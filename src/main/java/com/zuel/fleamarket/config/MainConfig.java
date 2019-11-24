@@ -2,9 +2,13 @@ package com.zuel.fleamarket.config;
 
 import com.jfinal.config.*;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
+import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.zuel.fleamarket.controller.IndexController;
+import com.zuel.fleamarket.model._MappingKit;
 
 public class MainConfig extends JFinalConfig {
 
@@ -36,7 +40,18 @@ public class MainConfig extends JFinalConfig {
 
     @Override
     public void configPlugin(Plugins me) {
-
+//配置数据库连接池插件
+        DruidPlugin dbPlugin=new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
+        dbPlugin.setDriverClass("com.mysql.cj.jdbc.Driver");
+        //orm映射 配置ActiveRecord插件
+        ActiveRecordPlugin arp=new ActiveRecordPlugin(dbPlugin);
+        arp.setShowSql(PropKit.getBoolean("devMode"));
+        arp.setDialect(new MysqlDialect());
+        /********在此添加数据库 表-Model 映射*********/
+        _MappingKit.mapping(arp);
+        //添加到插件列表中
+        me.add(dbPlugin);
+        me.add(arp);
     }
 
     @Override
