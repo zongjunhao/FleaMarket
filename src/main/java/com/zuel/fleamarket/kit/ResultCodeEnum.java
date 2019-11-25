@@ -30,7 +30,8 @@ public enum ResultCodeEnum
 	NO_EXIST_USER("4002","登录失败_用户不存在"),
 	NO_ENOUGH_MES("4003","登录失败_账号或密码为空"),
 	LOGOUT_SUCCESS("4004","退出登录成功"),
-	NO_LOGIN_USER("4005","退出登录失败_用户未登录");
+	NO_LOGIN_USER("4005","退出登录失败_用户未登录"),
+	LOGIN_FAILURE_CODE_ERROR("4008", "登陆失败，验证码错误");
 	
 	private String code;
     private String desc;

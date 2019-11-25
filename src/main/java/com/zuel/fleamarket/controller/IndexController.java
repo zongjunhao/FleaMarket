@@ -8,10 +8,7 @@ public class IndexController extends Controller {
         render("index.jsp");
     }
 
-    /**
-     * 管理员登录
-     */
-    public void login() {
-
+    public void test(){
+        render("test.html");
     }
 }
