@@ -35,6 +35,9 @@ public class UserController extends Controller {
         renderJson(baseResponse);
     }
 
+    /**
+     * 用户登录
+     */
     public void login() {
         BaseResponse baseResponse = new BaseResponse();
         boolean result = validateCaptcha("inputRandomCode");
@@ -57,4 +60,5 @@ public class UserController extends Controller {
         }
         renderJson(baseResponse);
     }
+
 }

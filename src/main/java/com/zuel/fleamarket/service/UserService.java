@@ -53,9 +53,16 @@ public class UserService {
         }
         return baseResponse;
     }
+
+    /**
+     * 用户登录
+     * @param u_stuid
+     * @param u_pwd
+     * @return
+     */
     public BaseResponse login(String u_stuid, String u_pwd){
         BaseResponse baseResponse = new BaseResponse();
-        User user = User.dao.findFirst(u_stuid);
+        User user = User.dao.findFirst("select * from user where u_stuid = " + "'" + u_stuid + "'");
         if (user == null) {
             // 用户不存在
             baseResponse.setResult(ResultCodeEnum.NO_EXIST_USER);
