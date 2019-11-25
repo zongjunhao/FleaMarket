@@ -17,7 +17,7 @@ public class UserService {
      * @param u_qq
      * @return
      */
-    public BaseResponse register(final String u_stuid, final String u_pwd, final String u_qq) {
+    public BaseResponse register(final String u_stuid, final String u_pwd, final String u_qq, final String u_name) {
         BaseResponse baseResponse = new BaseResponse();
         List<User> users = User.dao.find("select * from user where u_stuid = " + "'" + u_stuid + "'");
         if (users.size() == 0) {
@@ -29,6 +29,7 @@ public class UserService {
                     user.setUStuid(u_stuid);
                     user.setUPwd(u_pwd);
                     user.setUQq(u_qq);
+                    user.setUName(u_name);
                     if (!user.save())
                         return false;
                     return true;
