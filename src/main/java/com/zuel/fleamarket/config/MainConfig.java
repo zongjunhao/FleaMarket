@@ -7,6 +7,7 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.zuel.fleamarket.controller.AdminController;
 import com.zuel.fleamarket.controller.IndexController;
 import com.zuel.fleamarket.model._MappingKit;
 
@@ -31,6 +32,7 @@ public class MainConfig extends JFinalConfig {
     @Override
     public void configRoute(Routes me) {
         me.add("/", IndexController.class);
+        me.add("/admin", AdminController.class);
     }
 
     @Override
