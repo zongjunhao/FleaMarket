@@ -79,4 +79,24 @@ public class UserController extends Controller {
         renderJson(baseResponse);
     }
 
+    /**
+     * 修改用户的信息
+     */
+    public void modifyInfo() {
+        BaseResponse baseResponse = new BaseResponse();
+        String u_stuid = getPara("u_stuid");
+        String u_name = getPara("u_name");
+        String u_gender = getPara("u_gender");
+        String u_phone = getPara("u_phone");
+        String u_qq = getPara("u_qq");
+
+        if (!StrKit.isBlank(u_stuid) && !StrKit.isBlank(u_name) && !StrKit.isBlank(u_qq)) {
+            baseResponse = userService.modifyInfo(u_stuid, u_name, u_gender, u_phone, u_qq);
+        } else {
+            // 请求学号、名字、qq不能为空
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
+
 }

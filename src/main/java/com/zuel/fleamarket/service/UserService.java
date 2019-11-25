@@ -111,4 +111,36 @@ public class UserService {
         }
         return baseResponse;
     }
+
+    /**
+     * 修改用户的信息
+     * @param u_stuid
+     * @param u_name
+     * @param u_gender
+     * @param u_phone
+     * @param u_qq
+     * @return
+     */
+    public BaseResponse modifyInfo(String u_stuid, String u_name, String u_gender, String u_phone, String u_qq) {
+        BaseResponse baseResponse = new BaseResponse();
+        User user = User.dao.findFirst("select * from user where u_stuid =" + "'" + u_stuid + "'");
+        if (user != null) {
+            // 查找记录不为空
+            user.setUName(u_name);
+            user.setUGender(u_gender);
+            user.setUPhone(u_phone);
+            user.setUQq(u_qq);
+            if (user.update()) {
+                // 用户信息修改成功
+                baseResponse.setResult(ResultCodeEnum.DB_UPDATE_SUCCESS);
+            } else {
+                // 用户信息修改失败，数据库错误
+                baseResponse.setResult(ResultCodeEnum.DB_UPDATE_ERROR);
+            }
+        } else {
+            // 该账户不存在
+            baseResponse.setResult(ResultCodeEnum.RECORD_NO_EXIST);
+        }
+        return baseResponse;
+    }
 }
