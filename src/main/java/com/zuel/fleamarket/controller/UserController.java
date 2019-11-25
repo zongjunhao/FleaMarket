@@ -8,6 +8,17 @@ import com.zuel.fleamarket.service.UserService;
 
 public class UserController extends Controller {
     UserService userService = new UserService();
+
+    /**
+     * 获取验证码图片
+     */
+    public void pic() {
+        renderCaptcha();
+    }
+
+    /**
+     * 用户注册
+     */
     public void register() {
         BaseResponse baseResponse = new BaseResponse();
         String u_stuid = getPara("u_stuid");
@@ -20,6 +31,29 @@ public class UserController extends Controller {
         } else {
             // 提交的表单信息不完整
             baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
+
+    public void login() {
+        BaseResponse baseResponse = new BaseResponse();
+        boolean result = validateCaptcha("inputRandomCode");
+        if (result) {
+            String u_stuid = getPara("u_stuid");
+            String u_pwd = getPara("u_pwd");
+            if (!StrKit.isBlank(u_stuid) && !StrKit.isBlank(u_pwd)) {
+                baseResponse = userService.login(u_stuid, u_pwd);
+            } else {
+                // 请求的参数不足
+                baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+            }
+            if (baseResponse.getResultCode().equals("4000"))
+                setSessionAttr(u_stuid, "ready");
+            else
+                setSessionAttr(u_stuid, "unready");
+        } else {
+            // 验证码填写错误
+            baseResponse.setResult(ResultCodeEnum.LOGIN_FAILURE_CODE_ERROR);
         }
         renderJson(baseResponse);
     }

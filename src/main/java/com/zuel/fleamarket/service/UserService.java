@@ -7,6 +7,7 @@ import com.zuel.fleamarket.kit.ResultCodeEnum;
 import com.zuel.fleamarket.model.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -49,6 +50,23 @@ public class UserService {
         } else {
             // 注册失败，未知的系统错误
             baseResponse.setResult(ResultCodeEnum.REGISTER_FAILURE_SYS_ERROR);
+        }
+        return baseResponse;
+    }
+    public BaseResponse login(String u_stuid, String u_pwd){
+        BaseResponse baseResponse = new BaseResponse();
+        User user = User.dao.findFirst(u_stuid);
+        if (user == null) {
+            // 用户不存在
+            baseResponse.setResult(ResultCodeEnum.NO_EXIST_USER);
+        } else {
+            if (user.getUPwd().equals(u_pwd)) {
+                // 登录成功
+                baseResponse.setResult(ResultCodeEnum.LOGIN_SUCCESS);
+            } else {
+                // 登录失败，密码错误
+                baseResponse.setResult(ResultCodeEnum.LOGIN_ERROR);
+            }
         }
         return baseResponse;
     }
