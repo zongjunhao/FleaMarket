@@ -42,11 +42,11 @@ public class MainConfig extends JFinalConfig {
 
     @Override
     public void configPlugin(Plugins me) {
-//配置数据库连接池插件
-        DruidPlugin dbPlugin=new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
+        //配置数据库连接池插件
+        DruidPlugin dbPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
         dbPlugin.setDriverClass("com.mysql.cj.jdbc.Driver");
         //orm映射 配置ActiveRecord插件
-        ActiveRecordPlugin arp=new ActiveRecordPlugin(dbPlugin);
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(dbPlugin);
         arp.setShowSql(PropKit.getBoolean("devMode"));
         arp.setDialect(new MysqlDialect());
         /********在此添加数据库 表-Model 映射*********/
