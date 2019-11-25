@@ -61,4 +61,22 @@ public class UserController extends Controller {
         renderJson(baseResponse);
     }
 
+    /**
+     * 修改用户密码
+     */
+    public void modifyPwd() {
+        BaseResponse baseResponse = new BaseResponse();
+        String u_stuid = getPara("u_stuid");
+        String u_old_pwd = getPara("u_old_pwd");
+        String u_new_pwd = getPara("u_new_pwd");
+        if (!StrKit.isBlank(u_stuid) && !StrKit.isBlank(u_old_pwd) && !StrKit.isBlank(u_new_pwd)) {
+            // 请求的参数不为空
+            baseResponse = userService.modifyPwd(u_stuid, u_old_pwd, u_new_pwd);
+        } else {
+            // 请求的参数个数不足
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
+
 }

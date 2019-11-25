@@ -35,16 +35,16 @@ public enum ResultCodeEnum
 	NO_ENOUGH_MES("4003","登录失败_账号或密码为空"),
 	LOGOUT_SUCCESS("4004","退出登录成功"),
 	NO_LOGIN_USER("4005","退出登录失败_用户未登录"),
+	LOGIN_FAILURE_CODE_ERROR("4008", "登陆失败，验证码错误"),
 	// 注册
+	MODIFY_FAILURE_PWD_ERROR("5000", "修改失败，密码错误"),
 	REGISTER_SUCCESS("5001", "注册成功"),
 	REGISTER_FAILURE_DB_ERROR("5002","注册失败_数据库操作错误"),
 	REGISTER_FAILURE_USER_EXIST("5003", "注册失败_账户已存在"),
 	REGISTER_FAILURE_SYS_ERROR("5004", "注册失败_系统错误"),
 
-	LOGIN_FAILURE_CODE_ERROR("4008", "登陆失败，验证码错误"),
 
-	MODIFY_FAILURE_PWD_ERROR("5000", "修改失败，密码错误"),
-	MODIFY_SUCCESS("5001", "修改成功");
+	MODIFY_SUCCESS("5005", "修改成功");
 
 
 	private String code;
