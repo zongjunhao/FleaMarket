@@ -17,9 +17,8 @@ public class AdminService {
      */
     public BaseResponse login(String account, String password) {
         BaseResponse baseResponse = new BaseResponse();
-        boolean exist = false;
         // 查找所有管理员账号
-        Admin admin = Admin.dao.findFirst("select * from user where a_account = ?", account);
+        Admin admin = Admin.dao.findFirst("select * from admin where a_account = ?", account);
         System.out.println(admin);
         if (admin == null) {
             baseResponse.setResult(ResultCodeEnum.NO_EXIST_USER);
@@ -34,5 +33,33 @@ public class AdminService {
         return baseResponse;
     }
 
+    /**
+     * 管理员修改密码
+     *
+     * @param account     管理员账号
+     * @param oldPassword 旧密码
+     * @param password    新密码
+     * @return 返回是否修改成功
+     */
+    public BaseResponse modifyPassword(String account, String oldPassword, String password) {
+        BaseResponse baseResponse = new BaseResponse();
+        Admin admin = Admin.dao.findFirst("select * from admin where a_account = ?", account);
+        if (admin != null) { // 判断是否查找成功
+            if (admin.getAPwd().equals(oldPassword)) { // 判断原密码是否正确
+                admin.setAPwd(password);
+                if (admin.update()) { // 判断是否更新成功
+                    baseResponse.setData(admin);
+                    baseResponse.setResult(ResultCodeEnum.MODIFY_SUCCESS);
+                }else {
+
+                }
+            } else {
+                baseResponse.setResult(ResultCodeEnum.MODIFY_FAILURE_PWD_ERROR);
+            }
+        } else {
+            baseResponse.setResult(ResultCodeEnum.DB_UPDATE_ERROR);
+        }
+        return baseResponse;
+    }
 
 }

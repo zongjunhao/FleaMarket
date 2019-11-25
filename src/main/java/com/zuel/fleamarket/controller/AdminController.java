@@ -43,4 +43,13 @@ public class AdminController extends Controller {
         }
         renderJson(baseResponse);
     }
+
+    public void modifyPassword(){
+        BaseResponse baseResponse = new BaseResponse();
+        String account = getPara("account");
+        String oldPassword = getPara("oldPassword");
+        String password = getPara("password");
+        baseResponse = adminService.modifyPassword(account, oldPassword, password);
+        renderJson(baseResponse);
+    }
 }
