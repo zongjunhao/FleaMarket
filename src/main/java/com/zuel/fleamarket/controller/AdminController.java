@@ -9,7 +9,7 @@ public class AdminController extends Controller {
 
     public static AdminService adminService = new AdminService();
 
-    public void index(){
+    public void index() {
         renderText("adminController");
     }
 
@@ -26,7 +26,7 @@ public class AdminController extends Controller {
     public void login() {
         BaseResponse baseResponse = new BaseResponse();
         boolean result = validateCaptcha("inputRandomCode");
-        if (result){
+        if (result) {
             String account = getPara("account");
             String password = getPara("password");
             baseResponse = adminService.login(account, password);
@@ -47,7 +47,7 @@ public class AdminController extends Controller {
     /**
      * 管理员修改密码
      */
-    public void modifyPassword(){
+    public void modifyPassword() {
         BaseResponse baseResponse = new BaseResponse();
         String account = getPara("account");
         String oldPassword = getPara("oldPassword");
@@ -56,9 +56,38 @@ public class AdminController extends Controller {
         renderJson(baseResponse);
     }
 
-    public void viewAllUser(){
+    /**
+     * 查看所有用户
+     */
+    public void viewAllUser() {
         BaseResponse baseResponse = new BaseResponse();
         baseResponse = adminService.viewAllUser();
+        renderJson(baseResponse);
+    }
+
+    /**
+     * 删除用户（可批量删除）
+     */
+    public void deleteUsers() {
+        BaseResponse baseResponse = new BaseResponse();
+        String[] u_ids = getParaValues("u_ids");
+        baseResponse = adminService.deleteUsers(u_ids);
+        renderJson(baseResponse);
+    }
+
+    /**
+     * 查看所有货物
+     */
+    public void viewAllGoods() {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse = adminService.viewAllGoods();
+        renderJson(baseResponse);
+    }
+
+    public void deleteGoods(){
+        BaseResponse baseResponse = new BaseResponse();
+        String[] g_ids = getParaValues("g_ids");
+        baseResponse = adminService.deleteGoods(g_ids);
         renderJson(baseResponse);
     }
 }

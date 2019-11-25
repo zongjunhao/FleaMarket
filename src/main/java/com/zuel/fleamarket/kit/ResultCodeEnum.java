@@ -6,7 +6,11 @@ public enum ResultCodeEnum
 	
 	SITES_OPEN("1001","网页打开成功"),
 	INTERNTE_FAILURE("1002","网络错误，请重试"),
-	
+    UNKOWN_ERROE("1003","未知的错误"),
+    REQUEST_NO_PARAM_ID_ERROR("1004","页面请求参数错误"),
+    DB_SYS_ERROR("1005","数据库错误"),
+    RECORD_NO_EXIST("1006","记录不存在"),
+
 	DB_CONNECTION_SUCCESS("200O","数据库连接成功"),
 	DB_CONNECTION_FAILURE("2001","数据库连接失败"),
 	DB_UPDATE_SUCCESS("2002","数据库修改成功"),
