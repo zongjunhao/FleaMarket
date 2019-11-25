@@ -9,6 +9,7 @@ import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.zuel.fleamarket.controller.AdminController;
 import com.zuel.fleamarket.controller.IndexController;
+import com.zuel.fleamarket.controller.UserController;
 import com.zuel.fleamarket.model._MappingKit;
 
 public class MainConfig extends JFinalConfig {
@@ -33,6 +34,7 @@ public class MainConfig extends JFinalConfig {
     public void configRoute(Routes me) {
         me.add("/", IndexController.class);
         me.add("/admin", AdminController.class);
+        me.add("/user", UserController.class);
     }
 
     @Override

@@ -14,8 +14,8 @@ public class UserController extends Controller {
         String u_qq = getPara("u_qq");
         if (!StrKit.isBlank(u_stuid) && !StrKit.isBlank(u_pwd) && !StrKit.isBlank(u_qq)) {
             // 注册信息不为空
-//            baseResponse = userService
+            baseResponse = userService.register(u_stuid, u_pwd, u_qq);
         }
-
+        renderJson(baseResponse);
     }
 }
