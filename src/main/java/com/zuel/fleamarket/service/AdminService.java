@@ -3,6 +3,7 @@ package com.zuel.fleamarket.service;
 import com.zuel.fleamarket.kit.BaseResponse;
 import com.zuel.fleamarket.kit.ResultCodeEnum;
 import com.zuel.fleamarket.model.Admin;
+import com.zuel.fleamarket.model.User;
 
 import java.util.List;
 
@@ -44,16 +45,16 @@ public class AdminService {
     public BaseResponse modifyPassword(String account, String oldPassword, String password) {
         BaseResponse baseResponse = new BaseResponse();
         Admin admin = Admin.dao.findFirst("select * from admin where a_account = ?", account);
-        if (admin != null) { // 判断是否查找成功
-            if (admin.getAPwd().equals(oldPassword)) { // 判断原密码是否正确
+        if (admin != null) { // 查找成功
+            if (admin.getAPwd().equals(oldPassword)) { // 原密码是否正确
                 admin.setAPwd(password);
-                if (admin.update()) { // 判断是否更新成功
+                if (admin.update()) { // 更新成功
                     baseResponse.setData(admin);
                     baseResponse.setResult(ResultCodeEnum.MODIFY_SUCCESS);
-                }else {
-
+                } else { // 更新失败
+                    baseResponse.setResult(ResultCodeEnum.DB_UPDATE_ERROR);
                 }
-            } else {
+            } else { // 原密码错误
                 baseResponse.setResult(ResultCodeEnum.MODIFY_FAILURE_PWD_ERROR);
             }
         } else {
@@ -62,4 +63,15 @@ public class AdminService {
         return baseResponse;
     }
 
+    public BaseResponse viewAllUser() {
+        BaseResponse baseResponse = new BaseResponse();
+        List<User> users = User.dao.findAll();
+        if (users.isEmpty()) {
+            baseResponse.setResult(ResultCodeEnum.DB_FIND_FAILURE);
+        } else {
+            baseResponse.setData(users);
+            baseResponse.setResult(ResultCodeEnum.DB_FIND_SUCCESS);
+        }
+        return baseResponse;
+    }
 }

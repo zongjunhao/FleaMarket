@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/fleamarket</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="fleamarket@106.15.251.188" uuid="592c29fd-3ce7-48ed-ae1e-09f3072aae78">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://106.15.251.188:3306/fleamarket</jdbc-url>
+    </data-source>
   </component>
 </project>

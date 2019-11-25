@@ -44,12 +44,21 @@ public class AdminController extends Controller {
         renderJson(baseResponse);
     }
 
+    /**
+     * 管理员修改密码
+     */
     public void modifyPassword(){
         BaseResponse baseResponse = new BaseResponse();
         String account = getPara("account");
         String oldPassword = getPara("oldPassword");
         String password = getPara("password");
         baseResponse = adminService.modifyPassword(account, oldPassword, password);
+        renderJson(baseResponse);
+    }
+
+    public void viewAllUser(){
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse = adminService.viewAllUser();
         renderJson(baseResponse);
     }
 }
