@@ -10,7 +10,7 @@ public class AdminController extends Controller {
     public static AdminService adminService = new AdminService();
 
     public void index(){
-        render("adminController");
+        renderText("adminController");
     }
 
     /**

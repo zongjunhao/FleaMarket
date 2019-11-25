@@ -44,7 +44,7 @@ public class MainConfig extends JFinalConfig {
     public void configPlugin(Plugins me) {
         //配置数据库连接池插件
         DruidPlugin dbPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
-        dbPlugin.setDriverClass("com.mysql.cj.jdbc.Driver");
+//        dbPlugin.setDriverClass("com.mysql.cj.jdbc.Driver");
         //orm映射 配置ActiveRecord插件
         ActiveRecordPlugin arp = new ActiveRecordPlugin(dbPlugin);
         arp.setShowSql(PropKit.getBoolean("devMode"));
