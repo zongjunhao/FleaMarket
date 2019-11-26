@@ -36,6 +36,7 @@ public enum ResultCodeEnum
 	LOGOUT_SUCCESS("4004","退出登录成功"),
 	NO_LOGIN_USER("4005","退出登录失败_用户未登录"),
 	LOGIN_FAILURE_CODE_ERROR("4008", "登陆失败，验证码错误"),
+	LOGOUT_FAILURE("4009", "退出登录失败"),
 	// 注册
 	MODIFY_FAILURE_PWD_ERROR("5000", "修改失败，密码错误"),
 	REGISTER_SUCCESS("5001", "注册成功"),

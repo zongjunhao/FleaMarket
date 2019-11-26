@@ -50,6 +50,7 @@ public class UserController extends Controller {
                 // 请求的参数不足
                 baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
             }
+            System.out.println(baseResponse.getResultCode());
             if (baseResponse.getResultCode().equals("4000"))
                 setSessionAttr(u_stuid, "ready");
             else
@@ -57,6 +58,21 @@ public class UserController extends Controller {
         } else {
             // 验证码填写错误
             baseResponse.setResult(ResultCodeEnum.LOGIN_FAILURE_CODE_ERROR);
+        }
+        renderJson(baseResponse);
+    }
+
+    /**
+     * 用户退出登录
+     */
+    public void logout() {
+        BaseResponse baseResponse = new BaseResponse();
+        String u_stuid = getPara("u_stuid");
+        if (getSessionAttr(u_stuid) != null && getSessionAttr(u_stuid).equals("ready")) {
+            removeSessionAttr(u_stuid);
+            baseResponse.setResult(ResultCodeEnum.LOGOUT_SUCCESS);
+        } else {
+            baseResponse.setResult(ResultCodeEnum.LOGOUT_FAILURE);
         }
         renderJson(baseResponse);
     }
