@@ -7,7 +7,7 @@ import com.zuel.fleamarket.service.AdminService;
 
 public class AdminController extends Controller {
 
-    public static AdminService adminService = new AdminService();
+    private static AdminService adminService = new AdminService();
 
     public void index() {
         renderText("adminController");
@@ -84,6 +84,9 @@ public class AdminController extends Controller {
         renderJson(baseResponse);
     }
 
+    /**
+     * 删除货物（可批量删除）
+     */
     public void deleteGoods(){
         BaseResponse baseResponse = new BaseResponse();
         String[] g_ids = getParaValues("g_ids");

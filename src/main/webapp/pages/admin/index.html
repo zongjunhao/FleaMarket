@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二手交易平台后台管理</title>
+    <!-- 添加bootstrap的css样式表 -->
+    <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css">
+    <!-- 添加自定义css -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!-- 添加JQ -->
+    <script type="text/javascript" src="/lib/jq/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/lib/jq/jquerySession.js"></script>
+    <!-- 添加bootstrap的库 -->
+    <script type="text/javascript" src="/lib/js/bootstrap.js"></script>
+    <!-- 添加导航栏的插件库 -->
+    <script type="text/javascript" src="/lib/js/navbar.js"></script>
+    <!-- 引用阿里的字体图标库 -->
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_7u1x88ev717.css">
+    <!-- 	监听页面窗口大小改变的插件 -->
+    <script type="text/javascript" src="/lib/js/detect-element-resize.js"></script>
+</head>
+<body>
+<!-- 顶部导航条-->
+<nav id="book-top" class="navbar navbar-fixed-top header" role="navigation">
+    <div class="container-fluid">
+        <!--标题-->
+        <div class="navbar-header">
+            <div class="media">
+                <div class="media-left">
+                    <span class="iconfont iconershou"></span>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">校园二手交易平台</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <div id="sideNav" class="nav navbar-nav navbar-left">
+                <span class="iconfont iconmenu"></span>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li id="mamageRole" data-toggle="tooltip" data-placement="left" title="管理员">
+                    <a id="name" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class="iconfont icon-icon_xinyong_xianxing_jijin-"></span>
+                        用户名
+                        <small><span class="iconfont icon-xiala"></span></small>
+                    </a>
+                    <ul class="book-dropmenu dropdown-menu" aria-labelledby="dropdownMenu4">
+                        <li>
+                            <a target="main" class="userInfo">
+                                <span class="iconfont iconiconcopy">  个人信息</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="changeInfo" target="main">
+                                <span class="iconfont iconxiugaixinxi">  修改信息</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="logout">
+                    <a>
+                        退出
+                        <span class="iconfont icontuichu"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- /顶部导航条 -->
+
+<!-- 左侧导航条 -->
+<div class="book-left">
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
