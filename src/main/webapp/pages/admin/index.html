@@ -72,14 +72,83 @@
 <!-- /顶部导航条 -->
 
 <!-- 左侧导航条 -->
-<div class="book-left">
+<div id="book-left">
     <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
-
+                <li>
+                    <a href="/test.html" target="main" class="selected">
+                        <span class="iconfont iconzhuye">首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="userManage.html" target="main">
+                        <span class="iconfont iconyonghuguanli">用户管理</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
 </div>
+<!-- 左侧导航条 -->
+
+<!-- 页面主内容 -->
+<div id="book-main">
+    <!--  导航条  -->
+    <div class="page-header">
+        <h1 class="page-header">首页</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">首页</a></li>
+            <li class="active">首页</li>
+        </ol>
+    </div>
+    <!-- 页面主内容 -->
+    <iframe name="main" src="/test.html" width="100%" id="myiframe" scrolling="no" frameborder="0"></iframe>
+
+</div>
+<!-- /页面主内容 -->
 </body>
+<script type="text/javascript">
+    var interval = setInterval("checkSession()", 1000 * 60 * 30);
+    var logout = ["/admin/logout", "a_account", "/test.html"]
+    $(document).ready(function () {
+        //监听子页面大小变化，设置父页面的iframe的大小
+        console.log("index")
+        addResizeListener(document.getElementsByTagName("body")[0], function () {
+            console.log("index body change")
+            console.log("iframe", $("#myiframe").height())
+            if ($("#myiframe").height() < 355) {
+                document.getElementById("myiframe").height = "355";
+                //$("#myiframe").css({"height":"355px"})//height(355);
+                console.log($("#myiframe").height())
+            } else {
+            }
+        });
+    });
+
+    function init() {
+        $("#book-left .navbar-side ul .l0").hide()
+
+        url = logout[0] + "?" + logout[1] + "&" + $.session.get("a_account");
+        $("#manageRole").attr("title", "系统管理员");
+        $("#myiframe").attr("src", "adminMainPage.html");
+        $("#book-left .navbar-side ul .l1").show();
+        $("#name").text($.session.get("a_account"));
+        $(".userInfo").attr("href", "adminInfo.html");
+        $(".changeInfo").attr("href", "adminChangeInfo.html");
+    }
+
+    function logout() {
+        console.log("logout")
+        $.ajax({
+            type: "GET",
+            url: url,
+            success:function (res) {
+                if (res.resultCode=="4004"){
+                    $.session.clear();
+                }
+            }
+        })
+    }
+</script>
 </html>
