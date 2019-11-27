@@ -47,8 +47,10 @@ public enum ResultCodeEnum
 
 	MODIFY_SUCCESS("5005", "修改成功"),
 
-	CATEGORY_NULL("6000", "货品类别查询为空"),
+	CATEGORY_QUERY_NULL("6000", "货品类别查询为空"),
 	CATEGORY_QUERY_SUCCESS("6001", "货品查询成功"),
+	GOODS_QUERY_SUCCESS("6002", "货品查询成功"),
+	GOODS_QUERY_NULL("6003", "货品查询为空"),
 
 	TEST("9000", "测试");
 
