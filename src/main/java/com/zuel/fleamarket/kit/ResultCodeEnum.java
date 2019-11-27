@@ -45,7 +45,12 @@ public enum ResultCodeEnum
 	REGISTER_FAILURE_SYS_ERROR("5004", "注册失败_系统错误"),
 
 
-	MODIFY_SUCCESS("5005", "修改成功");
+	MODIFY_SUCCESS("5005", "修改成功"),
+
+	CATEGORY_NULL("6000", "货品类别查询为空"),
+	CATEGORY_QUERY_SUCCESS("6001", "货品查询成功"),
+
+	TEST("9000", "测试");
 
 
 	private String code;
