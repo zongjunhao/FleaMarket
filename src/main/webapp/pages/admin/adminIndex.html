@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二手交易平台</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="/assets/vendor/chartist/css/chartist-custom.css">
+    <!-- 引用阿里的字体图标库 -->
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_h74xmav95an.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/demo.css">
+</head>
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="brand" style="padding: 20px">
+            <span class="iconClass">
+                <div class="media-left">
+                    <span class="iconfont iconershou" style="font-size: 2em"></span>
+                </div>
+                <div class="media-left">
+                    <h4 class="media-heading">校园二手交易平台</h4>
+                </div>
+            </span>
+        </div>
+        <div class="container-fluid">
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth">
+                    <span class="iconfont iconiconleft"></span>
+                </button>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li id="mamageRole" data-toggle="tooltip" data-placement="left" title="管理员">
+                    <a id="name" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class="iconfont icon-icon_xinyong_xianxing_jijin-"></span>
+                        用户名
+                        <small><span class="iconfont iconarrow-down" style="font-size: 13px"></span></small>
+                    </a>
+                    <ul class="book-dropmenu dropdown-menu" aria-labelledby="dropdownMenu4">
+                        <li>
+                            <a target="main" class="userInfo">
+                                <span class="iconfont iconiconcopy">  个人信息</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="changeInfo" target="main">
+                                <span class="iconfont iconxiugaixinxi">  修改信息</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="logout">
+                    <a>
+                        退出
+                        <span class="iconfont icontuichu"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li>
+                        <a href="adminIndex.html" class="active">
+                            <span class="iconfont iconzhuye navleft">首页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="userManage.html" target="main">
+                            <span class="iconfont iconyonghuguanli navleft">用户管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="goodsManage.html" target="main">
+                            <span class="iconfont iconviewlist navleft">商品管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="systemInfo.html" target="main">
+                            <span class="iconfont iconxitongxinxi navleft">系统信息</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <iframe name="main" src="adminMainPage.html" id="myiframe" scrolling="no" frameborder="0"></iframe>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+<script src="/assets/vendor/chartist/js/chartist.min.js"></script>
+<script src="/assets/scripts/klorofil-common.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var logout = ["/admin/logout", "a_account", "/login.html"]
+        $('[data-toggle="tooltip"]').tooltip();
+        //加载导航插件
+        $('#main-menu').metisMenu();
+    })
+</script>
+</body>
+</html>

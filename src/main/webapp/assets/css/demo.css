@@ -1,0 +1,51 @@
+/* All styles created for demo purposes only, you may not need this for your project */
+.demo-button button {
+    margin-bottom: 5px;
+}
+
+.demo-icons li {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.demo-icons .lnr,
+.demo-icons .fa {
+    font-size: 28px;
+}
+
+.demo-icons .cssclass {
+    display: block;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.iconClass {
+    display: flex;
+    align-items: center;
+}
+
+.iconfont {
+    font-size: 20px;
+}
+
+.myBrand {
+    padding: 20px;
+}
+
+#logout a {
+    background-color: #41B314;
+    border-color: #3ca512;
+    color: white;
+    padding: 10px 20px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navleft::before {
+    padding-right: 20px;
+}
+
+/*# sourceMappingURL=demo.css.map */
