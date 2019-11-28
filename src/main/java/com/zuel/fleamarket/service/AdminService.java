@@ -125,7 +125,7 @@ public class AdminService {
         BaseResponse baseResponse = new BaseResponse();
         List<Goods> goods = Goods.dao.findAll();
         if (goods.isEmpty()) { // 货物列表为空
-            baseResponse.setResult(ResultCodeEnum.DB_FIND_FAILURE);
+            baseResponse.setResult(ResultCodeEnum.RECORD_NO_EXIST);
         } else {
             baseResponse.setData(goods);
             baseResponse.setResult(ResultCodeEnum.DB_FIND_SUCCESS);
