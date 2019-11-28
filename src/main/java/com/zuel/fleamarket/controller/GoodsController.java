@@ -148,7 +148,6 @@ public class GoodsController extends Controller {
         renderJson(baseResponse);
     }
 
-
     /**
      * 获取商品的详细信息，包括评论
      */
