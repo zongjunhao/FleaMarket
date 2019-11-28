@@ -1,12 +1,13 @@
 package com.zuel.fleamarket.service;
 
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.IAtom;
+import com.jfinal.upload.UploadFile;
 import com.zuel.fleamarket.kit.BaseResponse;
 import com.zuel.fleamarket.kit.ResultCodeEnum;
-import com.zuel.fleamarket.model.Category;
-import com.zuel.fleamarket.model.Comment;
-import com.zuel.fleamarket.model.Follow;
-import com.zuel.fleamarket.model.Goods;
+import com.zuel.fleamarket.model.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -290,6 +291,130 @@ public class GoodsService {
             baseResponse.setResult(ResultCodeEnum.GOODS_QUERY_SUCCESS);
         } else {
             baseResponse.setResult(ResultCodeEnum.GOODS_QUERY_NULL);
+        }
+        return baseResponse;
+    }
+
+    /**
+     * 上传货品
+     *
+     * @param u_id
+     * @param c_id
+     * @param g_name
+     * @param g_price
+     * @param g_realprice
+     * @param g_describe
+     * @param uploadFiles
+     * @return
+     */
+    public BaseResponse uploadGoods(String u_id, String c_id, String g_name, String g_price, String g_realprice, String g_describe, List<UploadFile> uploadFiles) {
+        BaseResponse baseResponse = new BaseResponse();
+        boolean succeed = Db.tx(new IAtom() {
+            boolean result = true;
+
+            @Override
+            public boolean run() throws SQLException {
+                Goods goods = new Goods();
+                goods.setGState(1);
+                goods.setGUId(Integer.parseInt(u_id));
+                goods.setGCId(Integer.parseInt(c_id));
+                goods.setGName(g_name);
+                goods.setGPrice(Integer.parseInt(g_price));
+                goods.setGRealprice(Integer.parseInt(g_realprice));
+                goods.setGDescribe(g_describe);
+                if (goods.save()) {
+                    int g_id = goods.getGId();
+                    for (UploadFile uploadFile :
+                            uploadFiles) {
+                        String fileName = uploadFile.getFileName();
+                        String path = "/upload/" + fileName;
+                        Image image = new Image();
+                        image.setIGId(g_id);
+                        image.setIPath(path);
+                        if (!image.save()) {
+                            result = false;
+                        }
+                    }
+                } else {
+                    result = false;
+                }
+                return result;
+            }
+        });
+        if (succeed) {
+            baseResponse.setResult(ResultCodeEnum.GOODS_UPLOAD_SUCCESS);
+        } else {
+            baseResponse.setResult(ResultCodeEnum.GOODS_UPLOAD_FAILURE_DB_ERROR);
+        }
+        return baseResponse;
+    }
+
+    /**
+     * 发布求购信息
+     *
+     * @param u_id
+     * @param n_name
+     * @param n_price
+     * @param n_describe
+     * @return
+     */
+    public BaseResponse notice(String u_id, String n_name, String n_price, String n_describe) {
+        BaseResponse baseResponse = new BaseResponse();
+        Notice notice = new Notice();
+        notice.setNUId(Integer.parseInt(u_id));
+        notice.setNName(n_name);
+        notice.setNPrice(Integer.parseInt(n_price));
+        notice.setNDescribe(n_describe);
+        notice.setNState(1);
+        if (notice.save()) {
+            baseResponse.setResult(ResultCodeEnum.NOTICE_UPLOAD_SUCCESS);
+        } else {
+            baseResponse.setResult(ResultCodeEnum.NOTICE_UPLOAD_FAILURE_DB_ERROR);
+        }
+        return baseResponse;
+    }
+
+    /**
+     * 修改求购信息的状态
+     *
+     * @param n_id
+     * @param n_state
+     * @return
+     */
+    public BaseResponse modifyNoticeState(String n_id, String n_state) {
+        BaseResponse baseResponse = new BaseResponse();
+        Notice notice = Notice.dao.findFirst("select * from notice where n_id = " + "'" + n_id + "'");
+        if (notice != null) {
+            notice.setNState(Integer.parseInt(n_state));
+            if (notice.update()) {
+                // 修改状态成功
+                baseResponse.setResult(ResultCodeEnum.NOTICE_UPDATE_STATE_SUCCESS);
+            } else {
+                // 修改状态失败，数据库错误
+                baseResponse.setResult(ResultCodeEnum.NOTICE_UPDATE_STATE_FAILURE_DB_ERROR);
+            }
+        } else {
+            // 求购信息不存在
+            baseResponse.setResult(ResultCodeEnum.GOODS_NOT_EXIST);
+        }
+        return baseResponse;
+    }
+
+    /**
+     * 获取所有的求购信息
+     *
+     * @return
+     */
+    public BaseResponse getNotice() {
+        BaseResponse baseResponse = new BaseResponse();
+        List<Notice> noticeList = Notice.dao.find("select * from notice");
+        if (!noticeList.isEmpty()) {
+            // 货品查询成功
+            baseResponse.setData(noticeList);
+            baseResponse.setResult(ResultCodeEnum.NOTICE_QUERY_SUCCESS);
+        } else {
+            // 货品为空
+            baseResponse.setResult(ResultCodeEnum.NOTICE_QUERY_NULL);
         }
         return baseResponse;
     }

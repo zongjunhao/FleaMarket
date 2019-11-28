@@ -2,9 +2,12 @@ package com.zuel.fleamarket.controller;
 
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
+import com.jfinal.upload.UploadFile;
 import com.zuel.fleamarket.kit.BaseResponse;
 import com.zuel.fleamarket.kit.ResultCodeEnum;
 import com.zuel.fleamarket.service.GoodsService;
+
+import java.util.List;
 
 public class GoodsController extends Controller {
     GoodsService goodsService = new GoodsService();
@@ -133,7 +136,7 @@ public class GoodsController extends Controller {
     /**
      * 用户对商品进行评论，或者针对某一评论的回复
      */
-    public void comment()  {
+    public void comment() {
         BaseResponse baseResponse = new BaseResponse();
         String g_id = getPara("g_id");
         String u_id = getPara("u_id");
@@ -160,5 +163,70 @@ public class GoodsController extends Controller {
             // 请求的参数不足
             baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
         }
+        renderJson(baseResponse);
+    }
+
+    /**
+     * 上传货品
+     */
+    public void uploadGoods() {
+        BaseResponse baseResponse = new BaseResponse();
+        List<UploadFile> uploadFiles = getFiles("files");
+        String u_id = getPara("u_id");
+        String c_id = getPara("c_id");
+        String g_name = getPara("g_name");
+        String g_price = getPara("g_price");
+        String g_realprice = getPara("g_realprice");
+        String g_describe = getPara("g_describe");
+
+        if (!StrKit.isBlank(u_id) && !StrKit.isBlank(c_id) && !StrKit.isBlank(g_describe) && !StrKit.isBlank(g_name) && !StrKit.isBlank(g_price) && !StrKit.isBlank(g_realprice)) {
+            baseResponse = goodsService.uploadGoods(u_id, c_id, g_name, g_price, g_realprice, g_describe, uploadFiles);
+        } else {
+            // 请求的参数不足
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
+
+    /**
+     * 发布求购信息
+     */
+    public void notice() {
+        BaseResponse baseResponse = new BaseResponse();
+        String u_id = getPara("u_id");
+        String n_name = getPara("n_name");
+        String n_price = getPara("n_price");
+        String n_describe = getPara("n_describe");
+        if (!StrKit.isBlank(u_id) && !StrKit.isBlank(n_name) && !StrKit.isBlank(n_price) && !StrKit.isBlank(n_describe)) {
+            baseResponse = goodsService.notice(u_id, n_name, n_price, n_describe);
+        } else {
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
+
+    /**
+     * 修改求购信息的状态
+     */
+    public void modifyNoticeState() {
+        BaseResponse baseResponse = new BaseResponse();
+        String n_id = getPara("n_id");
+        String n_state = getPara("n_state");
+        if (!StrKit.isBlank(n_id) && !StrKit.isBlank(n_state)) {
+            baseResponse = goodsService.modifyNoticeState(n_id, n_state);
+        } else {
+            // 请求的参数不足
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
+
+    /**
+     * 查询所有的求购信息
+     */
+    public void getNotice() {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse = goodsService.getNotice();
+        renderJson(baseResponse);
     }
 }

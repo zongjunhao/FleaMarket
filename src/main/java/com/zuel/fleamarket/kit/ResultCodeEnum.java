@@ -62,7 +62,14 @@ public enum ResultCodeEnum {
     COMMENT_SUCCESS("6013", "评论成功"),
     COMMENT_FAILURE_DB_ERROR("6014", "评论失败"),
 
-
+    GOODS_UPLOAD_FAILURE_DB_ERROR("6015", "货品上传失败_数据库错误"),
+    GOODS_UPLOAD_SUCCESS("6016", "货品上传成功"),
+    NOTICE_UPLOAD_FAILURE_DB_ERROR("6017", "货品上传失败_数据库错误"),
+    NOTICE_UPLOAD_SUCCESS("6018", "货品上传成功"),
+    NOTICE_UPDATE_STATE_SUCCESS("6019", "求购信息修改状态成功"),
+    NOTICE_UPDATE_STATE_FAILURE_DB_ERROR("6020", "求购信息修改状态失败_数据库错误"),
+    NOTICE_QUERY_SUCCESS("6021", "求购信息查询成功"),
+    NOTICE_QUERY_NULL("6022", "求购信息查询为空"),
     TEST("9000", "测试");
 
 
