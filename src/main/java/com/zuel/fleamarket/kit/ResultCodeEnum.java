@@ -59,6 +59,8 @@ public enum ResultCodeEnum {
     GOODS_FOLLOW_FAILURE_DB_ERROR("6010", "货品添加关注失败_数据库错误"),
     GOODS_FOLLOW_QUERY_SUCCESS("6011", "货品关注查询成功"),
     GOODS_FOLLOW_QUERY_NULL("6012", "货品关注查询为空"),
+    COMMENT_SUCCESS("6013", "评论成功"),
+    COMMENT_FAILURE_DB_ERROR("6014", "评论失败"),
 
 
     TEST("9000", "测试");

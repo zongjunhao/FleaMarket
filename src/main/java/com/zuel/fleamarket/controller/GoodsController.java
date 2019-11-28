@@ -130,4 +130,35 @@ public class GoodsController extends Controller {
         renderJson(baseResponse);
     }
 
+    /**
+     * 用户对商品进行评论，或者针对某一评论的回复
+     */
+    public void comment()  {
+        BaseResponse baseResponse = new BaseResponse();
+        String g_id = getPara("g_id");
+        String u_id = getPara("u_id");
+        String com_desc = getPara("com_desc");
+        String com_reply = getPara("com_reply");
+        if (!StrKit.isBlank(g_id) && !StrKit.isBlank(u_id) && !StrKit.isBlank(com_desc)) {
+            baseResponse = goodsService.comment(g_id, u_id, com_desc, com_reply);
+        } else {
+            // 请求的参数不足
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
+
+    /**
+     * 获取商品的详细信息，包括评论
+     */
+    public void getDetailedGoodsInfo() {
+        BaseResponse baseResponse = new BaseResponse();
+        String g_id = getPara("g_id");
+        if (!StrKit.isBlank(g_id)) {
+            baseResponse = goodsService.getDetailedGoodsInfo(g_id);
+        } else {
+            // 请求的参数不足
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+    }
 }
