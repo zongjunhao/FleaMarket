@@ -126,6 +126,33 @@
         });
     });
 
+    $(function () {
+        //初始化，设置退出时的url和退出时的地址
+        init();
+        //每隔半个小时判断session有没有失效，如果失效则要求用户重新登陆
+        checkSession();
+
+        $('[data-toggle="tooltip"]').tooltip();
+        //加载导航插件
+        $('#main-menu').metisMenu();
+
+        //添加手气左侧导航栏功能
+        $("#sideNav").click(function () {
+            if ($(this).hasClass('closed')) {
+                $('.navbar-side').animate({left: '0px'});
+                $(this).removeClass('closed');
+                $('#book-main').animate({'margin-left': '260px'});
+            } else {
+                $(this).addClass('closed');
+                $('.navbar-side').animate({left: '-260px'});
+                $('#book-main').animate({'margin-left' : '0px'});
+            }
+        });
+
+        //给上访导航栏添加跳转信息
+
+    });
+
     function init() {
         $("#book-left .navbar-side ul .l0").hide()
 
@@ -143,12 +170,29 @@
         $.ajax({
             type: "GET",
             url: url,
-            success:function (res) {
-                if (res.resultCode=="4004"){
+            success: function (res) {
+                if (res.resultCode == "4004") {
                     $.session.clear();
+                    location.href = "/login.html";
+                } else if (res.resultCode == "4005") {
+                    location.href = "/login,html"
+                } else {
+                    alert(res.resultCode)
                 }
+            },
+            error: function (res) {
+                alert("请求的页面有错");
             }
-        })
+        });
+    }
+
+    // 检查session信息，失效了要求重新登录
+    function checkSession() {
+        console.log("id", id);
+        if (id == null) {
+            alert("请先登录！");
+            location.href = "/login.html";
+        }
     }
 </script>
 </html>
