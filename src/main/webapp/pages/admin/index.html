@@ -15,7 +15,7 @@
     <!-- 添加导航栏的插件库 -->
     <script type="text/javascript" src="/lib/js/navbar.js"></script>
     <!-- 引用阿里的字体图标库 -->
-    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_7u1x88ev717.css">
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_ide54z3tzno.css">
     <!-- 	监听页面窗口大小改变的插件 -->
     <script type="text/javascript" src="/lib/js/detect-element-resize.js"></script>
 </head>
@@ -86,6 +86,16 @@
                         <span class="iconfont iconyonghuguanli">用户管理</span>
                     </a>
                 </li>
+                <li>
+                    <a href="goodsManage.html" target="main">
+                        <span class="iconfont iconviewlist">商品管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="systemInfo.html" target="main">
+                        <span class="iconfont iconxitongxinxi">系统信息</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -113,10 +123,10 @@
     var logout = ["/admin/logout", "a_account", "/test.html"]
     $(document).ready(function () {
         //监听子页面大小变化，设置父页面的iframe的大小
-        console.log("index")
+        console.log("index");
         addResizeListener(document.getElementsByTagName("body")[0], function () {
-            console.log("index body change")
-            console.log("iframe", $("#myiframe").height())
+            console.log("index body change");
+            console.log("iframe", $("#myiframe").height());
             if ($("#myiframe").height() < 355) {
                 document.getElementById("myiframe").height = "355";
                 //$("#myiframe").css({"height":"355px"})//height(355);
@@ -145,16 +155,46 @@
             } else {
                 $(this).addClass('closed');
                 $('.navbar-side').animate({left: '-260px'});
-                $('#book-main').animate({'margin-left' : '0px'});
+                $('#book-main').animate({'margin-left': '0px'});
             }
         });
 
-        //给上访导航栏添加跳转信息
+        var head = $("#book-main .header .breadcrumb");
+        //给上方导航栏添加跳转信息
+        $(".book-dropmenu a").click(function () {
+            $("#book-main .header h1").text($(this).text());
+            head.html("<li><a>首页</a></li>");
+            head.append("<li><a href=''>个人中心</a></li>");
+            head.append("<li class='active'>" + $(this).text() + "</li>");
+        });
+
+        //添加左侧导航栏的选择效果
+        $("#book-left .navbar-side ul li a").click(function () {
+            //先去掉selected类
+            $("#book-left .navbar-side ul li a").removeClass("selected");
+            //再给选择的导航栏添加特效
+            //console.log($("#book-left .navbar-side ul li a"))
+            head.html("<li><a>首页</a></li>");
+            $("#book-main .header h1").text($(this).text());
+            if ($(this).attr("level") == "1") {
+                head.append("<li class='active'>" + $(this).text() + "</li>")
+            } else {
+                head.append("<li><a href=''>" + $(this).parents("li").eq(1).children("a").text() + "</a></li>");
+                head.append("<li class='active'>" + $(this).text() + "</li>")
+            }
+            console.log($(this).attr("level"));
+            $(this).addClass("selected")
+
+        })
+
+        $("#logout").click(function () {
+            logOut()
+        })
 
     });
 
     function init() {
-        $("#book-left .navbar-side ul .l0").hide()
+        $("#book-left .navbar-side ul .l0").hide();
 
         url = logout[0] + "?" + logout[1] + "&" + $.session.get("a_account");
         $("#manageRole").attr("title", "系统管理员");
@@ -165,8 +205,8 @@
         $(".changeInfo").attr("href", "adminChangeInfo.html");
     }
 
-    function logout() {
-        console.log("logout")
+    function logOut() {
+        console.log("logout");
         $.ajax({
             type: "GET",
             url: url,

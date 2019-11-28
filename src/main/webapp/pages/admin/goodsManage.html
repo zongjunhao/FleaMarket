@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户管理</title>
+    <title>商品管理</title>
     <!-- 添加bootstrap的css样式表 -->
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/lib/dataTables/dataTables.bootstrap.css">
@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel-heading">
-                用户列表
+                商品列表
             </div>
             <div class="panel-body">
                 <div>
@@ -28,11 +28,11 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>学号</th>
-                            <th>姓名</th>
-                            <th>性别</th>
-                            <th>电话</th>
-                            <th>QQ</th>
+                            <th>名称</th>
+                            <th>类别</th>
+                            <th>价格</th>
+                            <th>发布时间</th>
+                            <th>状态</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -56,20 +56,22 @@
         table.fnDestroy();
         $.ajax({
             type: "POST",
-            url: "/admin/viewAllUser",
+            url: "/admin/viewAllGoods",
             success: function (res) {
                 if (res.resultCode == "2006") {// 查找成功
                     console.log(res);
+                    var categorys = ["闲置数码", "校园代步", "电器日用", "图书教材", "美妆衣物", "运动棋牌", "票圈小物"];
                     var table = "";
                     var tableLength = res.data.length;
                     $.each(res.data, function (i, value) {
+                        var category = categorys[parseInt(value.g_c_id) - 1];
                         table += "<tr>" +
                             "<td>" + (i + 1) + "</td>" +
-                            "<td>" + value.u_stuid + "</td>" +
-                            "<td>" + value.u_name + "</td>" +
-                            "<td>" + value.u_gender + "</td>" +
-                            "<td>" + value.u_phone + "</td>" +
-                            "<td>" + value.u_qq + "</td>" +
+                            "<td>" + value.g_name + "</td>" +
+                            "<td>" + category + "</td>" +
+                            "<td>" + value.g_realprice + "</td>" +
+                            "<td>" + value.g_addtime + "</td>" +
+                            "<td>" + value.g_state + "</td>" +
                             "</tr>"
                     });
                     $(".table tbody").append(table)

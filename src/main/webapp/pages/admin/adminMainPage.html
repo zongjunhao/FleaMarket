@@ -3,8 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 添加JQ -->
+    <script type="text/javascript" src="/lib/jq/jquery-3.4.1.js"></script>
+    <!-- 引用阿里的字体图标库 -->
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_ide54z3tzno.css">
+    <!-- 	监听页面窗口大小改变的插件 -->
+    <script type="text/javascript" src="/lib/js/detect-element-resize.js"></script>
+    <style>
+        .iconfont{
+            font-size: 100px;
+        }
+        .inner p{
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .inner{
+            margin: 40px;
+            cursor: pointer;
+        }
+        .content{
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
 </head>
 <body>
-
+<div class="content">
+    <div class="inner" id="1">
+        <span class="iconfont iconyonghuguanli"></span>
+        <p>用户管理</p>
+    </div>
+    <div class="inner" id="2">
+        <span class="iconfont iconviewlist"></span>
+        <p>商品管理</p>
+    </div>
+    <div class="inner" id="3">
+        <span class="iconfont iconxitongxinxi"></span>
+        <p>系统信息</p>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#1").click(function () {
+        location.href = "userManage.html"
+    });
+    $("#2").click(function () {
+        location.href = "goodsManage.html"
+    });
+    $("#3").click(function () {
+        location.href = "systemInfo.html"
+    });
+</script>
 </body>
 </html>
