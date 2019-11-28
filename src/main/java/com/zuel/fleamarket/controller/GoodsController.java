@@ -2,9 +2,12 @@ package com.zuel.fleamarket.controller;
 
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
+import com.jfinal.upload.UploadFile;
 import com.zuel.fleamarket.kit.BaseResponse;
 import com.zuel.fleamarket.kit.ResultCodeEnum;
 import com.zuel.fleamarket.service.GoodsService;
+
+import java.util.List;
 
 public class GoodsController extends Controller {
     GoodsService goodsService = new GoodsService();
@@ -156,6 +159,23 @@ public class GoodsController extends Controller {
         String g_id = getPara("g_id");
         if (!StrKit.isBlank(g_id)) {
             baseResponse = goodsService.getDetailedGoodsInfo(g_id);
+        } else {
+            // 请求的参数不足
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+    }
+    public void uploadGoods() {
+        BaseResponse baseResponse = new BaseResponse();
+        List<UploadFile> uploadFiles = getFiles();
+        String u_id = getPara("u_id");
+        String c_id = getPara("c_id");
+        String g_name = getPara("g_name");
+        String g_price = getPara("g_price");
+        String g_realprice = getPara("g_realprice");
+        String g_describe = getPara("g_describe");
+
+        if (!StrKit.isBlank(u_id) && !StrKit.isBlank(c_id) && !StrKit.isBlank(g_describe) && !StrKit.isBlank(g_name) && !StrKit.isBlank(g_price) && !StrKit.isBlank(g_realprice)) {
+            baseResponse = goodsService.uploadGoods(u_id, c_id, g_name, g_price, g_realprice, g_describe, uploadFiles);
         } else {
             // 请求的参数不足
             baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);

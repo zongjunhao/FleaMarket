@@ -1,5 +1,6 @@
 package com.zuel.fleamarket.service;
 
+import com.jfinal.upload.UploadFile;
 import com.zuel.fleamarket.kit.BaseResponse;
 import com.zuel.fleamarket.kit.ResultCodeEnum;
 import com.zuel.fleamarket.model.Category;
@@ -291,6 +292,11 @@ public class GoodsService {
         } else {
             baseResponse.setResult(ResultCodeEnum.GOODS_QUERY_NULL);
         }
+        return baseResponse;
+    }
+    public BaseResponse uploadGoods(String u_id, String c_id, String g_name, String g_price, String g_realprice, String g_describe, List<UploadFile> uploadFiles) {
+        BaseResponse baseResponse = new BaseResponse();
+
         return baseResponse;
     }
 }
