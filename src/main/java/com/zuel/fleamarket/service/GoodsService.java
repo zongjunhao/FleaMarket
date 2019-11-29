@@ -307,7 +307,7 @@ public class GoodsService {
      * @param uploadFiles
      * @return
      */
-    public BaseResponse uploadGoods(String u_id, String c_id, String g_name, String g_price, String g_realprice, String g_describe, List<UploadFile> uploadFiles) {
+    public BaseResponse uploadGoods(final String u_id, final String c_id, final String g_name, final String g_price, final String g_realprice, final String g_describe, final List<UploadFile> uploadFiles) {
         BaseResponse baseResponse = new BaseResponse();
         boolean succeed = Db.tx(new IAtom() {
             boolean result = true;
