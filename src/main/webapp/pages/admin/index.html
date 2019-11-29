@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>二手交易平台后台管理</title>
@@ -19,104 +20,105 @@
     <!-- 	监听页面窗口大小改变的插件 -->
     <script type="text/javascript" src="/lib/js/detect-element-resize.js"></script>
 </head>
+
 <body>
-<!-- 顶部导航条-->
-<nav id="book-top" class="navbar navbar-fixed-top header" role="navigation">
-    <div class="container-fluid">
-        <!--标题-->
-        <div class="navbar-header">
-            <div class="media">
-                <div class="media-left">
-                    <span class="iconfont iconershou" style="font-size: 24px"></span>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">校园二手交易平台</h4>
+    <!-- 顶部导航条-->
+    <nav id="book-top" class="navbar navbar-fixed-top header" role="navigation">
+        <div class="container-fluid">
+            <!--标题-->
+            <div class="navbar-header">
+                <div class="media">
+                    <div class="media-left">
+                        <span class="iconfont iconershou" style="font-size: 24px"></span>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">校园二手交易平台</h4>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="collapse navbar-collapse">
-            <div id="sideNav" class="nav navbar-nav navbar-left">
-                <span class="iconfont iconmenu"></span>
+            <div class="collapse navbar-collapse">
+                <div id="sideNav" class="nav navbar-nav navbar-left">
+                    <span class="iconfont iconmenu"></span>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="mamageRole" data-toggle="tooltip" data-placement="left" title="管理员">
+                        <a id="name" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="iconfont icon-icon_xinyong_xianxing_jijin-"></span>
+                            用户名
+                            <small><span class="iconfont icon-xiala"></span></small>
+                        </a>
+                        <ul class="book-dropmenu dropdown-menu" aria-labelledby="dropdownMenu4">
+                            <li>
+                                <a target="main" class="userInfo">
+                                    <span class="iconfont iconiconcopy"> 个人信息</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="changeInfo" target="main">
+                                    <span class="iconfont iconxiugaixinxi"> 修改信息</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="logout">
+                        <a>
+                            退出
+                            <span class="iconfont icontuichu"></span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li id="mamageRole" data-toggle="tooltip" data-placement="left" title="管理员">
-                    <a id="name" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <span class="iconfont icon-icon_xinyong_xianxing_jijin-"></span>
-                        用户名
-                        <small><span class="iconfont icon-xiala"></span></small>
-                    </a>
-                    <ul class="book-dropmenu dropdown-menu" aria-labelledby="dropdownMenu4">
-                        <li>
-                            <a target="main" class="userInfo">
-                                <span class="iconfont iconiconcopy">  个人信息</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="changeInfo" target="main">
-                                <span class="iconfont iconxiugaixinxi">  修改信息</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li id="logout">
-                    <a>
-                        退出
-                        <span class="iconfont icontuichu"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- /顶部导航条 -->
-
-<!-- 左侧导航条 -->
-<div id="book-left">
-    <nav class="navbar-default navbar-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav" id="main-menu">
-                <li>
-                    <a href="/test.html" target="main" class="selected">
-                        <span class="iconfont iconzhuye">首页</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="userManage.html" target="main">
-                        <span class="iconfont iconyonghuguanli">用户管理</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="goodsManage.html" target="main">
-                        <span class="iconfont iconviewlist">商品管理</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="systemInfo.html" target="main">
-                        <span class="iconfont iconxitongxinxi">系统信息</span>
-                    </a>
-                </li>
-            </ul>
         </div>
     </nav>
-</div>
-<!-- 左侧导航条 -->
+    <!-- /顶部导航条 -->
 
-<!-- 页面主内容 -->
-<div id="book-main">
-    <!--  导航条  -->
-    <div class="page-header">
-        <h1 class="page-header">首页</h1>
-        <ol class="breadcrumb">
-            <li><a href="#">首页</a></li>
-            <li class="active">首页</li>
-        </ol>
+    <!-- 左侧导航条 -->
+    <div id="book-left">
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a href="/test.html" target="main" class="selected">
+                            <span class="iconfont iconzhuye">首页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="userManage.html" target="main">
+                            <span class="iconfont iconyonghuguanli">用户管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="goodsManage.html" target="main">
+                            <span class="iconfont iconviewlist">商品管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="systemInfo.html" target="main">
+                            <span class="iconfont iconxitongxinxi">系统信息</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-    <!-- 页面主内容 -->
-    <iframe name="main" src="/test.html" width="100%" id="myiframe" scrolling="no" frameborder="0"></iframe>
+    <!-- 左侧导航条 -->
 
-</div>
-<!-- /页面主内容 -->
+    <!-- 页面主内容 -->
+    <div id="book-main">
+        <!--  导航条  -->
+        <div class="page-header">
+            <h1 class="page-header">首页</h1>
+            <ol class="breadcrumb">
+                <li><a href="#">首页</a></li>
+                <li class="active">首页</li>
+            </ol>
+        </div>
+        <!-- 页面主内容 -->
+        <iframe name="main" src="/test.html" width="100%" id="myiframe" scrolling="no" frameborder="0"></iframe>
+
+    </div>
+    <!-- /页面主内容 -->
 </body>
 <script type="text/javascript">
     var interval = setInterval("checkSession()", 1000 * 60 * 30);
@@ -149,13 +151,13 @@
         //添加手气左侧导航栏功能
         $("#sideNav").click(function () {
             if ($(this).hasClass('closed')) {
-                $('.navbar-side').animate({left: '0px'});
+                $('.navbar-side').animate({ left: '0px' });
                 $(this).removeClass('closed');
-                $('#book-main').animate({'margin-left': '260px'});
+                $('#book-main').animate({ 'margin-left': '260px' });
             } else {
                 $(this).addClass('closed');
-                $('.navbar-side').animate({left: '-260px'});
-                $('#book-main').animate({'margin-left': '0px'});
+                $('.navbar-side').animate({ left: '-260px' });
+                $('#book-main').animate({ 'margin-left': '0px' });
             }
         });
 
@@ -235,4 +237,5 @@
         }
     }
 </script>
+
 </html>
