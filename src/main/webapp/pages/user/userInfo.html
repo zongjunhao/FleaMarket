@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加bootstrap的css样式表 -->
+    <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css">
+    <!--    添加JQuery-->
+    <script type="text/javascript" src="/lib/jq/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/lib/jq/jquerySession.js"></script>
+    <!--    添加bootstrap的库-->
+    <script type="text/javascript" src="/lib/js/bootstrap.js"></script>
+    <!--    监听页面窗口大小改变的插件-->
+    <script type="text/javascript" src="/lib/js/detect-element-resize.js"></script>
+    <style>
+        #userInfo {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="userInfo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">学号</label>
+                        <div class="col-sm-8">
+                            <div class="u_stuid form-control"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">名称</label>
+                        <div class="col-sm-8">
+                            <div class="u_name form-control"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">性别</label>
+                        <div class="col-sm-8">
+                            <div class="u_gender form-control"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">电话</label>
+                        <div class="col-sm-8">
+                            <div class="u_phone form-control"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">QQ</label>
+                        <div class="col-sm-8">
+                            <div class="u_qq form-control"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        // 监听子页面大小变化，设置父页面iframe的大小
+        if ($(document.body).height < 335) {
+            window.parent.document.getElementById("myiframe").height = 355;
+        } else {
+            window.parent.document.getElementById("myiframe").height = $(document.body).height;
+        }
+        console.log("setHeight");
+        addResizeListener(document.getElementsByTagName("body")[0],
+            function () {
+                if ($(document.body).height < 335) {
+                    window.parent.document.getElementById("myiframe").height = 355;
+                } else {
+                    window.parent.document.getElementById("myiframe").height = $(document.body).height;
+                }
+            })
+    })
+    $(function () {
+        const id = (getUrlParam("id") == null ? $.session.get("u_id") : getUrlParam("id"));
+
+        $.ajax({
+            type: "post",
+            url: "/user/getInfo",
+            data: {
+                u_id: id
+            },
+            success: function (response) {
+                $(".u_stuid").text(response.data.u_stuid)
+                $(".u_name").text(response.data.u_name)
+                $(".u_gender").text(response.data.u_gender)
+                $(".u_phone").text(response.data.u_phone)
+                $(".u_qq").text(response.data.u_qq)
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    })
+</script>
+</html>
