@@ -114,6 +114,7 @@ public class UserService {
 
     /**
      * 修改用户的信息
+     *
      * @param u_stuid
      * @param u_name
      * @param u_gender
@@ -137,6 +138,26 @@ public class UserService {
                 // 用户信息修改失败，数据库错误
                 baseResponse.setResult(ResultCodeEnum.DB_UPDATE_ERROR);
             }
+        } else {
+            // 该账户不存在
+            baseResponse.setResult(ResultCodeEnum.RECORD_NO_EXIST);
+        }
+        return baseResponse;
+    }
+
+    /**
+     * 查找用户信息
+     *
+     * @param u_id
+     * @return
+     */
+    public BaseResponse getInfo(String u_id) {
+        BaseResponse baseResponse = new BaseResponse();
+        User user = User.dao.findFirst("select * from user where u_id =" + "'" + u_id + "'");
+        if (user != null) {
+            // 查找记录不为空
+            baseResponse.setData(user);
+            baseResponse.setResult(ResultCodeEnum.USER_QUERY_SUCCESS);
         } else {
             // 该账户不存在
             baseResponse.setResult(ResultCodeEnum.RECORD_NO_EXIST);

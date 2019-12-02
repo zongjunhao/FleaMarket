@@ -70,6 +70,8 @@ public enum ResultCodeEnum {
     NOTICE_UPDATE_STATE_FAILURE_DB_ERROR("6020", "求购信息修改状态失败_数据库错误"),
     NOTICE_QUERY_SUCCESS("6021", "求购信息查询成功"),
     NOTICE_QUERY_NULL("6022", "求购信息查询为空"),
+
+    USER_QUERY_SUCCESS("7000", "用户查询成功"),
     TEST("9000", "测试");
 
 

@@ -115,4 +115,18 @@ public class UserController extends Controller {
         renderJson(baseResponse);
     }
 
+    /**
+     * 获取用户的信息
+     */
+    public void getInfo() {
+        BaseResponse baseResponse = new BaseResponse();
+        String u_id = getPara("u_id");
+        if (!StrKit.isBlank(u_id)) {
+            baseResponse = userService.getInfo(u_id);
+        } else {
+            // 请求学号、名字、qq不能为空
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
 }
