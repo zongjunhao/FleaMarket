@@ -8,7 +8,4 @@ public class IndexController extends Controller {
         render("/pages/index.html");
     }
 
-    public void test(){
-        render("test.html");
-    }
 }
