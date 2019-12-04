@@ -45,6 +45,21 @@ public class AdminController extends Controller {
     }
 
     /**
+     * 管理员退出登录
+     */
+    public void logout() {
+        BaseResponse baseResponse = new BaseResponse();
+        String account = getPara("a_account");
+        if (getSessionAttr(account) != null && getSessionAttr(account).equals("ready")) {
+            removeSessionAttr(account);
+            baseResponse.setResult(ResultCodeEnum.LOGOUT_SUCCESS);
+        } else {
+            baseResponse.setResult(ResultCodeEnum.LOGOUT_FAILURE);
+        }
+        renderJson(baseResponse);
+    }
+
+    /**
      * 管理员修改密码
      */
     public void modifyPassword() {

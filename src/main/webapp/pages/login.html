@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/login.css" type="text/css" />
-    <script type="text/javascript" src = "/lib/jq/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src = "/lib/jq/jquerySession.js"></script>
-    <script type="text/javascript" src = "/js/login.js"></script>
+    <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+    <script type="text/javascript" src="/lib/jq/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/lib/jq/jquerySession.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+    <script src="/lib/js/vue.js" type="text/javascript" charset="utf-8"></script>
     <title>Login</title>
 </head>
 <body>
@@ -26,7 +27,8 @@
                 </div>
                 <div class="login_scan_panel" style="margin-top:0;" data-panel="qrcode" style="height: 420px;">
                     <div class="header_nav">
-                        <a href="javascript:;" id="user_nav" onclick="user_click()" class="nav_item js_verify_item curr">
+                        <a href="javascript:;" id="user_nav" onclick="user_click()"
+                           class="nav_item js_verify_item curr">
                             <div>用户登录</div>
                             <div class="curr_line"></div>
                         </a>
@@ -37,29 +39,41 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="user_tab">
-                            <input class="input" id="user_name" type="text" name="username"  placeholder="用户邮箱" size="35" maxlength ="20" onfocus="user_name_recovery()" onblur="check_user_name()">
+                            <input class="input" id="user_name" type="text" name="username" placeholder="用户邮箱" size="35"
+                                   maxlength="20" onfocus="user_name_recovery()" onblur="check_user_name()">
                             <div id="user_tip" style="color:white; height: 30px;">请输入正确的用户邮箱!</div>
-                            <input class="input" type="password" id="user_password" name="password" placeholder="密码" size="35" maxlength = "24" onfocus="user_pwd_recovery()" onblur="check_user_pwd()">
+                            <input class="input" type="password" id="user_password" name="password" placeholder="密码"
+                                   size="35" maxlength="24" onfocus="user_pwd_recovery()" onblur="check_user_pwd()">
                             <div id="user_pwd_tip" style="color:white; height: 30px;">请输入密码!</div>
                             <div class="randomCode">
-                                <input class="input" type="text" id="user_inputRandomCode" name="inputRandomCode" placeholder="验证码" size="35" maxlength = "24" onfocus="user_code_recovery()" onblur="check_user_code()">
-                                <img id="user_pic" src="user/pic" onclick="this.src='user/pic?x='+Math.random()">
+                                <input class="input" type="text" id="user_inputRandomCode" name="inputRandomCode"
+                                       placeholder="验证码" size="35" maxlength="24" onfocus="user_code_recovery()"
+                                       onblur="check_user_code()">
+                                <img id="user_pic" src="refreshUserCode()" onerror="refreshUserCode()"
+                                     onclick="refreshUserCode()">
                             </div>
                             <div id="user_code_tip" style="color:white; height: 30px;">请输入验证码</div>
-                            <input id="user_login" onclick="user_login()"class="login"  type="button" name="submit" value="登录">
+                            <input id="user_login" onclick="user_login()" class="login" type="button" name="submit"
+                                   value="登录">
                         </div>
 
                         <div class="tab-pane" id="admin_tab">
-                            <input class="input" id="admin_name" type="text" name="adminname"  placeholder="用户名" size="35" maxlength ="20" onfocus="admin_name_recovery()" onblur="check_admin_name()">
+                            <input class="input" id="admin_name" type="text" name="adminname" placeholder="用户名"
+                                   size="35" maxlength="20" onfocus="admin_name_recovery()" onblur="check_admin_name()">
                             <div id="admin_tip" style="color:white; height: 30px;">请输入用户名!</div>
-                            <input class="input" type="password" id="admin_password" name="password" placeholder="密码" size="35" maxlength = "24" onfocus="admin_pwd_recovery()" onblur="check_admin_pwd()">
+                            <input class="input" type="password" id="admin_password" name="password" placeholder="密码"
+                                   size="35" maxlength="24" onfocus="admin_pwd_recovery()" onblur="check_admin_pwd()">
                             <div id="admin_pwd_tip" style="color:white; height: 30px;">请输入密码!</div>
                             <div class="randomCode">
-                                <input class="input" type="text" id="admin_inputRandomCode" name="inputRandomCode" placeholder="验证码" size="35" maxlength = "24" onfocus="admin_code_recovery()" onblur="check_admin_code()">
-                                <img id="admin_pic" src="user/pic" onclick="this.src='user/pic?x='+Math.random()">
+                                <input class="input" type="text" id="admin_inputRandomCode" name="inputRandomCode"
+                                       placeholder="验证码" size="35" maxlength="24" onfocus="admin_code_recovery()"
+                                       onblur="check_admin_code()">
+                                <img id="admin_pic" src="refreshAdminCode()" onerror="refreshAdminCode()"
+                                     onclick="refreshAdminCode()">
                             </div>
                             <div id="admin_code_tip" style="color:white; height: 30px;">请输入验证码</div>
-                            <input id="admin_login" onclick="admin_login()" class="login"  type="button" name="submit" value="登录">
+                            <input id="admin_login" onclick="admin_login()" class="login" type="button" name="submit"
+                                   value="登录">
                         </div>
                     </div>
                     <div class="login_scan_footer">
@@ -70,17 +84,29 @@
         </div>
     </div>
 </div>
-<script>
-    $("body").keydown(function() {
+<script type="text/javascript">
+    $("body").keydown(function () {
         if (event.keyCode == "13") {//keyCode=13是回车键
             $('#user_login').click();
         }
     });
-    $("body").keydown(function() {
+    $("body").keydown(function () {
         if (event.keyCode == "13") {//keyCode=13是回车键
             $('#admin_login').click();
         }
     });
+    console.log("test1");
+    var vm = new Vue({
+        el: "#app",
+        methods: {
+            getRootPath: function () {
+                var strFullPath = window.document.location.href;
+                var strPath = window.document.location.pathname;
+                var pos = strFullPath.indexOf(strPath);
+                return strFullPath.substring(0, pos);
+            }
+        }
+    })
 </script>
 </body>
 </html>

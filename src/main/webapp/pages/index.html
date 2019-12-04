@@ -6,9 +6,9 @@
     <title>二手交易平台</title>
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
-<!--    <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">-->
-<!--    <link rel="stylesheet" href="/assets/vendor/linearicons/style.css">-->
-<!--    <link rel="stylesheet" href="/assets/vendor/chartist/css/chartist-custom.css">-->
+    <!--    <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">-->
+    <!--    <link rel="stylesheet" href="/assets/vendor/linearicons/style.css">-->
+    <!--    <link rel="stylesheet" href="/assets/vendor/chartist/css/chartist-custom.css">-->
     <!-- 引用阿里的字体图标库 -->
     <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_h74xmav95an.css">
     <!-- MAIN CSS -->
@@ -102,7 +102,8 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <iframe name="main" src="/pages/admin/adminMainPage.html" width="100%" height="100%" id="myiframe" scrolling="no"
+                <iframe name="main" src="/pages/admin/adminMainPage.html" width="100%" height="100%" id="myiframe"
+                        scrolling="no"
                         frameborder="0"></iframe>
             </div>
         </div>
@@ -113,6 +114,7 @@
 <!-- END WRAPPER -->
 <!-- Javascript -->
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/lib/jq/jquerySession.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!--<script src="/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>-->
@@ -120,6 +122,9 @@
 <script src="/assets/scripts/klorofil-common.js"></script>
 <script type="text/javascript" src="/lib/js/detect-element-resize.js"></script>
 <script type="text/javascript">
+    var logout = [["/admin/logout", "a_account", "/pages/login.html"], ["/user/logout", "u_stuid", "/pages/login.html"]];
+    var role = $.session.get("role");
+    var url, id;
     $("#myiframe").height($("#sidebar-nav").height() - 64);
     $(document).ready(function () {
         //监听子页面大小变化，设置父页面的iframe的大小
@@ -149,20 +154,59 @@
     // 控制收起或展开左侧导航栏的箭头的方向
     $(".btn-toggle-fullwidth span").click(function () {
         if ($(this).hasClass("iconiconleft")) {
-            $(this).removeClass("iconiconleft")
-            $(this).addClass("iconiconright")
+            $(this).removeClass("iconiconleft");
+            $(this).addClass("iconiconright");
         } else {
-            $(this).removeClass("iconiconright")
-            $(this).addClass("iconiconleft")
+            $(this).removeClass("iconiconright");
+            $(this).addClass("iconiconleft");
         }
     });
 
     $(function () {
-        var logout = ["/admin/logout", "a_account", "/login.html"]
         $('[data-toggle="tooltip"]').tooltip();
         //加载导航插件
         $('#main-menu').metisMenu();
-    })
+
+        $("#logout").click(function () {
+            logOut()
+        })
+    });
+
+    // 初始化
+    function init() {
+        if (role == "1") { // 管理员
+            url = logout[0][0] + "?" + logout[0][1] + "=" + $.session.get("a_account");
+            id = $.session.get
+        } else { // 用户
+
+        }
+    }
+
+    // 退出登陆
+    function logOut() {
+        console.log("logout");
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (res) {
+                //console.log(returnLocation)
+                if (res.resultCode == "4004") {
+                    $.session.clear();
+                    location.href = "login.html";
+                } else if (res.resultCode == "4005") {
+                    //alert("退出登陆失败，用户未登录");
+                    //$.session.clear();
+                    location.href = "/pages/login.html";
+                } else {
+                    alert(res.resultCode);
+                }
+            },
+            error: function (res) {
+                alert("请求的页面有错");
+            }
+        });
+
+    }
 </script>
 </body>
 
