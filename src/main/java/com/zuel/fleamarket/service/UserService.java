@@ -70,6 +70,7 @@ public class UserService {
         } else {
             if (user.getUPwd().equals(u_pwd)) {
                 // 登录成功
+                baseResponse.setData(user);
                 baseResponse.setResult(ResultCodeEnum.LOGIN_SUCCESS);
             } else {
                 // 登录失败，密码错误
