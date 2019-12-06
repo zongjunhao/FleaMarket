@@ -46,11 +46,12 @@ public class AdminService {
      * @param password    新密码
      * @return 返回是否修改成功
      */
-    public BaseResponse modifyPassword(String account, String oldPassword, String password) {
+    public BaseResponse modifyPassword(String id, String account, String oldPassword, String password) {
         BaseResponse baseResponse = new BaseResponse();
-        Admin admin = Admin.dao.findFirst("select * from admin where a_account = ?", account);
+        Admin admin = Admin.dao.findFirst("select * from admin where a_id = ?", id);
         if (admin != null) { // 查找成功
             if (admin.getAPwd().equals(oldPassword)) { // 原密码是否正确
+                admin.setAAccount(account);
                 admin.setAPwd(password);
                 if (admin.update()) { // 更新成功
                     baseResponse.setData(admin);

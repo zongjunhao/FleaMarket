@@ -3,8 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 添加bootstrap的css样式表 -->
+    <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css">
+    <!--    添加JQuery-->
+    <script type="text/javascript" src="/lib/jq/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/lib/jq/jquerySession.js"></script>
+    <!--    添加bootstrap的库-->
+    <script type="text/javascript" src="/lib/js/bootstrap.js"></script>
+    <!--    监听页面窗口大小改变的插件-->
+    <script type="text/javascript" src="/lib/js/detect-element-resize.js"></script>
+    <style>
+        #userInfo{
+            padding-top:20px;
+        }
+    </style>
 </head>
 <body>
-
+<div id="userInfo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <div class="name form-control">1</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <div class="password form-control">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".name").text($.session.get("a_account"));
+        $(".password").text($.session.get("a_pwd"));
+    });
+</script>
 </html>

@@ -64,10 +64,11 @@ public class AdminController extends Controller {
      */
     public void modifyPassword() {
         BaseResponse baseResponse = new BaseResponse();
+        String id = getPara("id");
         String account = getPara("account");
         String oldPassword = getPara("oldPassword");
         String password = getPara("password");
-        baseResponse = adminService.modifyPassword(account, oldPassword, password);
+        baseResponse = adminService.modifyPassword(id, account, oldPassword, password);
         renderJson(baseResponse);
     }
 
@@ -102,7 +103,7 @@ public class AdminController extends Controller {
     /**
      * 删除货物（可批量删除）
      */
-    public void deleteGoods(){
+    public void deleteGoods() {
         BaseResponse baseResponse = new BaseResponse();
         String[] g_ids = getParaValues("g_ids");
         baseResponse = adminService.deleteGoods(g_ids);

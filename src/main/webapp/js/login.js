@@ -136,15 +136,13 @@ function user_login() {
                 if (json.resultCode == "4000") {
                     //登录成功
                     //alert(json.resultDesc);
-                    $.session.set("u_age", json.data.u_age);
-                    $.session.set("u_mail", json.data.u_email);
-                    $.session.set("u_firm", json.data.u_firm);
-                    $.session.set("u_gender", json.data.u_gender);
                     $.session.set("u_id", json.data.u_id);
                     $.session.set("u_name", json.data.u_name);
+                    $.session.set("u_gender", json.data.u_gender);
                     $.session.set("u_phone", json.data.u_phone);
+                    $.session.set("u_stuid", json.data.u_stuid);
+                    $.session.set("u_qq", json.data.u_qq);
                     $.session.set("u_pwd", json.data.u_pwd);
-                    $.session.set("u_role", json.data.u_role);
                     $.session.set("role", "2");
                     console.log($.session.get("role"));
                     window.location.href = "/pages/index.html";
