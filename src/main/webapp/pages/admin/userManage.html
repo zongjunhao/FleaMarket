@@ -28,15 +28,40 @@
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                         <tr>
+                            <th>ID</th>
                             <th>学号</th>
                             <th>姓名</th>
                             <th>性别</th>
                             <th>电话</th>
                             <th>QQ</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-
+                        <tr>
+                            <td>1</td>
+                            <td>201721130058</td>
+                            <td>宗俊豪</td>
+                            <td>男</td>
+                            <td>13176553791</td>
+                            <td>1016767058</td>
+                            <td style="text-align: center">
+                                <button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_stuid + ')">删除
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>201721130058</td>
+                            <td>宗俊豪</td>
+                            <td>男</td>
+                            <td>13176553791</td>
+                            <td>1016767058</td>
+                            <td style="text-align: center">
+                                <button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_stuid + ')">删除
+                                </button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -64,11 +89,15 @@
                     var tableLength = res.data.length;
                     $.each(res.data, function (i, value) {
                         table += "<tr>" +
+                            "<td>" + i + 1 + "</td>" +
                             "<td>" + value.u_stuid + "</td>" +
                             "<td>" + value.u_name + "</td>" +
                             "<td>" + value.u_gender + "</td>" +
                             "<td>" + value.u_phone + "</td>" +
                             "<td>" + value.u_qq + "</td>" +
+                            "<td>" +
+                            '<button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_stuid + ')">删除</button>' +
+                            "</td>" +
                             "</tr>"
                     });
                     $(".table tbody").append(table)
@@ -83,6 +112,14 @@
             }
         });
     });
+
+    function getUserInfo(u_stuid) {
+
+    }
+
+    function deleteUser(u_stuid) {
+
+    }
 </script>
 </body>
 </html>
