@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
     <!-- 添加bootstrap的css样式表 -->
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css">
-    <!--    添加JQuery-->
+    <!-- 添加JQ -->
     <script type="text/javascript" src="/lib/jq/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="/lib/jq/jquerySession.js"></script>
-    <!--    添加bootstrap的库-->
+    <!-- 添加bootstrap的库 -->
     <script type="text/javascript" src="/lib/js/bootstrap.js"></script>
-    <!--    监听页面窗口大小改变的插件-->
+    <!-- 	监听页面窗口大小改变的插件 -->
     <script type="text/javascript" src="/lib/js/detect-element-resize.js"></script>
+    <!-- 引用阿里的字体图标库 -->
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1333406_174a1653fij.css">
     <style>
         #userInfo {
             padding-top: 20px;
@@ -29,7 +30,7 @@
                         <label class="col-sm-4 control-label">用户名</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" class="name form-control" placeholder="请输入用户名"/>
+                                <input type="text" class="a_account form-control" placeholder="请输入用户名"/>
                                 <span class="input-group-btn">
                                     <span class="icon1 iconfont icon-tongguo"></span>
                                 </span>
@@ -41,9 +42,9 @@
                         <label class="col-sm-4 control-label">原密码</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="password" class="password1 form-control" placeholder="请输入原密码"/>
+                                <input type="text" class="oldPassword form-control" placeholder="请输入原密码"/>
                                 <span class="input-group-btn">
-                                    <span class="icon2 iconfont icon-jujue"></span>
+                                    <span class="icon2 iconfont icon-tongguo"></span>
                                 </span>
                             </div><!-- /input-group -->
                         </div>
@@ -52,8 +53,9 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">新密码</label>
                         <div class="col-sm-8">
+                            <!-- <div class="f_phone form-control">15717172075</div> -->
                             <div class="input-group">
-                                <input type="password" class="password2 form-control" placeholder="请输入新密码"/>
+                                <input type="text" class="newPassword form-control" placeholder="请输入新密码"/>
                                 <span class="input-group-btn">
                                     <span class="icon3 iconfont icon-jujue"></span>
                                 </span>
@@ -64,8 +66,9 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">确认密码</label>
                         <div class="col-sm-8">
+                            <!-- <div class="f_phone form-control">15717172075</div> -->
                             <div class="input-group">
-                                <input type="password" class="password form-control" placeholder="请确认密码"/>
+                                <input type="text" class="confirmPassword form-control" placeholder="请确认密码"/>
                                 <span class="input-group-btn">
                                     <span class="icon4 iconfont icon-jujue"></span>
                                 </span>
@@ -78,7 +81,6 @@
                             <button id="modify" class=" btn btn-default text-right" style="float: right;">修改</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -86,24 +88,6 @@
 </div>
 </body>
 <script type="text/javascript">
-    $(document).ready(function () {
-        //监听子页面大小变化，设置父页面iframe的大小
-        if($(document.body).height()<355){
-            window.parent.document.getElementById("myiframe").height = 355
-        }else{
-            window.parent.document.getElementById("myiframe").height=$(document.body).height();
-        }
-        //window.parent.document.getElementById("myiframe").height=$(document.body).height();
-        console.log("setHeight");
-        addResizeListener(document.getElementsByTagName("body")[0],function(){
-            if($(document.body).height()<355){
-                window.parent.document.getElementById("myiframe").height = 355
-            }else{
-                window.parent.document.getElementById("myiframe").height=$(document.body).height();
-            }
-        });
-    });
-
     $(function(){
         $(".name").val($.session.get("a_account"));
         $("#modify").click(function(){
@@ -133,22 +117,22 @@
         });
 
         $(".icon1").css({"color":"green"});
-        $(".icon2").css({"color":"red"});
+        // $(".icon2").css({"color":"red"});
         $(".icon3").css({"color":"red"});
         $(".icon4").css({"color":"red"});
-        $(".name").on("blur",function(){
+        $(".a_account").on("blur",function(){
             checkName()
         });
-        $(".password2").on("blur",function(){
+        $(".newPassword").on("blur",function(){
             checkNewPass()
         });
-        $(".password").on("blur",function(){
+        $(".confirmPassword").on("blur",function(){
             checkNewPass1()
         });
     });
 
     function checkName(){
-        if(($(".name").val()=="")){
+        if(($(".a_account").val()=="")){
             //console.log("empty")
             $(".icon1").removeClass("icon-tongguo").addClass("icon-jujue").css({"color":"red"});
             return false;
@@ -160,7 +144,7 @@
     }
 
     function checkNewPass(){
-        if($(".password2").val()==""){
+        if($(".newPassword").val()==""){
             //console.log("empty")
             $(".icon3").removeClass("icon-tongguo").addClass("icon-jujue").css({"color":"red"});
             return false;
@@ -172,7 +156,7 @@
     }
 
     function checkNewPass1(){
-        if($(".password").val()==""||$(".password").val()!=$(".password2").val()){
+        if($(".confirmPassword").val()==""||$(".password").val()!=$(".password2").val()){
             $(".icon4").removeClass("icon-tongguo").addClass("icon-jujue").css({"color":"red"});
             return false;
         }else{

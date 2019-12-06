@@ -136,27 +136,9 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        //监听子页面大小变化，设置父页面iframe的大小
-        if ($(document.body).height() < 355) {
-            window.parent.document.getElementById("myiframe").height = 355
-        } else {
-            window.parent.document.getElementById("myiframe").height = $(document.body).height();
-        }
-        //window.parent.document.getElementById("myiframe").height=$(document.body).height();
-        console.log("setHeight");
-        addResizeListener(document.getElementsByTagName("body")[0], function () {
-            if ($(document.body).height() < 355) {
-                window.parent.document.getElementById("myiframe").height = 355
-            } else {
-                window.parent.document.getElementById("myiframe").height = $(document.body).height();
-            }
-        });
-    });
     $(function () {
         $.ajax({
             type: "post",
