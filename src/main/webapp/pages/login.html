@@ -49,8 +49,9 @@
                                 <input class="input" type="text" id="user_inputRandomCode" name="inputRandomCode"
                                        placeholder="验证码" size="35" maxlength="24" onfocus="user_code_recovery()"
                                        onblur="check_user_code()">
-                                <img id="user_pic" src="refreshUserCode()" onerror="refreshUserCode()"
-                                     onclick="refreshUserCode()">
+<!--                                <img id="user_pic" src="refreshUserCode()" onerror="refreshUserCode()"-->
+<!--                                     onclick="refreshUserCode()">-->
+                                <img id="user_pic" src="/user/pic" onclick="refreshUserCode()">
                             </div>
                             <div id="user_code_tip" style="color:white; height: 30px;">请输入验证码</div>
                             <input id="user_login" onclick="user_login()" class="login" type="button" name="submit"
@@ -68,8 +69,9 @@
                                 <input class="input" type="text" id="admin_inputRandomCode" name="inputRandomCode"
                                        placeholder="验证码" size="35" maxlength="24" onfocus="admin_code_recovery()"
                                        onblur="check_admin_code()">
-                                <img id="admin_pic" src="refreshAdminCode()" onerror="refreshAdminCode()"
-                                     onclick="refreshAdminCode()">
+<!--                                <img id="admin_pic" src="refreshAdminCode()" onerror="refreshAdminCode()"-->
+<!--                                     onclick="refreshAdminCode()">-->
+                                <img id="admin_pic" src="/admin/pic" onclick="refreshAdminCode()">
                             </div>
                             <div id="admin_code_tip" style="color:white; height: 30px;">请输入验证码</div>
                             <input id="admin_login" onclick="admin_login()" class="login" type="button" name="submit"
@@ -96,17 +98,6 @@
         }
     });
     console.log("test1");
-    var vm = new Vue({
-        el: "#app",
-        methods: {
-            getRootPath: function () {
-                var strFullPath = window.document.location.href;
-                var strPath = window.document.location.pathname;
-                var pos = strFullPath.indexOf(strPath);
-                return strFullPath.substring(0, pos);
-            }
-        }
-    })
 </script>
 </body>
 </html>

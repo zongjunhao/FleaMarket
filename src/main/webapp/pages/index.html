@@ -10,7 +10,7 @@
     <!--    <link rel="stylesheet" href="/assets/vendor/linearicons/style.css">-->
     <!--    <link rel="stylesheet" href="/assets/vendor/chartist/css/chartist-custom.css">-->
     <!-- 引用阿里的字体图标库 -->
-    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_1d3coy51yhr.css">
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_ywe242k90t.css">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/demo.css">
@@ -71,7 +71,7 @@
     <div id="sidebar-nav" class="sidebar">
         <div class="sidebar-scroll">
             <nav>
-                <ul class="nav">
+                <ul class="nav adminNav">
                     <li>
                         <a href="/pages/admin/adminMainPage.html" target="main" class="active">
                             <span class="iconfont iconzhuye navleft">首页</span>
@@ -90,6 +90,78 @@
                     <li>
                         <a href="/pages/admin/systemInfo.html" target="main">
                             <span class="iconfont iconxitongxinxi navleft">系统信息</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav userNav">
+                    <li>
+                        <a href="/pages/user/userMainPage.html" target="main" class="active">
+                            <span class="iconfont iconzhuye navleft">首页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#subPages" data-toggle="collapse" class="collapsed">
+                            <span class="iconfont iconshangpinleibie navleft">商品类别</span>
+                            <span class="iconfont iconarrow-left navbar-right"></span>
+                        </a>
+                        <div id="subPages" class="collapse ">
+                            <ul class="nav">
+                                <li>
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(1)">
+                                        <span class="iconfont iconappzuixinfabu navleft secondary-text">最新发布</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(2)">
+                                        <span class="iconfont iconshuma1 navleft">闲置数码</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(3)">
+                                        <span class="iconfont iconjiaotongdanchezihangcheqihangxianxing navleft">校园代步</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(4)">
+                                        <span class="iconfont icondianqi navleft">电器日用</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(5)">
+                                        <span class="iconfont icontushu navleft">图书教材</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(6)">
+                                        <span class="iconfont iconmeizhuang navleft">美妆衣物</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(7)">
+                                        <span class="iconfont icon19 navleft">运动棋牌</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(8)">
+                                        <span class="iconfont iconpiaoquan1 navleft">票券小物</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/pages/admin/systemInfo.html" target="main">
+                            <span class="iconfont iconwofabude navleft">我发布的</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/admin/systemInfo.html" target="main">
+                            <span class="iconfont iconwodeguanzhu navleft">我关注的</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/admin/systemInfo.html" target="main">
+                            <span class="iconfont iconwoyaofabu navleft">我要发布</span>
                         </a>
                     </li>
                 </ul>
@@ -167,14 +239,16 @@
             $("#manageRole").attr("title", "管理员");
             $(".userInfo").attr("href", "/pages/admin/adminInfo.html");
             $(".changeInfo").attr("href", "/pages/admin/adminChangeInfo.html");
-            $("#username").text($.session.get("a_account"))
+            $("#username").text($.session.get("a_account"));
+            $(".userNav").hide();
         } else { // 用户
             url = logout[1][0] + "?" + logout[1][1] + "=" + $.session.get("u_stuid");
             id = $.session.get("u_id");
             $("#manageRole").attr("title", "用户");
             $(".userInfo").attr("href", "/pages/user/userInfo.html");
             $(".changeInfo").attr("href", "/pages/user/userChangeInfo.html");
-            $("#username").text($.session.get("u_name"))
+            $("#username").text($.session.get("u_name"));
+            $(".adminNav").hide();
         }
     }
 
@@ -201,7 +275,11 @@
                 alert("请求的页面有错");
             }
         });
+    }
 
+    function setCategoryID(categoryId) {
+        $.session.set("categoryId", categoryId);
+        console.log($.session.get("categoryId"))
     }
 </script>
 </body>
