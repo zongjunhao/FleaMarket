@@ -21,7 +21,6 @@ public class _MappingKit {
 		arp.addMapping("comment", "com_id", Comment.class);
 		arp.addMapping("follow", "f_id", Follow.class);
 		arp.addMapping("goods", "g_id", Goods.class);
-		arp.addMapping("image", "i_id", Image.class);
 		arp.addMapping("notice", "n_id", Notice.class);
 		arp.addMapping("user", "u_id", User.class);
 	}

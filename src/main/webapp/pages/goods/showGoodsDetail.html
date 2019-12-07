@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--添加JQuery-->
+    <script type="text/javascript" src="/lib/jq/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/lib/jq/jquerySession.js"></script>
+</head>
+<body>
+<div class="goods-detail-box">
+    <div class="col s6">
+        <div class="slider" style="height: 440px;">
+            <ul class="slides" style="height: 400px;">
+                <img src=""/>
+            </ul>
+            <ul class="indicators">
+                <li class="indicator-item"></li>
+                <li class="indicator-item"></li>
+                <li class="indicator-item"></li>
+                <li class="indicator-item"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+   $(function () {
+        $.ajax({
+            type: "post",
+            url: "/goods/getDetailedGoodsInfo",
+            data: {
+                g_id: $.session.get("g_id"),
+            },
+            success: function (res) {
+                const detailedGoodsInfo = res;
+                $().attr("src", res.data.sec)
+            },
+            error: function (res) {
+                console.log(res);
+            }
+        });
+   });
+</script>
+</body>
+</html>

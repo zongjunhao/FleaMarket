@@ -57,6 +57,7 @@ public class GoodsService {
     public BaseResponse getGoodsByCategory(String categoryId) {
         BaseResponse baseResponse = new BaseResponse();
         List<Goods> goods = Goods.dao.find("select * from goods where g_c_id = " + "'" + categoryId + "'" + "and g_state = 1");
+
         if (!goods.isEmpty()) {
             // 货品查询成功
             baseResponse.setResult(ResultCodeEnum.GOODS_QUERY_SUCCESS);
@@ -304,44 +305,26 @@ public class GoodsService {
      * @param g_price
      * @param g_realprice
      * @param g_describe
-     * @param uploadFiles
+     * @param uploadFile
      * @return
      */
-    public BaseResponse uploadGoods(final String u_id, final String c_id, final String g_name, final String g_price, final String g_realprice, final String g_describe, final List<UploadFile> uploadFiles) {
+    public BaseResponse uploadGoods(final String u_id, final String c_id, final String g_name, final String g_price, final String g_realprice, final String g_describe, final UploadFile uploadFile) {
         BaseResponse baseResponse = new BaseResponse();
-        boolean succeed = Db.tx(new IAtom() {
-            boolean result = true;
 
-            @Override
-            public boolean run() throws SQLException {
-                Goods goods = new Goods();
-                goods.setGState(1);
-                goods.setGUId(Integer.parseInt(u_id));
-                goods.setGCId(Integer.parseInt(c_id));
-                goods.setGName(g_name);
-                goods.setGPrice(Integer.parseInt(g_price));
-                goods.setGRealprice(Integer.parseInt(g_realprice));
-                goods.setGDescribe(g_describe);
-                if (goods.save()) {
-                    int g_id = goods.getGId();
-                    for (UploadFile uploadFile :
-                            uploadFiles) {
-                        String fileName = uploadFile.getFileName();
-                        String path = "/upload/" + fileName;
-                        Image image = new Image();
-                        image.setIGId(g_id);
-                        image.setIPath(path);
-                        if (!image.save()) {
-                            result = false;
-                        }
-                    }
-                } else {
-                    result = false;
-                }
-                return result;
-            }
-        });
-        if (succeed) {
+        Goods goods = new Goods();
+        goods.setGState(1);
+        goods.setGUId(Integer.parseInt(u_id));
+        goods.setGCId(Integer.parseInt(c_id));
+        goods.setGName(g_name);
+        goods.setGPrice(Integer.parseInt(g_price));
+        goods.setGRealprice(Integer.parseInt(g_realprice));
+        goods.setGDescribe(g_describe);
+        // 保存图片的路径
+        String fileName = uploadFile.getFileName();
+        String path = "/upload/" + fileName;
+        goods.setGImagepath(path);
+
+        if (goods.save()) {
             baseResponse.setResult(ResultCodeEnum.GOODS_UPLOAD_SUCCESS);
         } else {
             baseResponse.setResult(ResultCodeEnum.GOODS_UPLOAD_FAILURE_DB_ERROR);

@@ -65,6 +65,14 @@ public abstract class BaseGoods<M extends BaseGoods<M>> extends Model<M> impleme
 		return getStr("g_describe");
 	}
 
+	public void setGImagepath(java.lang.String gImagepath) {
+		set("g_imagepath", gImagepath);
+	}
+	
+	public java.lang.String getGImagepath() {
+		return getStr("g_imagepath");
+	}
+
 	public void setGState(java.lang.Integer gState) {
 		set("g_state", gState);
 	}

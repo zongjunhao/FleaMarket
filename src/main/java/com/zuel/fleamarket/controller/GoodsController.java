@@ -171,7 +171,7 @@ public class GoodsController extends Controller {
      */
     public void uploadGoods() {
         BaseResponse baseResponse = new BaseResponse();
-        List<UploadFile> uploadFiles = getFiles("files");
+        UploadFile uploadFile = getFile();
         String u_id = getPara("u_id");
         String c_id = getPara("c_id");
         String g_name = getPara("g_name");
@@ -180,7 +180,7 @@ public class GoodsController extends Controller {
         String g_describe = getPara("g_describe");
 
         if (!StrKit.isBlank(u_id) && !StrKit.isBlank(c_id) && !StrKit.isBlank(g_describe) && !StrKit.isBlank(g_name) && !StrKit.isBlank(g_price) && !StrKit.isBlank(g_realprice)) {
-            baseResponse = goodsService.uploadGoods(u_id, c_id, g_name, g_price, g_realprice, g_describe, uploadFiles);
+            baseResponse = goodsService.uploadGoods(u_id, c_id, g_name, g_price, g_realprice, g_describe, uploadFile);
         } else {
             // 请求的参数不足
             baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
