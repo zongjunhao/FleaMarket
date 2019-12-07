@@ -278,7 +278,7 @@
     }
 
     function setCategoryID(categoryId) {
-        $.session.set("categoryId", categoryId);
+        $.session.set("categoryId", categoryId - 1);
         console.log($.session.get("categoryId"))
     }
 </script>
