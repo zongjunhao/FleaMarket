@@ -1,9 +1,12 @@
 package com.zuel.fleamarket.service;
 
+import com.jfinal.kit.JsonKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.upload.UploadFile;
 import com.zuel.fleamarket.kit.BaseResponse;
+import com.zuel.fleamarket.kit.EachGroupComments;
+import com.zuel.fleamarket.kit.GoodsDetails;
 import com.zuel.fleamarket.kit.ResultCodeEnum;
 import com.zuel.fleamarket.model.*;
 
@@ -241,40 +244,15 @@ public class GoodsService {
      */
     public BaseResponse getDetailedGoodsInfo(String g_id) {
         BaseResponse baseResponse = new BaseResponse();
-        // 每一条评论和该条评论的回复评论
-        class EachGroupComments {
-            private Comment comment;
-            private List<Comment> replyComments;
 
-            public void setComment(Comment comment) {
-                this.comment = comment;
-            }
-
-            public void setReplyComments(List<Comment> replyComments) {
-                this.replyComments = replyComments;
-            }
-        }
-        // 每一条商品信息和所有的评论
-        class DetailedGoodsInfo {
-            private Goods goods;
-            private List<EachGroupComments> allComments;
-
-            public void setGoods(Goods goods) {
-                this.goods = goods;
-            }
-
-            public void setEachGroupCommentsList(List<EachGroupComments> eachGroupCommentsList) {
-                this.allComments = eachGroupCommentsList;
-            }
-        }
-        // 每一个商品的所有详细信息（商品信息和评论）
-        DetailedGoodsInfo detailedGoodsInfo = new DetailedGoodsInfo();
+        GoodsDetails goodsDetails = new GoodsDetails();
         Goods goods = Goods.dao.findFirst("select * from goods where g_id = " + "'" + g_id + "'");
         if (goods != null) {
+            System.out.println(goods);
             // 商品的详细信息
-            detailedGoodsInfo.setGoods(goods);
+            goodsDetails.setGoods(goods);
             // 该商品的所有评论信息（不包括回复信息）
-            List<Comment> comments = Comment.dao.find("select * from comment where com_g_id = " + g_id + "'" + "and com_reply = 0");
+            List<Comment> comments = Comment.dao.find("select * from comment where com_g_id = " + "'" + g_id + "'" + "and com_reply = 0");
             // 该商品的所有评论信息（包括所有回复信息）
             List<EachGroupComments> allComments = new ArrayList<EachGroupComments>();
             for (Comment comment :
@@ -282,13 +260,13 @@ public class GoodsService {
                 // 每一组评论（每一条评论和它的回复评论）
                 EachGroupComments eachGroupComments = new EachGroupComments();
                 eachGroupComments.setComment(comment);
-                List<Comment> replyComments = Comment.dao.find("select * from comment where com_reply = " + comment.getComId() + "'");
+                List<Comment> replyComments = Comment.dao.find("select * from comment where com_reply = " + "'" + comment.getComId() + "'");
                 eachGroupComments.setReplyComments(replyComments);
                 allComments.add(eachGroupComments);
             }
-            detailedGoodsInfo.setEachGroupCommentsList(allComments);
+            goodsDetails.setAllComments(allComments);
 
-            baseResponse.setData(detailedGoodsInfo);
+            baseResponse.setData(goodsDetails);
             baseResponse.setResult(ResultCodeEnum.GOODS_QUERY_SUCCESS);
         } else {
             baseResponse.setResult(ResultCodeEnum.GOODS_QUERY_NULL);

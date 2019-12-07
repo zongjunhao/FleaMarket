@@ -11,7 +11,7 @@
     <div class="col s6">
         <div class="slider" style="height: 440px;">
             <ul class="slides" style="height: 400px;">
-                <img src=""/>
+                <img class="goods-image"/>
             </ul>
             <ul class="indicators">
                 <li class="indicator-item"></li>
@@ -33,7 +33,7 @@
             },
             success: function (res) {
                 const detailedGoodsInfo = res;
-                $().attr("src", res.data.sec)
+                $(".goods-image").attr("src", detailedGoodsInfo.data.g_imagepath);
             },
             error: function (res) {
                 console.log(res);
