@@ -78,6 +78,7 @@
 <script type="text/javascript" src="../../lib/js/vue.js"></script>
 <script type="text/javascript">
     let categoryId = $.session.get("categoryId");
+    let u_id = $.session.get("u_id");
     // let categoryId = 1
     var app = new Vue({
         el: '#content',
@@ -95,84 +96,84 @@
                 g_realprice: 20,
                 g_imagepath: "//g-search3.alicdn.com/img/bao/uploaded/i4/i1/115823344/O1CN01Mi9Ty91aZb0yxNShH_!!0-item_pic.jpg_250x250.jpg_.webp"
             },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 2,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                }
+            //     {
+            //         g_describe: "test2",
+            //         g_state: 1,
+            //         g_name: "user2category1",
+            //         g_id: 2,
+            //         g_c_id: 1,
+            //         g_addtime: "2019-11-28 10:24:27",
+            //         g_u_id: 2,
+            //         g_price: 200,
+            //         g_updatetime: "2019-11-28 10:24:27",
+            //         g_realprice: 20,
+            //         g_imagepath: ""
+            //     },
+            //     {
+            //         g_describe: "test2",
+            //         g_state: 1,
+            //         g_name: "user2category1",
+            //         g_id: 3,
+            //         g_c_id: 1,
+            //         g_addtime: "2019-11-28 10:24:27",
+            //         g_u_id: 2,
+            //         g_price: 200,
+            //         g_updatetime: "2019-11-28 10:24:27",
+            //         g_realprice: 20,
+            //         g_imagepath: ""
+            //     },
+            //     {
+            //         g_describe: "test2",
+            //         g_state: 1,
+            //         g_name: "user2category1",
+            //         g_id: 3,
+            //         g_c_id: 1,
+            //         g_addtime: "2019-11-28 10:24:27",
+            //         g_u_id: 2,
+            //         g_price: 200,
+            //         g_updatetime: "2019-11-28 10:24:27",
+            //         g_realprice: 20,
+            //         g_imagepath: ""
+            //     },
+            //     {
+            //         g_describe: "test2",
+            //         g_state: 1,
+            //         g_name: "user2category1",
+            //         g_id: 3,
+            //         g_c_id: 1,
+            //         g_addtime: "2019-11-28 10:24:27",
+            //         g_u_id: 2,
+            //         g_price: 200,
+            //         g_updatetime: "2019-11-28 10:24:27",
+            //         g_realprice: 20,
+            //         g_imagepath: ""
+            //     },
+            //     {
+            //         g_describe: "test2",
+            //         g_state: 1,
+            //         g_name: "user2category1",
+            //         g_id: 3,
+            //         g_c_id: 1,
+            //         g_addtime: "2019-11-28 10:24:27",
+            //         g_u_id: 2,
+            //         g_price: 200,
+            //         g_updatetime: "2019-11-28 10:24:27",
+            //         g_realprice: 20,
+            //         g_imagepath: ""
+            //     },
+            //     {
+            //         g_describe: "test2",
+            //         g_state: 1,
+            //         g_name: "user2category1",
+            //         g_id: 3,
+            //         g_c_id: 1,
+            //         g_addtime: "2019-11-28 10:24:27",
+            //         g_u_id: 2,
+            //         g_price: 200,
+            //         g_updatetime: "2019-11-28 10:24:27",
+            //         g_realprice: 20,
+            //         g_imagepath: ""
+            //     }
             ]
         },
         methods: {
@@ -195,25 +196,44 @@
                     }
                 })
             },
-			searchGoods(searchInfo){
-				let that = this;
-				$.ajax({
-					type: "post",
-					url: "/goods/queryGoods",
-					data: {"g_name": searchInfo},
-					success: function (res) {
-					    console.log(res);
-					    if (res.resultCode == "6002") {
-					        that.goodsList = res.data;
-					    } else {
-					        console.log(res.resultDesc)
-					    }
-					},
-					error: function (res) {
-					    console.log(res)
-					}
-				})
-			},
+            searchGoods(searchInfo) {
+                let that = this;
+                $.ajax({
+                    type: "post",
+                    url: "/goods/queryGoods",
+                    data: {"g_name": searchInfo},
+                    success: function (res) {
+                        console.log(res);
+                        if (res.resultCode == "6002") {
+                            that.goodsList = res.data;
+                        } else {
+                            console.log(res.resultDesc)
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res)
+                    }
+                })
+            },
+            getUserGoods(url) {
+                let that = this;
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    data: {u_id: u_id},
+                    success: function (res) {
+                        console.log(res);
+                        if (res.resultCode == "6002") {
+                            that.goodsList = res.data;
+                        } else {
+                            console.log(res.resultDesc)
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res)
+                    }
+                })
+            },
             click: function (g_id) {
                 console.log(g_id);
                 $.session.set("g_id", g_id);
@@ -227,8 +247,14 @@
             // console.log("this is mounted");
             if (categoryId == "search") {//搜索商品
                 console.log("search goods");
-				let searchInfo = $.session.get("searchInfo");
-				this.searchGoods(searchInfo);
+                let searchInfo = $.session.get("searchInfo");
+                this.searchGoods(searchInfo);
+            } else if (categoryId == "myGoods") {//查看用户发布的商品
+                console.log("get my goods");
+                this.getUserGoods("/goods/getGoodsByUser")
+            } else if (categoryId == "myCollection") {//查看用户收藏的商品
+                console.log("get my collection");
+                this.getUserGoods("/goods/getFollowList")
             } else {//按照类别查询商品
                 this.getGoods();
             }

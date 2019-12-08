@@ -37,14 +37,14 @@
                     <span class="iconfont iconiconleft"></span>
                 </button>
             </div>
-            <form class="navbar-form navbar-left">
+            <div class="navbar-form navbar-left">
                 <div class="input-group">
                     <input id="search-input" type="text" value="" class="form-control" placeholder="查询商品">
                     <span class="input-group-btn">
                         <a href="goods/viewGoods.html" target="main" id="search-btn" type="button" class="btn btn-primary">搜索</a>
                     </span>
                 </div>
-            </form>
+            </div>
             <ul class="nav navbar-nav navbar-right">
                 <li id="mamageRole" data-toggle="tooltip" data-placement="left" title="管理员">
                     <a id="name" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -115,42 +115,42 @@
                         <div id="subPages" class="collapse ">
                             <ul class="nav">
                                 <li>
-                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(1)">
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(0)">
                                         <span class="iconfont iconappzuixinfabu navleft secondary-text">最新发布</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(2)">
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(1)">
                                         <span class="iconfont iconshuma1 navleft">闲置数码</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(3)">
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(2)">
                                         <span class="iconfont iconjiaotongdanchezihangcheqihangxianxing navleft">校园代步</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(4)">
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(3)">
                                         <span class="iconfont icondianqi navleft">电器日用</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(5)">
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(4)">
                                         <span class="iconfont icontushu navleft">图书教材</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(6)">
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(5)">
                                         <span class="iconfont iconmeizhuang navleft">美妆衣物</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(7)">
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(6)">
                                         <span class="iconfont icon19 navleft">运动棋牌</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(8)">
+                                    <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID(7)">
                                         <span class="iconfont iconpiaoquan1 navleft">票券小物</span>
                                     </a>
                                 </li>
@@ -158,17 +158,17 @@
                         </div>
                     </li>
                     <li>
-                        <a href="/pages/admin/systemInfo.html" target="main">
+                        <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID('myGoods')">
                             <span class="iconfont iconwofabude navleft">我发布的</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/pages/admin/systemInfo.html" target="main">
+                        <a href="/pages/goods/viewGoods.html" target="main" onclick="setCategoryID('myCollection')">
                             <span class="iconfont iconwodeguanzhu navleft">我关注的</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/pages/admin/systemInfo.html" target="main">
+                        <a href="/pages/goods/addNewGoods.html" target="main">
                             <span class="iconfont iconwoyaofabu navleft">我要发布</span>
                         </a>
                     </li>
@@ -200,6 +200,8 @@
 <script src="/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/assets/scripts/klorofil-common.js"></script>
 <script src="../lib/js/vue.js"></script>
+<!-- 添加导航栏的插件库 -->
+<script type="text/javascript" src="../lib/js/navbar.js"></script>
 <script type="text/javascript">
     var logout = [["/admin/logout", "a_account", "/pages/login.html"], ["/user/logout", "u_stuid", "/pages/login.html"]];
     var role = $.session.get("role");
@@ -254,12 +256,14 @@
             $(".changeInfo").attr("href", "/pages/admin/adminChangeInfo.html");
             $("#username").text($.session.get("a_account"));
             $(".userNav").hide();
+            $(".navbar-form").hide();
         } else { // 用户
             url = logout[1][0] + "?" + logout[1][1] + "=" + $.session.get("u_stuid");
             id = $.session.get("u_id");
             $("#manageRole").attr("title", "用户");
             $(".userInfo").attr("href", "/pages/user/userInfo.html");
             $(".changeInfo").attr("href", "/pages/user/userChangeInfo.html");
+            $("#myiframe").attr("src", "/pages/user/userMainPage.html");
             $("#username").text($.session.get("u_name"));
             $(".adminNav").hide();
         }
@@ -291,7 +295,7 @@
     }
 
     function setCategoryID(categoryId) {
-        $.session.set("categoryId", categoryId - 1);
+        $.session.set("categoryId", categoryId);
         console.log($.session.get("categoryId"))
     }
 

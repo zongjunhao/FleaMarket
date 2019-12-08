@@ -3,8 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 添加JQ -->
+    <script type="text/javascript" src="/lib/jq/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/lib/jq/jquerySession.js"></script>
+    <!-- 引用阿里的字体图标库 -->
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_ywe242k90t.css">
+    <style>
+        .iconfont{
+            font-size: 100px;
+        }
+        .inner p{
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .inner{
+            margin: 40px;
+            cursor: pointer;
+        }
+        .content{
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
 </head>
 <body>
-
+<div class="content">
+    <div class="inner" id="1">
+        <span class="iconfont iconwofabude"></span>
+        <p>我发布的</p>
+    </div>
+    <div class="inner" id="2">
+        <span class="iconfont iconwodeguanzhu"></span>
+        <p>我关注的</p>
+    </div>
+    <div class="inner" id="3">
+        <span class="iconfont iconwoyaofabu"></span>
+        <p>我要发布</p>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#1").click(function () {
+        $.session.set("categoryId", "myGoods");
+        location.href = "/pages/goods/viewGoods.html"
+    });
+    $("#2").click(function () {
+        $.session.set("categoryId", "myCollection");
+        location.href = "/pages/goods/viewGoods.html"
+    });
+    $("#3").click(function () {
+        location.href = "/pages/goods/addNewGoods.html"
+    });
+</script>
 </body>
 </html>

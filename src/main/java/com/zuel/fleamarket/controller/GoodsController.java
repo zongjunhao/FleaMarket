@@ -175,7 +175,7 @@ public class GoodsController extends Controller {
      */
     public void uploadGoods() {
         BaseResponse baseResponse = new BaseResponse();
-        UploadFile uploadFile = getFile();
+        UploadFile uploadFile = getFile("file");
         String u_id = getPara("u_id");
         String c_id = getPara("c_id");
         String g_name = getPara("g_name");
