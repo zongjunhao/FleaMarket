@@ -37,7 +37,11 @@ public class GoodsController extends Controller {
         BaseResponse baseResponse = new BaseResponse();
         String categoryId = getPara("categoryId");
         if (!StrKit.isBlank(categoryId))
-            baseResponse = goodsService.getGoodsByCategory(categoryId);
+            if (Integer.parseInt(categoryId) == 0) {
+                baseResponse = goodsService.getGoods();
+            } else {
+                baseResponse = goodsService.getGoodsByCategory(categoryId);
+            }
         else // 请求的参数不足
             baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
         renderJson(baseResponse);

@@ -1,197 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Title</title>
-		<style>
-			.price, .goods-name, .goods-time{
-				margin: 10px;
-			}
-			.goods-image img{
-				width: 250px;
-				height: 250px;
-				margin: 0;
-			}
-			.goods-image, .goods-name, .goods-time{
-				width: 250px;
-			}
-			.goods-realprice{
-				color: #F40;
-				font-weight: 700;
-				font-size: 20px;
-			}
-			.goods-card{
-				border: 1px solid #ededed;
-				margin: 22px 22px 0 0;
-				width: 250px;
-				box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-			}
-			.goods-card p{
-				width: 250px;
-				margin: 0;
-			}
-			.goods-price{
-				margin-left: 20px;
-			}
-			.goods-time, .goods-price{
-				color: gray;
-			}
-			.card-body{
-				display: flex;
-				flex-wrap: wrap;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="content">
-			<div class="card">
-				<div class="card-body">
-					<div class="goods-card" v-for="goods in goodsList" v-on:click="click(goods.g_id)">
-						<div class="goods-image">
-							<img src="//g-search3.alicdn.com/img/bao/uploaded/i4/i1/115823344/O1CN01Mi9Ty91aZb0yxNShH_!!0-item_pic.jpg_250x250.jpg_.webp">
-						</div>
-						<div class="price">
-							<span class="goods-realprice">￥{{goods.g_realprice}}</span>
-							<s class="goods-price">￥{{goods.g_price}}</s>
-						</div>
-						<div class="goods-name">
-							<span>{{goods.g_name}}</span>
-						</div>
-						<div class="goods-time">
-							<span>{{goods.g_updatetime}}</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript" src="../../lib/jq/jquery-3.4.1.js"></script>
-		<script type="text/javascript" src="../../lib/jq/jquerySession.js"></script>
-		<script type="text/javascript" src="../../lib/js/vue.js"></script>
-		<script type="text/javascript">
-			// let categoryId = $.session.get("categoryId")
-			let categoryId = 1
-			var app = new Vue({
-				el: '#content',
-				data: {
-					goodsList: [{
-							g_describe: "test",
-							g_state: 1,
-							g_name: "user2category1",
-							g_id: 1,
-							g_c_id: 1,
-							g_addtime: "2019-11-28 10:24:27",
-							g_u_id: 2,
-							g_price: 200,
-							g_updatetime: "2019-11-28 10:24:27",
-							g_realprice: 20
-						},
-						{
-							g_describe: "test2",
-							g_state: 1,
-							g_name: "user2category1",
-							g_id: 2,
-							g_c_id: 1,
-							g_addtime: "2019-11-28 10:24:27",
-							g_u_id: 2,
-							g_price: 200,
-							g_updatetime: "2019-11-28 10:24:27",
-							g_realprice: 20
-						},
-						{
-							g_describe: "test2",
-							g_state: 1,
-							g_name: "user2category1",
-							g_id: 3,
-							g_c_id: 1,
-							g_addtime: "2019-11-28 10:24:27",
-							g_u_id: 2,
-							g_price: 200,
-							g_updatetime: "2019-11-28 10:24:27",
-							g_realprice: 20
-						},
-						{
-							g_describe: "test2",
-							g_state: 1,
-							g_name: "user2category1",
-							g_id: 3,
-							g_c_id: 1,
-							g_addtime: "2019-11-28 10:24:27",
-							g_u_id: 2,
-							g_price: 200,
-							g_updatetime: "2019-11-28 10:24:27",
-							g_realprice: 20
-						},
-						{
-							g_describe: "test2",
-							g_state: 1,
-							g_name: "user2category1",
-							g_id: 3,
-							g_c_id: 1,
-							g_addtime: "2019-11-28 10:24:27",
-							g_u_id: 2,
-							g_price: 200,
-							g_updatetime: "2019-11-28 10:24:27",
-							g_realprice: 20
-						},
-						{
-							g_describe: "test2",
-							g_state: 1,
-							g_name: "user2category1",
-							g_id: 3,
-							g_c_id: 1,
-							g_addtime: "2019-11-28 10:24:27",
-							g_u_id: 2,
-							g_price: 200,
-							g_updatetime: "2019-11-28 10:24:27",
-							g_realprice: 20
-						},
-						{
-							g_describe: "test2",
-							g_state: 1,
-							g_name: "user2category1",
-							g_id: 3,
-							g_c_id: 1,
-							g_addtime: "2019-11-28 10:24:27",
-							g_u_id: 2,
-							g_price: 200,
-							g_updatetime: "2019-11-28 10:24:27",
-							g_realprice: 20
-						}
-					]
-				},
-				methods: {
-					init() {
-						let that = this;
-						$.ajax({
-							type: "post",
-							url: "/goods/getGoodsByCategory",
-							data: categoryId,
-							success: function(res) {
-								console.log(res);
-								if (res.resultCode == "6002") {
-									that.goodsList = res.data;
-								} else {
-									console.log(res.resultDesc)
-								}
-							},
-							error: function(res) {
-								console.log(res)
-							}
-						})
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .price, .goods-name, .goods-time {
+            margin: 10px;
+        }
+
+        .goods-image img {
+            width: 250px;
+            height: 250px;
+            margin: 0;
+        }
+
+        .goods-image, .goods-name, .goods-time {
+            width: 250px;
+        }
+
+        .goods-realprice {
+            color: #F40;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .goods-card {
+            border: 1px solid #ededed;
+            margin-bottom: 30px;
+            width: 250px;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+        }
+
+        .goods-card p {
+            width: 250px;
+            margin: 0;
+        }
+
+        .goods-price {
+            margin-left: 20px;
+        }
+
+        .goods-time, .goods-price {
+            color: gray;
+        }
+
+        .card-body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+<div id="content">
+    <div class="card">
+        <div class="card-body">
+            <div class="goods-card" v-for="goods in goodsList" v-on:click="click(goods.g_id)">
+                <div class="goods-image">
+                    <img v-bind:src="goods.g_imagepath">
+                </div>
+                <div class="price">
+                    <span class="goods-realprice">￥{{goods.g_realprice}}</span>
+                    <s class="goods-price">￥{{goods.g_price}}</s>
+                </div>
+                <div class="goods-name">
+                    <span>{{goods.g_name}}</span>
+                </div>
+                <div class="goods-time">
+                    <span>{{goods.g_updatetime}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../lib/jq/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../../lib/jq/jquerySession.js"></script>
+<script type="text/javascript" src="../../lib/js/vue.js"></script>
+<script type="text/javascript">
+    let categoryId = $.session.get("categoryId");
+    // let categoryId = 1
+    var app = new Vue({
+        el: '#content',
+        data: {
+            goodsList: [{
+                g_describe: "test",
+                g_state: 1,
+                g_name: "user2category1",
+                g_id: 1,
+                g_c_id: 1,
+                g_addtime: "2019-11-28 10:24:27",
+                g_u_id: 2,
+                g_price: 200,
+                g_updatetime: "2019-11-28 10:24:27",
+                g_realprice: 20,
+                g_imagepath: "//g-search3.alicdn.com/img/bao/uploaded/i4/i1/115823344/O1CN01Mi9Ty91aZb0yxNShH_!!0-item_pic.jpg_250x250.jpg_.webp"
+            },
+                {
+                    g_describe: "test2",
+                    g_state: 1,
+                    g_name: "user2category1",
+                    g_id: 2,
+                    g_c_id: 1,
+                    g_addtime: "2019-11-28 10:24:27",
+                    g_u_id: 2,
+                    g_price: 200,
+                    g_updatetime: "2019-11-28 10:24:27",
+                    g_realprice: 20,
+                    g_imagepath: ""
+                },
+                {
+                    g_describe: "test2",
+                    g_state: 1,
+                    g_name: "user2category1",
+                    g_id: 3,
+                    g_c_id: 1,
+                    g_addtime: "2019-11-28 10:24:27",
+                    g_u_id: 2,
+                    g_price: 200,
+                    g_updatetime: "2019-11-28 10:24:27",
+                    g_realprice: 20,
+                    g_imagepath: ""
+                },
+                {
+                    g_describe: "test2",
+                    g_state: 1,
+                    g_name: "user2category1",
+                    g_id: 3,
+                    g_c_id: 1,
+                    g_addtime: "2019-11-28 10:24:27",
+                    g_u_id: 2,
+                    g_price: 200,
+                    g_updatetime: "2019-11-28 10:24:27",
+                    g_realprice: 20,
+                    g_imagepath: ""
+                },
+                {
+                    g_describe: "test2",
+                    g_state: 1,
+                    g_name: "user2category1",
+                    g_id: 3,
+                    g_c_id: 1,
+                    g_addtime: "2019-11-28 10:24:27",
+                    g_u_id: 2,
+                    g_price: 200,
+                    g_updatetime: "2019-11-28 10:24:27",
+                    g_realprice: 20,
+                    g_imagepath: ""
+                },
+                {
+                    g_describe: "test2",
+                    g_state: 1,
+                    g_name: "user2category1",
+                    g_id: 3,
+                    g_c_id: 1,
+                    g_addtime: "2019-11-28 10:24:27",
+                    g_u_id: 2,
+                    g_price: 200,
+                    g_updatetime: "2019-11-28 10:24:27",
+                    g_realprice: 20,
+                    g_imagepath: ""
+                },
+                {
+                    g_describe: "test2",
+                    g_state: 1,
+                    g_name: "user2category1",
+                    g_id: 3,
+                    g_c_id: 1,
+                    g_addtime: "2019-11-28 10:24:27",
+                    g_u_id: 2,
+                    g_price: 200,
+                    g_updatetime: "2019-11-28 10:24:27",
+                    g_realprice: 20,
+                    g_imagepath: ""
+                }
+            ]
+        },
+        methods: {
+            getGoods() {
+                let that = this;
+                $.ajax({
+                    type: "post",
+                    url: "/goods/getGoodsByCategory",
+                    data: {"categoryId": categoryId},
+                    success: function (res) {
+                        console.log(res);
+                        if (res.resultCode == "6002") {
+                            that.goodsList = res.data;
+                        } else {
+                            console.log(res.resultDesc)
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res)
+                    }
+                })
+            },
+			searchGoods(searchInfo){
+				let that = this;
+				$.ajax({
+					type: "post",
+					url: "/goods/queryGoods",
+					data: {"g_name": searchInfo},
+					success: function (res) {
+					    console.log(res);
+					    if (res.resultCode == "6002") {
+					        that.goodsList = res.data;
+					    } else {
+					        console.log(res.resultDesc)
+					    }
 					},
-					click: function(g_id) {
-						console.log(g_id);
-						$.session.set("g_id", g_id);
-						console.log($.session.get("g_id"));
-						location.href = "showGoodsDetail.html"
+					error: function (res) {
+					    console.log(res)
 					}
-				},
-				created() {},
-				mounted() {
-					// console.log("this is mounted");
-					this.init();
-				}
-			})
-		</script>
-	</body>
+				})
+			},
+            click: function (g_id) {
+                console.log(g_id);
+                $.session.set("g_id", g_id);
+                console.log($.session.get("g_id"));
+                location.href = "showGoodsDetail.html"
+            }
+        },
+        created() {
+        },
+        mounted() {
+            // console.log("this is mounted");
+            if (categoryId == "search") {//搜索商品
+                console.log("search goods");
+				let searchInfo = $.session.get("searchInfo");
+				this.searchGoods(searchInfo);
+            } else {//按照类别查询商品
+                this.getGoods();
+            }
+        }
+    })
+</script>
+</body>
 </html>

@@ -37,6 +37,14 @@
                     <span class="iconfont iconiconleft"></span>
                 </button>
             </div>
+            <form class="navbar-form navbar-left">
+                <div class="input-group">
+                    <input id="search-input" type="text" value="" class="form-control" placeholder="查询商品">
+                    <span class="input-group-btn">
+                        <a href="goods/viewGoods.html" target="main" id="search-btn" type="button" class="btn btn-primary">搜索</a>
+                    </span>
+                </div>
+            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li id="mamageRole" data-toggle="tooltip" data-placement="left" title="管理员">
                     <a id="name" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -174,10 +182,10 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <div class="embed-responsive embed-responsive-16by9">
+<!--                <div class="embed-responsive embed-responsive-16by9">-->
                     <iframe name="main" src="/pages/admin/adminMainPage.html" width="100%" height="100%"
-                            id="myiframe" class="embed-responsive-item" scrolling="no" frameborder="0"></iframe>
-                </div>
+                            id="myiframe" class="embed-responsive-item" frameborder="0"></iframe>
+<!--                </div>-->
             </div>
         </div>
         <!-- END MAIN CONTENT -->
@@ -191,10 +199,15 @@
 <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/assets/scripts/klorofil-common.js"></script>
+<script src="../lib/js/vue.js"></script>
 <script type="text/javascript">
     var logout = [["/admin/logout", "a_account", "/pages/login.html"], ["/user/logout", "u_stuid", "/pages/login.html"]];
     var role = $.session.get("role");
     var url, id;
+
+    $(document).ready(function (){
+        $("#myiframe").height($(".slimScrollDiv").height()-30);
+    });
 
     // 左侧导航栏选择效果
     $(".sidebar-scroll .nav li a").click(function () {
@@ -281,6 +294,13 @@
         $.session.set("categoryId", categoryId - 1);
         console.log($.session.get("categoryId"))
     }
+
+    $("#search-btn").click(function () {
+        $.session.set("categoryId", "search");
+        $.session.set("searchInfo", $("#search-input").val());
+        console.log($.session.get("categoryId"));
+        console.log($.session.get("searchInfo"));
+    })
 </script>
 </body>
 
