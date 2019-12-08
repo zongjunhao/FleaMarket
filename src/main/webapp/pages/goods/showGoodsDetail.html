@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <!--添加JQuery-->
@@ -169,6 +169,21 @@
             margin-top: 10px;
             margin-left: 395px;
         }
+
+        #all-comments{
+            margin: 10px 20px;
+        }
+
+        .first-comment{
+            margin-left: 20px;
+            color: red;
+            font-size: large;
+            font-weight: bold;
+        }
+        .reply-comment{
+            margin-left: 40px;
+            color: #9d9d9d;
+        }
     </style>
 </head>
 <body>
@@ -177,7 +192,7 @@
     <div class="goods-detail" id="goods-desc">
         <div class="g-d-image">
             <img id="image"
-                 src="http://g-search3.alicdn.com/img/bao/uploaded/i4/i1/115823344/O1CN01Mi9Ty91aZb0yxNShH_!!0-item_pic.jpg_250x250.jpg_.webp">
+                 v-bind:src="goodsDetailedInfo.goods.g_imagepath">
         </div>
         <div class="g-d-info">
             <h1 class="g-name">{{goodsDetailedInfo.goods.g_name}}</h1>
@@ -283,11 +298,14 @@
         </div>
         <hr class="hr3">
 
-        <div id="all-comments">
+        <div id="all-comments" v-for="eachGroupComment in goodsDetailedInfo.allComments">
             <div class="each-group-comment">
-                <div class="first-comment"></div>
-                <div class="reply-comment"></div>
+                <div class="first-comment">{{eachGroupComment.comment.com_desc}}</div>
+                <div class="reply-comments" v-for="eachReplyComment in eachGroupComment.replyComments">
+                    <div class="reply-comment">{{eachReplyComment.com_desc}}</div>
+                </div>
             </div>
+            <hr class="hr3">
         </div>
 
         <div class="publish-comment">
