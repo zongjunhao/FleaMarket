@@ -13,6 +13,15 @@
     <!-- 添加bootstrap的库 -->
     <script type="text/javascript" src="../../lib/js/bootstrap.js"></script>
     <script src="../../lib/js/vue.js"></script>
+    <style>
+        .icon-tongguo {
+            color: green;
+        }
+
+        .icon-jujue {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,7 +31,7 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="form-horizontal">
                     <form action="/goods/uploadGoods" id="form" enctype="multipart/form-data" method="post">
-                        <input type="hidden" id="u_id" name="u_id" />
+                        <input type="hidden" id="u_id" name="u_id"/>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">物品名:</label>
                             <div class="col-sm-6">
@@ -30,8 +39,8 @@
                                     <input type="text" name="g_name" id="g_name" class="form-control"
                                            placeholder="请输入物品名"/>
                                     <span class="input-group-btn">
-											<span class="icon1 iconfont icon-tongguo"></span>
-										</span>
+                                        <span class="icon-name iconfont icon-jujue"></span>
+                                    </span>
                                 </div><!-- /input-group -->
                             </div>
                         </div>
@@ -43,8 +52,8 @@
                                     <input type="text" name="g_realprice" id="g_realprice" class="form-control"
                                            placeholder="请输入物品价格"/>
                                     <span class="input-group-btn">
-											<span class="icon1 iconfont icon-tongguo"></span>
-										</span>
+                                        <span class="icon-real-price iconfont icon-jujue"></span>
+                                    </span>
                                 </div><!-- /input-group -->
                             </div>
                         </div>
@@ -56,8 +65,8 @@
                                     <input type="text" name="g_price" id="g_price" class="form-control"
                                            placeholder="请输入物品原价"/>
                                     <span class="input-group-btn">
-											<span class="icon1 iconfont icon-tongguo"></span>
-										</span>
+                                        <span class="icon-price iconfont icon-jujue"></span>
+                                    </span>
                                 </div><!-- /input-group -->
                             </div>
                         </div>
@@ -89,7 +98,7 @@
                                 <textarea type="text" name="g_describe" id="g_describe" class="form-control"
                                           placeholder="请输入描述信息"></textarea>
                                     <span class="input-group-btn">
-                                    <span class="icon1 iconfont icon-tongguo"></span>
+                                    <span class="icon-describe iconfont icon-jujue"></span>
                                 </span>
                                 </div><!-- /input-group -->
                             </div>
@@ -103,7 +112,7 @@
                                     <br/>
                                     <img class="imgPreview" src="../../image/choosePicture.png" style="width: 250px;"/>
                                     <span class="input-group-btn">
-                                    <span class="icon1 iconfont icon-tongguo"></span>
+                                    <span class="icon-image iconfont icon-jujue"></span>
                                 </span>
                                 </div><!-- /input-group -->
                             </div>
@@ -122,32 +131,114 @@
 </div>
 </body>
 <script>
-    $("#g_image").change(function(){
-        $(".imgPreview").attr("src",URL.createObjectURL($(this)[0].files[0]));
+    $("#g_image").change(function () {
+        $(".imgPreview").attr("src", URL.createObjectURL($(this)[0].files[0]));
     });
     $("#u_id").val($.session.get("u_id"));
     $("#addGoods").click(function () {
         var formdata = new FormData(document.getElementById("form"));
         // $("#loading").append("<img src='./image/加载动画.gif' class='loading'></img>");
         console.log(formdata);
-        $.ajax({
-            type: "POST",
-            url: "/goods/uploadGoods",
-            //dataType: "json",
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: formdata,
-            success: function (res) {
-                // $("#loading").remove();
-                location.href = getUrlParam("return");
-                console.log(res);
-            },
-            error: function (res) {
-                console.log(res);
-            }
-        })
+        if (checkName() && checkDescribe() && checkImage() && checkPrice() && checkRealPrice()) {
+            $.ajax({
+                type: "POST",
+                url: "/goods/uploadGoods",
+                //dataType: "json",
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (res) {
+                    // $("#loading").remove();
+                    location.href = getUrlParam("return");
+                    console.log(res);
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            });
+        }
+    })
+    ;
+
+    $(function () {
+        $("#g_name").on("blur", function () {
+            checkName()
+        });
+        $("#g_price").on("blur", function () {
+            checkPrice()
+        });
+
+        $("#g_realprice").on("blur", function () {
+            checkRealPrice()
+        });
+
+        $("#g_describe").on("blur", function () {
+            checkDescribe()
+        });
+
+        $("#g_image").on("change", function () {
+            checkImage()
+        });
     });
+
+    function checkName() {
+        if (($("#g_name").val() == "")) {
+            //console.log("empty")
+            $(".icon-name").removeClass("icon-tongguo").addClass("icon-jujue");
+            return false;
+        } else {
+            //console.log("not")
+            $(".icon-name").removeClass("icon-jujue").addClass("icon-tongguo");
+            return true;
+        }
+    }
+
+    function checkPrice() {
+        if (($("#g_price").val() == "")) {
+            //console.log("empty")
+            $(".icon-price").removeClass("icon-tongguo").addClass("icon-jujue");
+            return false;
+        } else {
+            //console.log("not")
+            $(".icon-price").removeClass("icon-jujue").addClass("icon-tongguo");
+            return true;
+        }
+    }
+
+    function checkRealPrice() {
+        if (($("#g_realprice").val() == "")) {
+            //console.log("empty")
+            $(".icon-real-price").removeClass("icon-tongguo").addClass("icon-jujue");
+            return false;
+        } else {
+            //console.log("not")
+            $(".icon-real-price").removeClass("icon-jujue").addClass("icon-tongguo");
+            return true;
+        }
+    }
+
+    function checkDescribe() {
+        if (($("#g_describe").val() == "")) {
+            //console.log("empty")
+            $(".icon-describe").removeClass("icon-tongguo").addClass("icon-jujue");
+            return false;
+        } else {
+            //console.log("not")
+            $(".icon-describe").removeClass("icon-jujue").addClass("icon-tongguo");
+            return true;
+        }
+    }
+
+    function checkImage() {
+        if (($("#g_image").val() == "")) {
+            $(".icon-image").removeClass("icon-tongguo").addClass("icon-jujue");
+            return false;
+        } else {
+            $(".icon-image").removeClass("icon-jujue").addClass("icon-tongguo");
+            return true;
+        }
+    }
 </script>
 </html>
