@@ -1,6 +1,7 @@
 package com.zuel.fleamarket.kit;
 
 import com.zuel.fleamarket.model.Goods;
+import com.zuel.fleamarket.model.User;
 
 import java.util.List;
 
@@ -9,7 +10,16 @@ import java.util.List;
  */
 public class GoodsDetails {
     private Goods goods;
+    private User user;
     private List<EachGroupComments> allComments;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Goods getGoods() {
         return goods;
