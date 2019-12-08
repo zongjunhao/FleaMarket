@@ -2,17 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../css/register.css" type="text/css" />
-    <script type="text/javascript" src = "../../lib/jq/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src = "../../lib/jq/jquerySession.js"></script>
-    <script type="text/javascript" src = "../../js/register.js"></script>
+    <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1531354_ywe242k90t.css">
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1333406_174a1653fij.css">
+    <link rel="stylesheet" href="../../css/register.css" type="text/css"/>
+    <script type="text/javascript" src="../../lib/jq/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../../lib/jq/jquerySession.js"></script>
+    <script type="text/javascript" src="../../lib/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../js/register.js"></script>
     <title>Register</title>
 </head>
 <body>
 <div class="signup_head">
     <div class="signup_head_inner">
-        <img src="image/知识管理.png" alt="">
-        <span>校园二手交易平台</span>
+        <span class="iconfont iconershou">校园二手交易平台</span>
     </div>
 </div>
 <div class="index_content index_content_signup">
@@ -26,78 +29,68 @@
             </div>
             <div class="signup_form">
                 <div class="signup_simple_sec" style="padding-top:40px;">
-                    <div class="signup_simple_sec_title">企业信息</div>
-                    <div class="signup_item">
-                        <div class="signup_item_left">企业名称</div>
-                        <div class="signup_item_right qy_inputWithTips_WithErr">
-                            <input type="text" class="signup_item_input" id="corp_name" onfocus="firm_name_recovery()" onblur="check_firm_name()">
-                            <div class="signup_column_item_tip">
-                                <span class="signup_item_input_desc" id="corp_name_tip">请填写企业、政府或组织名称</span>
-                                <div class="signup_column_item_tip_error js_error_msg"></div>
+                    <div class="signup_simple_sec_title">个人信息</div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">学号</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="u_stuid form-control" placeholder="请输入学号"/>
+                                    <span class="input-group-btn">
+                                    <span class="icon-stuid iconfont icon-jujue"></span>
+                                </span>
+                                </div><!-- /input-group -->
                             </div>
                         </div>
-                    </div>
-                    <div class="signup_item">
-                        <div class="signup_item_left">法人姓名</div>
-                        <div class="signup_item_right">
-                            <input type="text" class="signup_item_input" id="legal_person_name" onfocus="legal_person_name_recovery()" onblur="check_legal_person_name()">
-                            <div class="signup_column_item_tip">
-                                <span class="signup_item_input_desc" id="legal_person_name_tip">请填写企业法人的姓名</span>
-                                <div class="signup_column_item_tip_error js_error_msg"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">姓名</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="u_name form-control" placeholder="请输入姓名"/>
+                                    <span class="input-group-btn">
+                                    <span class="icon-name iconfont icon-jujue"></span>
+                                </span>
+                                </div><!-- /input-group -->
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="signup_simple_sec" style="padding-top:30px;">
-                    <div class="signup_simple_sec_title">管理员信息</div>
-                    <div class="signup_item">
-                        <div class="signup_item_left">管理员姓名</div>
-                        <div class="signup_item_right">
-                            <input type="text" class="signup_item_input" id="admin_name" onfocus="admin_name_recovery()" onblur="check_admin_name()">
-                            <div class="signup_column_item_tip">
-                                <span class="signup_item_input_desc" id="admin_name_tip">请填写企业的管理员姓名</span>
-                                <div class="signup_column_item_tip_error js_error_msg"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">QQ</label>
+                            <div class="col-sm-8">
+                                <!-- <div class="f_phone form-control">15717172075</div> -->
+                                <div class="input-group">
+                                    <input type="text" class="u_qq form-control" placeholder="请输入QQ"/>
+                                    <span class="input-group-btn">
+                                    <span class="icon-qq iconfont icon-jujue"></span>
+                                </span>
+                                </div><!-- /input-group -->
                             </div>
                         </div>
-                    </div>
-                    <div class="signup_item">
-                        <div class="signup_item_left">管理员邮箱</div>
-                        <div class="signup_item_right">
-                            <input type="text" class="signup_item_input" id="mail" onfocus="mail_recovery()" onblur="check_mail()" oninput="check_mail()">
-                            <div class="signup_column_item_tip">
-                                <span class="signup_item_input_desc" id="mail_tip">请输入你的邮箱</span>
-                                <div class="signup_column_item_tip_error js_error_msg"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="password" class="u_password form-control"
+                                           placeholder="请输入新密码"/>
+                                    <span class="input-group-btn">
+                                    <span class="icon-password iconfont icon-jujue"></span>
+                                </span>
+                                </div><!-- /input-group -->
                             </div>
                         </div>
-                    </div>
-                    <div class="signup_item">
-                        <div class="signup_item_left">邮箱验证码</div>
-                        <div class="signup_item_right">
-                            <input type="text" class="signup_item_input signup_item_input_short" id="smscode" autocomplete="off" style="display:inline-block;"  disabled onfocus="smscode_recovery()" onblur="check_smscode()">
-                            <button class="signup_item_input_option_inline js_send_sms"  id="get_smscode" onclick="get_smscode()"disabled>获取验证码</button>
-                            <div class="signup_column_item_tip" id="smscode_tip">
-                                <span class="signup_item_input_desc">请输入邮箱收到的6位验证码</span>
-                                <div class="signup_column_item_tip_error js_error_msg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="signup_item">
-                        <div class="signup_item_left">密码</div>
-                        <div class="signup_item_right">
-                            <input type="password" class="signup_item_input" id="password" onfocus="password_recovery()" onblur="check_password()">
-                            <div class="signup_column_item_tip">
-                                <span class="signup_item_input_desc" id="password_tip">请输入你的密码</span>
-                                <div class="signup_column_item_tip_error js_error_msg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="signup_item">
-                        <div class="signup_item_left">确认密码</div>
-                        <div class="signup_item_right">
-                            <input type="password" class="signup_item_input" id="password_confirm" onfocus="confirm_recovery()" onblur="check_confirm_password()">
-                            <div class="signup_column_item_tip">
-                                <span class="signup_item_input_desc" id="confirm_tip">再次输入密码</span>
-                                <div class="signup_column_item_tip_error js_error_msg"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">确认密码</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="password" class="confirm-password form-control"
+                                           placeholder="请确认密码"/>
+                                    <span class="input-group-btn">
+                                    <span class="icon-confirm-password iconfont icon-jujue"></span>
+                                </span>
+                                </div><!-- /input-group -->
                             </div>
                         </div>
                     </div>
@@ -112,9 +105,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="frame_foot">
-        <p class="frame_foot_copyright">Copyright © 识意智创 by 识意小分队</p>
     </div>
 </div>
 </body>

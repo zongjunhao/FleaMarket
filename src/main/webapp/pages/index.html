@@ -41,7 +41,8 @@
                 <div class="input-group">
                     <input id="search-input" type="text" value="" class="form-control" placeholder="查询商品">
                     <span class="input-group-btn">
-                        <a href="goods/viewGoods.html" target="main" id="search-btn" type="button" class="btn btn-primary">搜索</a>
+                        <a href="goods/viewGoods.html" target="main" id="search-btn" type="button"
+                           class="btn btn-primary">搜索</a>
                     </span>
                 </div>
             </div>
@@ -110,7 +111,7 @@
                     <li>
                         <a href="#subPages" data-toggle="collapse" class="collapsed">
                             <span class="iconfont iconshangpinleibie navleft">商品类别</span>
-                            <span class="iconfont iconarrow-left navbar-right"></span>
+                            <span class="iconfont myarrow iconarrow-left navbar-right"></span>
                         </a>
                         <div id="subPages" class="collapse ">
                             <ul class="nav">
@@ -182,10 +183,10 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-<!--                <div class="embed-responsive embed-responsive-16by9">-->
-                    <iframe name="main" src="/pages/admin/adminMainPage.html" width="100%" height="100%"
-                            id="myiframe" class="embed-responsive-item" frameborder="0"></iframe>
-<!--                </div>-->
+                <!--                <div class="embed-responsive embed-responsive-16by9">-->
+                <iframe name="main" src="/pages/admin/adminMainPage.html" width="100%" height="100%"
+                        id="myiframe" class="embed-responsive-item" frameborder="0"></iframe>
+                <!--                </div>-->
             </div>
         </div>
         <!-- END MAIN CONTENT -->
@@ -207,8 +208,8 @@
     var role = $.session.get("role");
     var url, id;
 
-    $(document).ready(function (){
-        $("#myiframe").height($(".slimScrollDiv").height()-30);
+    $(document).ready(function () {
+        $("#myiframe").height($(".slimScrollDiv").height() - 30);
     });
 
     // 左侧导航栏选择效果
@@ -217,6 +218,15 @@
         // 先去掉active类
         $(".sidebar-scroll .nav li a").removeClass("active");
         $(this).addClass("active");
+    });
+
+    $(".collapsed").click(function () {
+        console.log("clicked");
+        if ($(".myarrow").hasClass("iconarrow-left")) {
+            $(".myarrow").addClass("iconarrow-down").removeClass("iconarrow-left")
+        } else if ($(".myarrow").hasClass("iconarrow-down")) {
+            $(".myarrow").addClass("iconarrow-left").removeClass("iconarrow-down")
+        }
     });
 
     // 控制收起或展开左侧导航栏的箭头的方向
