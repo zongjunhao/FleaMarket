@@ -470,6 +470,9 @@
                     url: "/goods/getDetailedGoodsInfo",
                     data: {"g_id": g_id},
                     success: function (res) {
+                        if (res.data.followed == true) {
+                            $("#btn-focus").css("color","red");
+                        }
                         if (res.resultCode == "6002") {
                             that.goodsDetailedInfo = res.data;
                         } else {
