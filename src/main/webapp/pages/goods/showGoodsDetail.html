@@ -180,14 +180,15 @@
         }
 
         .first-comment {
-            margin-left: 20px;
+            margin-left: 25px;
+            margin-bottom: 30px;
             color: black;
             font-size: large;
             font-weight: bold;
         }
 
         .reply-comment {
-            /*margin-left: 40px;*/
+            margin-left: 60px;
             margin-top: 12px;
             color: #9d9d9d;
         }
@@ -311,25 +312,19 @@
         <div id="all-comments" v-for="eachGroupComment in goodsDetailedInfo.allComments">
             <div class="each-group-comment">
                 <div class="first-comment">
+
                     {{eachGroupComment.commentAndUser.user.u_name}}:
                     {{eachGroupComment.commentAndUser.comment.com_desc}}
-                    <svg t="1575887162884" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                         xmlns="http://www.w3.org/2000/svg" p-id="1128" width="25" height="25"
+                    <svg t="1575896416002" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="2037" width="35" height="35"
                          v-on:click="getRepliedUser(eachGroupComment.commentAndUser.user.u_name, eachGroupComment.commentAndUser.comment.com_id)">
-                        <path d="M222.208 631.296l-36.352 61.952s-18.432 122.368 22.528 145.408c40.448 23.04 139.776-53.248 139.776-53.248l35.328-59.392-162.304-91.648 1.024-3.072z m360.448-243.712l-162.304-92.16 23.552-39.936 162.304 91.648L629.76 307.2c19.456-32.768 7.68-74.752-25.6-94.208l-40.448-23.04c-33.792-18.944-76.8-7.68-96.256 25.088l-222.72 377.344 162.304 91.648 191.488-324.608-15.872 28.16zM796.16 746.496H465.92c-25.088 0-46.08 20.48-46.08 46.08 0 25.088 20.48 46.08 46.08 46.08h330.24c25.088 0 46.08-20.48 46.08-46.08s-20.48-46.08-46.08-46.08z"
-                              fill="#515151" p-id="1129"></path>
+                        <path d="M384 768a32 32 0 0 1-32-32v-96H288a64 64 0 0 1-64-64v-256a64 64 0 0 1 64-64h448a64 64 0 0 1 64 64v256a64 64 0 0 1-64 64h-210.24l-118.72 118.72A32 32 0 0 1 384 768zM288 320v256h96a32 32 0 0 1 32 32v50.88l73.28-73.28A32 32 0 0 1 512 576h224v-256H288z"
+                              p-id="2038"></path>
                     </svg>
                 </div>
 
                 <div class="reply-comments">
                     <div v-for="eachReplyComment in eachGroupComment.replyCommentsAndUsers">
-                        <div class="item">
-                            <svg t="1575853798417" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                 xmlns="http://www.w3.org/2000/svg" p-id="3513" width="25" height="25">
-                                <path d="M397.8 609.6v31.3c0 12.5-5.9 21.3-17.4 26.4-3.8 1.5-7.6 2.2-11.2 2.2-8.1 0-14.7-2.8-20.1-8.5L120.5 432.3c-5.7-5.7-8.5-12.3-8.5-20.1 0-7.7 2.8-14.4 8.5-20.1L349 163.6c8.7-9.2 19.1-11.3 31.3-6.3 11.6 5 17.4 13.8 17.4 26.4v30.8L220.5 392.1c-5.7 5.7-8.5 12.4-8.5 20.1s2.8 14.4 8.5 20.1l177.3 177.3zM912 626.5c0 17.3-2.5 37.1-7.6 59.6-5 22.4-10.8 43-17.2 61.6-6.4 18.6-13.5 37.2-21.4 55.7-7.9 18.6-13.9 32.1-18.1 40.4-4.1 8.4-7.2 14.2-8.9 17.9-2.3 5-6.6 7.6-12.5 7.6-1.8 0-3.1-0.2-4-0.5-7.4-2.3-10.9-7.4-10.2-15.2 12.7-119.1-3-203.1-47.4-252.2-19.1-21.1-44.4-37.6-76.1-49.3-31.7-11.7-71.5-19.5-119.5-23.4v112c0 12.5-5.9 21.3-17.4 26.4-3.8 1.5-7.6 2.2-11.2 2.2-8.1 0-14.7-2.8-20.1-8.5L292 432.3c-5.7-5.7-8.5-12.3-8.5-20.1 0-7.7 2.8-14.4 8.5-20.1l228.5-228.5c8.7-9.2 19.1-11.3 31.3-6.3 11.6 5 17.4 13.8 17.4 26.4v116.9c122.3 8.4 211.5 41.2 267.4 98.7 50.3 51.5 75.4 127.2 75.4 227.2z"
-                                      p-id="3514"></path>
-                            </svg>
-                        </div>
                         <div class="reply-comment">{{eachReplyComment.user.u_name}}:
                             {{eachReplyComment.comment.com_desc}}
                         </div>
@@ -453,7 +448,7 @@
                         com_reply: com_to
                     },
                     success: function (res) {
-                        console.log(res);
+                        $("#textarea-comment").val("");
                         if (res.resultCode == "6013") {
                             that.getDetailedGoodsInfo();
                         } else {
@@ -474,7 +469,6 @@
                     url: "/goods/getDetailedGoodsInfo",
                     data: {"g_id": g_id},
                     success: function (res) {
-                        console.log(res);
                         if (res.resultCode == "6002") {
                             that.goodsDetailedInfo = res.data;
                         } else {
