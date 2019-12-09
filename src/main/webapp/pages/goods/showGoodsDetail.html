@@ -316,7 +316,7 @@
                     {{eachGroupComment.commentAndUser.user.u_name}}:
                     {{eachGroupComment.commentAndUser.comment.com_desc}}
                     <svg t="1575896416002" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                         xmlns="http://www.w3.org/2000/svg" p-id="2037" width="35" height="35"
+                         xmlns="http://www.w3.org/2000/svg" p-id="2037" width="35" height="35" style="cursor: pointer"
                          v-on:click="getRepliedUser(eachGroupComment.commentAndUser.user.u_name, eachGroupComment.commentAndUser.comment.com_id)">
                         <path d="M384 768a32 32 0 0 1-32-32v-96H288a64 64 0 0 1-64-64v-256a64 64 0 0 1 64-64h448a64 64 0 0 1 64 64v256a64 64 0 0 1-64 64h-210.24l-118.72 118.72A32 32 0 0 1 384 768zM288 320v256h96a32 32 0 0 1 32 32v50.88l73.28-73.28A32 32 0 0 1 512 576h224v-256H288z"
                               p-id="2038"></path>
@@ -503,7 +503,8 @@
                 })
             },
             getRepliedUser(u_name, com_to) {
-                $("#textarea-comment").text("@" + u_name);
+                console.log("click reply");
+                $("#textarea-comment").val("@" + u_name);
                 $.session.set("com_to", com_to);
                 $.session.set("com_to_name", u_name);
             }
