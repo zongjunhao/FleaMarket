@@ -503,7 +503,7 @@
                 })
             },
             getRepliedUser(u_name, com_to) {
-                console.log("click reply");
+
                 $("#textarea-comment").val("@" + u_name);
                 $.session.set("com_to", com_to);
                 $.session.set("com_to_name", u_name);
