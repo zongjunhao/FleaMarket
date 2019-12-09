@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../lib/css/bootstrap.css">
+    <script type="text/javascript" src="../../lib/jq/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../../lib/jq/jquerySession.js"></script>
+    <script type="text/javascript" src="../../lib/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1333406_174a1653fij.css">
+    <style>
+        body {
+            background: #F5F5FA;
+        }
+
+        .notice-card,
+        .form-inline {
+            border-radius: .25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+            border-left: 5px solid #00AAFF;
+            background-color: #fff;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            box-sizing: border-box;
+            margin-right: 2rem;
+        }
+
+        .form-inline {
+            border-left: 5px solid #41B314;
+            display: flex;
+            justify-content: space-around;
+            padding: 2rem 1rem;
+        }
+
+        .name {
+            font-weight: bold;
+        }
+
+        .describe {
+            margin: 5px 0;
+        }
+
+        .first {
+            margin-bottom: 5px;
+        }
+
+        .price,
+        .phone {
+            margin-left: 20px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bolder;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="content">
+    <div class="title">求购物品</div>
+    <div class="card">
+        <div class="form-inline">
+            <div class="form-group">
+                <label>名称：</label>
+                <input type="text" class="form-control" id="notice-name" placeholder="请输入所须物品名称"/>
+            </div>
+            <div class="form-group">
+                <label>预期价格：</label>
+                <input type="text" class="form-control" id="notice-price" placeholder="请输入预期价格"/>
+            </div>
+            <div class="form-group">
+                <label>描述：</label>
+                <input type="text" class="form-control" id="notice-describe" placeholder="请输入描述信息"/>
+            </div>
+            <button type="button" class="btn btn-default" v-on:click="publishNotice">发布</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="title">求购信息</div>
+        <div class="card-body">
+            <div class="notice-card" v-for="notice in noticeList">
+                <div class="first line">
+                    <span class="name">{{ notice.n_name }}</span>
+                    <span class="price">预期价格：￥{{notice.n_price}}</span>
+                </div>
+                <div class="second line">
+                    <span class="puslisher">发布者：宗俊豪{{ notice.publisherId }}</span>
+                    <span class="phone">联系方式：13176553791{{notice.n_pp}}</span>
+                </div>
+                <p class="describe">描述：{{notice.n_describe}}</p>
+                <span class="times">发布时间：{{notice.n_addtime}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../lib/jq/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../../lib/jq/jquerySession.js"></script>
+<script type="text/javascript" src="../../lib/js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#content",
+        data: {
+            noticeList: [{
+                n_u_id: 1,
+                n_price: 123,
+                n_addtime: "2019-12-09 09:10:44",
+                n_state: 1,
+                n_describe: "4564651",
+                n_updatetime: "2019-12-09 09:10:44",
+                n_id: 1,
+                n_name: "test1"
+            },
+                {
+                    n_u_id: 4,
+                    n_price: 456,
+                    n_addtime: "2019-12-09 09:11:12",
+                    n_state: 1,
+                    n_describe: "45611发顺丰",
+                    n_updatetime: "2019-12-09 09:11:12",
+                    n_id: 3,
+                    n_name: "特殊图"
+                },
+                {
+                    n_u_id: 6,
+                    n_price: 646,
+                    n_addtime: "2019-12-09 09:11:23",
+                    n_state: 1,
+                    n_describe: "惹我热无群若",
+                    n_updatetime: "2019-12-09 09:11:23",
+                    n_id: 4,
+                    n_name: "发大水"
+                }
+            ]
+        },
+        methods: {
+            getNotice() {
+                let that = this;
+                $.ajax({
+                    type: "post",
+                    url: "/goods/getNotice",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.resultCode == "6021") {
+                            that.noticeList = res.data;
+                        } else {
+                            console.log(res.resultDesc)
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res)
+                    }
+                })
+            },
+            publishNotice() {
+                console.log("publish")
+                $.ajax({
+                    type: "post",
+                    url: "/goods/notice",
+                    data: {
+                        u_id: $.session.get("u_id"),
+                        n_name: $("#notice-name").val(),
+                        n_price: $("#notice-price").val(),
+                        n_describe: $("#notice-describe").val()
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        if (res.resultCode == "6021") {
+                            console.log(res.resultDesc);
+                            this.getNotice();
+                        } else {
+                            console.log(res.resultDesc)
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res)
+                    }
+                })
+            }
+        },
+        mounted() {
+            this.getNotice();
+        }
+    })
+</script>
+</body>
+
+</html>
