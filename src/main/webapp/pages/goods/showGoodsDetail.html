@@ -460,7 +460,31 @@
                     success: function (res) {
                         console.log(res);
                         if (res.resultCode == "6009") {
-
+                            $("#btn-focus").text("已关注");
+                        } else {
+                            console.log(res.resultDesc);
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res);
+                    }
+                })
+            },
+            commentGoods() {
+                let that = this;
+                $.ajax({
+                    type: "post",
+                    url: "/goods/comment",
+                    data: {
+                        u_id: $.session.get("u_id"),
+                        g_id: $.session.get("g_id"),
+                        com_desc: $("#textarea-comment").val(),
+                        com_reply: "0",//默认先设置为0
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        if (res.resultCode == "6013") {
+                            that.getDetailedGoodsInfo();
                         } else {
                             console.log(res.resultDesc);
                         }
