@@ -1,16 +1,9 @@
 package com.zuel.fleamarket.service;
 
-import com.jfinal.kit.JsonKit;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.upload.UploadFile;
-import com.zuel.fleamarket.kit.BaseResponse;
-import com.zuel.fleamarket.kit.EachGroupComments;
-import com.zuel.fleamarket.kit.GoodsDetails;
-import com.zuel.fleamarket.kit.ResultCodeEnum;
+import com.zuel.fleamarket.kit.*;
 import com.zuel.fleamarket.model.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -248,7 +241,6 @@ public class GoodsService {
         GoodsDetails goodsDetails = new GoodsDetails();
         Goods goods = Goods.dao.findFirst("select * from goods where g_id = " + "'" + g_id + "'");
         if (goods != null) {
-            System.out.println(goods);
             // 商品的详细信息
             goodsDetails.setGoods(goods);
             // 获取商品的用户信息
@@ -263,9 +255,27 @@ public class GoodsService {
                     comments) {
                 // 每一组评论（每一条评论和它的回复评论）
                 EachGroupComments eachGroupComments = new EachGroupComments();
-                eachGroupComments.setComment(comment);
+                // 每一条评论和它的发布者信息
+                CommentAndUser commentAndUser = new CommentAndUser();
+                // 获取该评论的发布者信息
+                User user1 = User.dao.findFirst("select * from user where u_id = " + "'" + comment.getComUId() + "'");
+
+                commentAndUser.setComment(comment);
+                commentAndUser.setUser(user1);
+
                 List<Comment> replyComments = Comment.dao.find("select * from comment where com_reply = " + "'" + comment.getComId() + "'");
-                eachGroupComments.setReplyComments(replyComments);
+
+                List<CommentAndUser> commentAndUserList = new ArrayList<CommentAndUser>();
+                for (Comment comment1 : replyComments
+                ) {
+                    CommentAndUser commentAndUser1 = new CommentAndUser();
+                    User user2 = User.dao.findFirst("select * from user where u_id = " + "'" + comment1.getComUId() + "'");
+                    commentAndUser1.setUser(user2);
+                    commentAndUser1.setComment(comment1);
+                    commentAndUserList.add(commentAndUser1);
+                }
+                eachGroupComments.setCommentAndUser(commentAndUser);
+                eachGroupComments.setReplyCommentsAndUsers(commentAndUserList);
                 allComments.add(eachGroupComments);
             }
             goodsDetails.setAllComments(allComments);
@@ -372,10 +382,20 @@ public class GoodsService {
      */
     public BaseResponse getNotice() {
         BaseResponse baseResponse = new BaseResponse();
-        List<Notice> noticeList = Notice.dao.find("select * from notice");
+        List<NoticeAndUser> noticeAndUserList = new ArrayList<NoticeAndUser>();
+        List<Notice> noticeList = Notice.dao.find("select * from notice order by n_updatetime desc");
         if (!noticeList.isEmpty()) {
-            // 货品查询成功
-            baseResponse.setData(noticeList);
+            // 求购信息查询成功
+            for (Notice notice: noticeList
+                 ) {
+                NoticeAndUser noticeAndUser = new NoticeAndUser();
+                User user = User.dao.findById(notice.getNUId());
+
+                noticeAndUser.setNotice(notice);
+                noticeAndUser.setUser(user);
+                noticeAndUserList.add(noticeAndUser);
+            }
+            baseResponse.setData(noticeAndUserList);
             baseResponse.setResult(ResultCodeEnum.NOTICE_QUERY_SUCCESS);
         } else {
             // 货品为空

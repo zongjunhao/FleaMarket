@@ -9,23 +9,24 @@ import java.util.List;
  */
 public class EachGroupComments {
     // 每条评论
-    private Comment comment;
+    private CommentAndUser commentAndUser;
     // 每条评论的回复评论
-    private List<Comment> replyComments;
+    private List<CommentAndUser> replyCommentsAndUsers;
 
-    public Comment getComment() {
-        return comment;
+    public CommentAndUser getCommentAndUser() {
+        return commentAndUser;
     }
 
-    public void setComment(Comment comment) {
-        this.comment = comment;
+    public List<CommentAndUser> getReplyCommentsAndUsers() {
+        return replyCommentsAndUsers;
     }
 
-    public List<Comment> getReplyComments() {
-        return replyComments;
+    public void setReplyCommentsAndUsers(List<CommentAndUser> replyCommentsAndUsers) {
+        this.replyCommentsAndUsers = replyCommentsAndUsers;
     }
 
-    public void setReplyComments(List<Comment> replyComments) {
-        this.replyComments = replyComments;
+    public void setCommentAndUser(CommentAndUser commentAndUser) {
+        this.commentAndUser = commentAndUser;
     }
+
 }
