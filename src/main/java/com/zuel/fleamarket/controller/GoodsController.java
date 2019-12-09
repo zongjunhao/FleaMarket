@@ -160,9 +160,10 @@ public class GoodsController extends Controller {
      */
     public void getDetailedGoodsInfo() {
         BaseResponse baseResponse = new BaseResponse();
+        String u_id = getPara("u_id");
         String g_id = getPara("g_id");
         if (!StrKit.isBlank(g_id)) {
-            baseResponse = goodsService.getDetailedGoodsInfo(g_id);
+            baseResponse = goodsService.getDetailedGoodsInfo(u_id, g_id);
         } else {
             // 请求的参数不足
             baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);

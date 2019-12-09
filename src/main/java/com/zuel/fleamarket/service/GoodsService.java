@@ -235,7 +235,7 @@ public class GoodsService {
      * @param g_id
      * @return
      */
-    public BaseResponse getDetailedGoodsInfo(String g_id) {
+    public BaseResponse getDetailedGoodsInfo(String u_id, String g_id) {
         BaseResponse baseResponse = new BaseResponse();
 
         GoodsDetails goodsDetails = new GoodsDetails();
@@ -247,6 +247,17 @@ public class GoodsService {
             int g_u_id = goods.getGUId();
             User user = User.dao.findFirst("select * from user where u_id = " + "'" + g_u_id + "'");
             goodsDetails.setUser(user);
+            // 判断用户是否关注该商品
+            boolean isFollowed = false;
+            List<Follow> followList = Follow.dao.find("select * from follow where f_u_id = " + "'" + u_id + "'");
+            for (Follow follow: followList
+                 ) {
+                if (follow.getFGId() == Integer.parseInt(g_id)) {
+                    isFollowed = true;
+                    break;
+                }
+            }
+            goodsDetails.setFollowed(isFollowed);
             // 该商品的所有评论信息（不包括回复信息）
             List<Comment> comments = Comment.dao.find("select * from comment where com_g_id = " + "'" + g_id + "'" + "and com_reply = 0");
             // 该商品的所有评论信息（包括所有回复信息）
