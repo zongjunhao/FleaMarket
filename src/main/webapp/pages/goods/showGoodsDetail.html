@@ -338,7 +338,7 @@
 
         <div class="publish-comment">
             <textarea cols="80" rows="6" placeholder="这里写下评论" id="textarea-comment"></textarea>
-            <button type="button" class="btn-comment-submit" id="btn-comment" onclick="commentGoods()">评论</button>
+            <button type="button" class="btn-comment-submit" id="btn-comment" v-on:click="commentGoods()">评论</button>
         </div>
     </div>
 </div>
@@ -426,8 +426,29 @@
             }
         },
         methods: {
-            created() {
-                this.getDetailedGoodsInfo();
+            commentGoods() {
+                let that = this;
+                $.ajax({
+                    type: "post",
+                    url: "/goods/comment",
+                    data: {
+                        u_id: $.session.get("u_id"),
+                        g_id: $.session.get("g_id"),
+                        com_desc: $("#textarea-comment").val(),
+                        com_reply: 0,//默认先设置为0
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        if (res.resultCode == "6013") {
+                            that.getDetailedGoodsInfo();
+                        } else {
+                            console.log(res.resultDesc);
+                        }
+                    },
+                    error: function (res) {
+                        console.log(res);
+                    }
+                })
             },
             getDetailedGoodsInfo() {
                 let that = this;
@@ -469,33 +490,11 @@
                         console.log(res);
                     }
                 })
-            },
-            commentGoods() {
-                let that = this;
-                $.ajax({
-                    type: "post",
-                    url: "/goods/comment",
-                    data: {
-                        u_id: $.session.get("u_id"),
-                        g_id: $.session.get("g_id"),
-                        com_desc: $("#textarea-comment").val(),
-                        com_reply: "0",//默认先设置为0
-                    },
-                    success: function (res) {
-                        console.log(res);
-                        if (res.resultCode == "6013") {
-                            that.getDetailedGoodsInfo();
-                        } else {
-                            console.log(res.resultDesc);
-                        }
-                    },
-                    error: function (res) {
-                        console.log(res);
-                    }
-                })
             }
         },
-
+        created() {
+            this.getDetailedGoodsInfo();
+        }
     })
 </script>
 </body>

@@ -211,11 +211,11 @@ public class GoodsService {
      * @param com_reply
      * @return
      */
-    public BaseResponse comment(String u_id, String g_id, String com_desc, String com_reply) {
+    public BaseResponse comment(String g_id, String u_id, String com_desc, String com_reply) {
         BaseResponse baseResponse = new BaseResponse();
         Comment comment = new Comment();
-        comment.setComUId(Integer.parseInt(u_id));
         comment.setComGId(Integer.parseInt(g_id));
+        comment.setComUId(Integer.parseInt(u_id));
         comment.setComDesc(com_desc);
         if (com_reply != null) {
             comment.setComReply(Integer.parseInt(com_reply));
