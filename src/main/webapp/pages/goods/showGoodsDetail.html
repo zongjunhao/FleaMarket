@@ -370,9 +370,7 @@
     var vm = new Vue({
         el: '#main-content',
         data: {
-            goodsDetailedInfo: {
-
-            }
+            goodsDetailedInfo: {}
         },
         methods: {
             // 评价商品
@@ -418,17 +416,25 @@
                 $.ajax({
                     type: "post",
                     url: "/goods/getDetailedGoodsInfo",
-                    data: {"g_id": g_id},
+                    data: {
+                        "g_id": g_id,
+                        "u_id": $.session.get("u_id")
+                    },
                     success: function (res) {
                         console.log("response:" + res);
                         console.log("follow?:" + res.data.followed);
+                        console.log(res.data.followed == "true");
+                        console.log(res.data.followed == "false");
+                        console.log(res.data.followed == true);
+                        console.log(res.data.followed == false);
                         let isFollow = res.data.followed;
-                        if (isFollow) {
+                        console.log(isFollow);
+                        if (isFollow == true) {
                             // $("#btn-focus").removeClass('btn-focus1');
                             // $("#btn-focus").addClass('btn-focus2');
                             // $("#btn-focus").css("background-color", "red");
                             $('#btn-focus').removeAttr("style");
-                            $('#btn-focus').attr("style","background-color:red;");
+                            $('#btn-focus').attr("style", "background-color:red;");
                             // $("#btn-focus").val("已关注");
                             console.log("999999999999999999999999999999");
                         } else {
@@ -437,7 +443,7 @@
                             // $("#btn-focus").css("background-color", "#2e9fff");
                             console.log("333333333333333333333333333333");
                             $('#btn-focus').removeAttr("style");
-                            $('#btn-focus').attr("style","background-color:#2e9fff;");
+                            $('#btn-focus').attr("style", "background-color:#2e9fff;");
                             // $("#btn-focus").val("关注");
                             console.log("555555555555555555555555");
 
