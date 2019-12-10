@@ -108,7 +108,29 @@
         }
 
         #btn-focus {
-            /*background-color: #2e9fff;*/
+            background-color: #2e9fff;
+            width: 200px;
+            height: 35px;
+            border-radius: 5px;
+            color: #f9f9f9;
+            border: 1px solid #0ea0db;
+            font-weight: bolder;
+            font-size: large;
+        }
+
+        .btn-focus1 {
+            background-color: #2e9fff;
+            width: 200px;
+            height: 35px;
+            border-radius: 5px;
+            color: #f9f9f9;
+            border: 1px solid #0ea0db;
+            font-weight: bolder;
+            font-size: large;
+        }
+
+        .btn-focus2 {
+            background-color: #00aa00;
             width: 200px;
             height: 35px;
             border-radius: 5px;
@@ -449,7 +471,6 @@
                         com_reply: com_to
                     },
                     success: function (res) {
-                        $("#textarea-comment").val("");
                         if (res.resultCode == "6013") {
                             that.getDetailedGoodsInfo();
                         } else {
@@ -470,15 +491,31 @@
                     url: "/goods/getDetailedGoodsInfo",
                     data: {"g_id": g_id},
                     success: function (res) {
+                        console.log("response:" + res);
+                        console.log("follow?:" + res.data.followed);
                         if (res.data.followed) {
-                            $("#btn-focus").css("background-color", "red");
-                            $("#btn-focus").val("已关注");
+                            // $("#btn-focus").removeClass('btn-focus1');
+                            // $("#btn-focus").addClass('btn-focus2');
+                            // $("#btn-focus").css("background-color", "red");
+                            $('#btn-focus').removeAttr("style");
+                            $('#btn-focus').attr("style","background-color:red;");
+                            // $("#btn-focus").val("已关注");
+                            console.log("999999999999999999999999999999");
                         } else {
-                            $("#btn-focus").css("background-color", "#2e9fff");
-                            $("#btn-focus").val("关注");
+                            // $("#btn-focus").removeClass('btn-focus2');
+                            // $("#btn-focus").addClass('btn-focus1');
+                            // $("#btn-focus").css("background-color", "#2e9fff");
+                            console.log("333333333333333333333333333333");
+                            $('#btn-focus').removeAttr("style");
+                            $('#btn-focus').attr("style","background-color:#2e9fff;");
+                            // $("#btn-focus").val("关注");
+                            console.log("555555555555555555555555");
+
                         }
+                        console.log("77777777777777777777777");
                         if (res.resultCode == "6002") {
                             that.goodsDetailedInfo = res.data;
+                            console.log("888888888888888888888888888");
                         } else {
                             console.log(res.resultDesc);
                         }
@@ -496,7 +533,6 @@
                 } else {
                     cancelFocus = 0;
                 }
-                console.log("state:" + cancelFocus);
                 $.ajax({
                     type: "post",
                     url: "/goods/followGoods",
@@ -506,7 +542,6 @@
                         focus_state: cancelFocus,
                     },
                     success: function (res) {
-                        console.log(res);
                         if (res.resultCode == "6009") {
                             $("#btn-focus").css("background-color", "red");
                             $("#btn-focus").val("已关注");
