@@ -449,10 +449,12 @@
             }
         },
         methods: {
+            // 评价商品
             commentGoods() {
                 let that = this;
                 let com_to_name = $.session.get("com_to_name");
                 let com_desc = $("#textarea-comment").val();
+                // 是否是对某一评论的回复
                 let com_to;
 
                 if (com_desc.indexOf(com_to_name) == 1) {
@@ -484,6 +486,7 @@
                     }
                 })
             },
+            // 获取商品的详细信息
             getDetailedGoodsInfo() {
                 let that = this;
                 $.ajax({
@@ -493,7 +496,8 @@
                     success: function (res) {
                         console.log("response:" + res);
                         console.log("follow?:" + res.data.followed);
-                        if (res.data.followed) {
+                        let isFollow = res.data.followed;
+                        if (isFollow) {
                             // $("#btn-focus").removeClass('btn-focus1');
                             // $("#btn-focus").addClass('btn-focus2');
                             // $("#btn-focus").css("background-color", "red");
@@ -525,10 +529,11 @@
                     }
                 })
             },
+            // 关注或者取消关注某商品
             followGoods() {
                 let that = this;
                 let cancelFocus;
-                if ($("#btn-focus").val() == "已关注") {
+                if (vm.$data.goodsDetailedInfo.followed) {
                     cancelFocus = 1;
                 } else {
                     cancelFocus = 0;
@@ -545,10 +550,11 @@
                         if (res.resultCode == "6009") {
                             $("#btn-focus").css("background-color", "red");
                             $("#btn-focus").val("已关注");
-
+                            vm.$data.goodsDetailedInfo.followed = true;
                         } else if (res.resultCode == "6024") {
                             $("#btn-focus").css("background-color", "#2e9fff");
                             $("#btn-focus").val("关注");
+                            vm.$data.goodsDetailedInfo.followed = false;
                         } else {
                             console.log(res.resultDesc);
                         }
@@ -559,7 +565,6 @@
                 })
             },
             getRepliedUser(u_name, com_to) {
-
                 $("#textarea-comment").val("@" + u_name);
                 $.session.set("com_to", com_to);
                 $.session.set("com_to_name", u_name);
