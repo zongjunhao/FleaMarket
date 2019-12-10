@@ -289,7 +289,7 @@
                 </div>
                 <div class="btn-wrapper">
                     <i>
-                        <input type="button" value="" id="btn-focus" v-on:click="followGoods()">
+                        <input type="button" value="关注" id="btn-focus" v-on:click="followGoods()">
                     </i>
                 </div>
             </div>
@@ -369,11 +369,67 @@
     var vm = new Vue({
         el: '#main-content',
         data: {
-            goodsDetailedInfo: {}
+            goodsDetailedInfo: {
+                allComments: [
+                    {
+                        commentAndUser: {
+                            comment: {
+                                com_g_id: 1,
+                                com_addtime: "2019-12-09 17:50:35",
+                                com_updatetime: "2019-12-09 17:50:35",
+                                com_id: 25,
+                                com_u_id: 6,
+                                com_desc: "gggg",
+                                com_reply: 0
+                            },
+                            user: {
+                                u_name: "小太阳",
+                                u_id: 6,
+                                u_gender: "男",
+                                u_phone: "15827288196",
+                                u_stuid: "201721130005",
+                                u_updatetime: "2019-11-25 20:34:21",
+                                u_addtime: "2019-11-25 17:59:41",
+                                u_qq: "847031946",
+                                u_pwd: "123456"
+                            }
+                        },
+                        replyCommentsAndUsers: []
+                    }
+                ],
+                goods: {
+                    g_describe: "test",
+                    g_imagepath: "",
+                    g_state: 1,
+                    g_name: "user2category1",
+                    g_id: 1,
+                    g_c_id: 1,
+                    g_addtime: "2019-11-28 10:24:27",
+                    g_u_id: 2,
+                    g_price: 200,
+                    g_updatetime: "2019-11-28 10:24:27",
+                    g_realprice: 20
+                },
+                followed: 1,
+                user: {
+                    u_name: "孔剑",
+                    u_id: 2,
+                    u_gender: "男",
+                    u_phone: null,
+                    u_stuid: "201721130041",
+                    u_updatetime: "2019-11-25 17:56:41",
+                    u_addtime: "2019-11-25 17:56:41",
+                    u_qq: "1815348757",
+                    u_pwd: "123456"
+                }
+            }
         },
-		created() {
-		    this.getDetailedGoodsInfo();
-		},
+        created() {
+            this.getDetailedGoodsInfo();
+        },
+        // mounted() {
+        //     this.getDetailedGoodsInfo();
+        // },
         methods: {
             // 评价商品
             commentGoods() {
@@ -427,15 +483,15 @@
                         if (res.resultCode == "6002") {
                             that.goodsDetailedInfo = res.data;
                             console.log("关注状态：" + that.goodsDetailedInfo.followed);
-							if (that.goodsDetailedInfo.followed) {
-							    console.log("设置已关注样式");
-							    $("#btn-focus").css("background-color", "red");
-							    $("#btn-focus").val("已关注");
-							} else {
-							    console.log("设置未关注样式");
-							    $("#btn-focus").css("background-color", "#2e9fff");
-							    $("#btn-focus").val("关注");
-							}
+                            if (that.goodsDetailedInfo.followed) {
+                                console.log("设置已关注样式");
+                                $("#btn-focus").css("background-color", "red");
+                                $("#btn-focus").val("已关注");
+                            } else {
+                                console.log("设置未关注样式");
+                                $("#btn-focus").css("background-color", "#2e9fff");
+                                $("#btn-focus").val("关注");
+                            }
                         } else {
                             console.log(res.resultDesc);
                         }
