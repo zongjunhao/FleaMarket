@@ -108,7 +108,7 @@
         }
 
         #btn-focus {
-            background-color: #2e9fff;
+            /*background-color: #2e9fff;*/
             width: 200px;
             height: 35px;
             border-radius: 5px;
@@ -267,7 +267,7 @@
                 </div>
                 <div class="btn-wrapper">
                     <i>
-                        <input type="button" value="关注" id="btn-focus" v-on:click="followGoods()">
+                        <input type="button" value="" id="btn-focus" v-on:click="followGoods()">
                     </i>
                 </div>
             </div>
@@ -349,81 +349,81 @@
         el: '#main-content',
         data: {
             goodsDetailedInfo: {
-                allComments: [
-                    {
-                        commentAndUser: {
-                            comment: {
-                                com_g_id: 1,
-                                com_addtime: "2019-12-07 17:54:35",
-                                com_updatetime: "2019-12-07 17:54:35",
-                                com_id: 1,
-                                com_u_id: 1,
-                                com_desc: "555",
-                                com_reply: 0
-                            },
-                            user: {
-                                u_name: "宗俊豪",
-                                u_id: 1,
-                                u_gender: "男",
-                                u_phone: null,
-                                u_stuid: "201721130058",
-                                u_updatetime: "2019-11-25 17:56:08",
-                                u_addtime: "2019-11-25 17:56:08",
-                                u_qq: "1016767058",
-                                u_pwd: "123456"
-                            }
-                        },
-                        replyCommentsAndUsers: [
-                            {
-                                comment: {
-                                    com_g_id: 1,
-                                    com_addtime: "2019-12-08 16:51:33",
-                                    com_updatetime: "2019-12-08 16:51:33",
-                                    com_id: 2,
-                                    com_u_id: 2,
-                                    com_desc: "666",
-                                    com_reply: 1
-                                },
-                                user: {
-                                    u_name: "孔剑",
-                                    u_id: 2,
-                                    u_gender: "男",
-                                    u_phone: null,
-                                    u_stuid: "201721130041",
-                                    u_updatetime: "2019-11-25 17:56:41",
-                                    u_addtime: "2019-11-25 17:56:41",
-                                    u_qq: "1815348757",
-                                    u_pwd: "123456"
-                                }
-                            }
-                        ]
-                    }
-                ],
-                goods: {
-                    g_describe: "test",
-                    g_imagepath: "",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 1,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20
-                },
-                followed: false,
-                user: {
-                    u_name: "孔剑",
-                    u_id: 2,
-                    u_gender: "男",
-                    u_phone: null,
-                    u_stuid: "201721130041",
-                    u_updatetime: "2019-11-25 17:56:41",
-                    u_addtime: "2019-11-25 17:56:41",
-                    u_qq: "1815348757",
-                    u_pwd: "123456"
-                }
+                // allComments: [
+                //     {
+                //         commentAndUser: {
+                //             comment: {
+                //                 com_g_id: 1,
+                //                 com_addtime: "2019-12-07 17:54:35",
+                //                 com_updatetime: "2019-12-07 17:54:35",
+                //                 com_id: 1,
+                //                 com_u_id: 1,
+                //                 com_desc: "555",
+                //                 com_reply: 0
+                //             },
+                //             user: {
+                //                 u_name: "宗俊豪",
+                //                 u_id: 1,
+                //                 u_gender: "男",
+                //                 u_phone: null,
+                //                 u_stuid: "201721130058",
+                //                 u_updatetime: "2019-11-25 17:56:08",
+                //                 u_addtime: "2019-11-25 17:56:08",
+                //                 u_qq: "1016767058",
+                //                 u_pwd: "123456"
+                //             }
+                //         },
+                //         replyCommentsAndUsers: [
+                //             {
+                //                 comment: {
+                //                     com_g_id: 1,
+                //                     com_addtime: "2019-12-08 16:51:33",
+                //                     com_updatetime: "2019-12-08 16:51:33",
+                //                     com_id: 2,
+                //                     com_u_id: 2,
+                //                     com_desc: "666",
+                //                     com_reply: 1
+                //                 },
+                //                 user: {
+                //                     u_name: "孔剑",
+                //                     u_id: 2,
+                //                     u_gender: "男",
+                //                     u_phone: null,
+                //                     u_stuid: "201721130041",
+                //                     u_updatetime: "2019-11-25 17:56:41",
+                //                     u_addtime: "2019-11-25 17:56:41",
+                //                     u_qq: "1815348757",
+                //                     u_pwd: "123456"
+                //                 }
+                //             }
+                //         ]
+                //     }
+                // ],
+                // goods: {
+                //     g_describe: "test",
+                //     g_imagepath: "",
+                //     g_state: 1,
+                //     g_name: "user2category1",
+                //     g_id: 1,
+                //     g_c_id: 1,
+                //     g_addtime: "2019-11-28 10:24:27",
+                //     g_u_id: 2,
+                //     g_price: 200,
+                //     g_updatetime: "2019-11-28 10:24:27",
+                //     g_realprice: 20
+                // },
+                // followed: false,
+                // user: {
+                //     u_name: "孔剑",
+                //     u_id: 2,
+                //     u_gender: "男",
+                //     u_phone: null,
+                //     u_stuid: "201721130041",
+                //     u_updatetime: "2019-11-25 17:56:41",
+                //     u_addtime: "2019-11-25 17:56:41",
+                //     u_qq: "1815348757",
+                //     u_pwd: "123456"
+                // }
             }
         },
         methods: {
@@ -470,8 +470,14 @@
                     url: "/goods/getDetailedGoodsInfo",
                     data: {"g_id": g_id},
                     success: function (res) {
-                        if (res.data.followed == true) {
-                            $("#btn-focus").css("color","red");
+                        console.log(res);
+                        console.log("sssssssssss" + res.data.followed);
+                        if (res.data.followed) {
+                            $("#btn-focus").css("background-color","red");
+                            $("#btn-focus").val("已关注");
+                        } else {
+                            $("#btn-focus").css("background-color","#2e9fff");
+                            $("#btn-focus").val("关注");
                         }
                         if (res.resultCode == "6002") {
                             that.goodsDetailedInfo = res.data;
@@ -486,17 +492,30 @@
             },
             followGoods() {
                 let that = this;
+                let cancelFocus;
+                if ($("#btn-focus").val().equals("已关注")) {
+                    cancelFocus = 1;
+                } else {
+                    cancelFocus = 0;
+                }
                 $.ajax({
                     type: "post",
                     url: "/goods/followGoods",
                     data: {
                         u_id: $.session.get("u_id"),
                         g_id: $.session.get("g_id"),
+                        focus_state: cancelFocus,
                     },
                     success: function (res) {
                         console.log(res);
                         if (res.resultCode == "6009") {
-                            $("#btn-focus").text("已关注");
+                            if (cancelFocus) {
+                                $("#btn-focus").css("background-color","#2e9fff");
+                                $("#btn-focus").val("关注");
+                            } else {
+                                $("#btn-focus").css("background-color","red");
+                                $("#btn-focus").val("已关注");
+                            }
                         } else {
                             console.log(res.resultDesc);
                         }

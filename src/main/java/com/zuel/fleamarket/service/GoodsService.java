@@ -162,17 +162,30 @@ public class GoodsService {
      * @param g_id
      * @return
      */
-    public BaseResponse followGoods(String u_id, String g_id) {
+    public BaseResponse followGoods(String u_id, String g_id, String followState) {
         BaseResponse baseResponse = new BaseResponse();
-        Follow follow = new Follow();
-        follow.setFUId(Integer.parseInt(u_id));
-        follow.setFGId(Integer.parseInt(g_id));
-        if (follow.save()) {
-            // 添加关注成功
-            baseResponse.setResult(ResultCodeEnum.GOODS_FOLLOW_SUCCESS);
-        } else {
-            // 添加关注失败
-            baseResponse.setResult(ResultCodeEnum.GOODS_FOLLOW_FAILURE_DB_ERROR);
+        if (followState == "0") {
+            Follow follow = new Follow();
+            follow.setFUId(Integer.parseInt(u_id));
+            follow.setFGId(Integer.parseInt(g_id));
+            if (follow.save()) {
+                // 添加关注成功
+                baseResponse.setResult(ResultCodeEnum.GOODS_FOLLOW_SUCCESS);
+            } else {
+                // 添加关注失败
+                baseResponse.setResult(ResultCodeEnum.GOODS_FOLLOW_FAILURE_DB_ERROR);
+            }
+        } else if (followState == "1") {
+            Follow follow = Follow.dao.findFirst("select * from follow where u_id = " + "'" + u_id + "'" + "and g_id = " + "'" + g_id + "'");
+            if (follow != null) {
+                if (follow.delete()) {
+                    baseResponse.setResult(ResultCodeEnum.GOODS_CANCEL_FOLLOW__SUCCESS);
+                } else {
+                    baseResponse.setResult(ResultCodeEnum.GOODS_CANCEL_FOLLOW_FAILURE_DB_ERROR);
+                }
+            } else {
+                baseResponse.setResult(ResultCodeEnum.GOODS_NOT_FOLLOW);
+            }
         }
         return baseResponse;
     }

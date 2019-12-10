@@ -71,6 +71,10 @@ public enum ResultCodeEnum {
     NOTICE_QUERY_SUCCESS("6021", "求购信息查询成功"),
     NOTICE_QUERY_NULL("6022", "求购信息查询为空"),
 
+    GOODS_CANCEL_FOLLOW_FAILURE_DB_ERROR("6023", "货品取消关注失败_数据库错误"),
+    GOODS_CANCEL_FOLLOW__SUCCESS("6024", "货品取消关注成功"),
+    GOODS_NOT_FOLLOW("6025", "货品未关注"),
+
     USER_QUERY_SUCCESS("7000", "用户查询成功"),
     TEST("9000", "测试");
 
