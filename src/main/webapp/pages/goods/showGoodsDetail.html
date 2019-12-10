@@ -365,13 +365,15 @@
     </div>
 </div>
 <script type="text/javascript">
-    // let g_id = $.session.get("g_id");
-    let g_id = 1;
+
     var vm = new Vue({
         el: '#main-content',
         data: {
             goodsDetailedInfo: {}
         },
+		created() {
+		    this.getDetailedGoodsInfo();
+		},
         methods: {
             // 评价商品
             commentGoods() {
@@ -418,36 +420,22 @@
                     type: "post",
                     url: "/goods/getDetailedGoodsInfo",
                     data: {
-                        "g_id": g_id,
+                        "g_id": $.session.get("g_id"),
                         "u_id": $.session.get("u_id")
                     },
                     success: function (res) {
-                        console.log("response:" + res);
-                        let isFollow = res.data.followed;
-                        console.log(isFollow);
-                        if (isFollow) {
-                            // $("#btn-focus").removeClass('btn-focus1');
-                            // $("#btn-focus").addClass('btn-focus2');
-                            // $("#btn-focus").css("background-color", "red");
-                            $('#btn-focus').removeAttr("style");
-                            $('#btn-focus').attr("style", "background-color:red;");
-                            // $("#btn-focus").val("已关注");
-                            console.log("999999999999999999999999999999");
-                        } else {
-                            // $("#btn-focus").removeClass('btn-focus2');
-                            // $("#btn-focus").addClass('btn-focus1');
-                            // $("#btn-focus").css("background-color", "#2e9fff");
-                            console.log("333333333333333333333333333333");
-                            $('#btn-focus').removeAttr("style");
-                            $('#btn-focus').attr("style", "background-color:#2e9fff;");
-                            // $("#btn-focus").val("关注");
-                            console.log("555555555555555555555555");
-
-                        }
-                        console.log("77777777777777777777777");
                         if (res.resultCode == "6002") {
                             that.goodsDetailedInfo = res.data;
-                            console.log("888888888888888888888888888");
+                            console.log("关注状态：" + that.goodsDetailedInfo.followed);
+							if (that.goodsDetailedInfo.followed) {
+							    console.log("设置已关注样式");
+							    $("#btn-focus").css("background-color", "red");
+							    $("#btn-focus").val("已关注");
+							} else {
+							    console.log("设置未关注样式");
+							    $("#btn-focus").css("background-color", "#2e9fff");
+							    $("#btn-focus").val("关注");
+							}
                         } else {
                             console.log(res.resultDesc);
                         }
@@ -491,9 +479,6 @@
                 $.session.set("com_to", com_to);
                 $.session.set("com_to_name", u_name);
             }
-        },
-        created() {
-            this.getDetailedGoodsInfo();
         }
     })
 </script>
