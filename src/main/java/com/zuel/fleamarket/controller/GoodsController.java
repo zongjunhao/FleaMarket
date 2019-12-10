@@ -161,7 +161,7 @@ public class GoodsController extends Controller {
         BaseResponse baseResponse = new BaseResponse();
         String u_id = getPara("u_id");
         String g_id = getPara("g_id");
-        if (!StrKit.isBlank(g_id)) {
+        if (!StrKit.isBlank(g_id) && !StrKit.isBlank(u_id)) {
             baseResponse = goodsService.getDetailedGoodsInfo(u_id, g_id);
         } else {
             // 请求的参数不足

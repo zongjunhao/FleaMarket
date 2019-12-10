@@ -397,6 +397,7 @@
                         com_reply: com_to
                     },
                     success: function (res) {
+                        $("#textarea-comment").val("");
                         if (res.resultCode == "6013") {
                             that.getDetailedGoodsInfo();
                         } else {
@@ -422,14 +423,9 @@
                     },
                     success: function (res) {
                         console.log("response:" + res);
-                        console.log("follow?:" + res.data.followed);
-                        console.log(res.data.followed == "true");
-                        console.log(res.data.followed == "false");
-                        console.log(res.data.followed == true);
-                        console.log(res.data.followed == false);
                         let isFollow = res.data.followed;
                         console.log(isFollow);
-                        if (isFollow == true) {
+                        if (isFollow) {
                             // $("#btn-focus").removeClass('btn-focus1');
                             // $("#btn-focus").addClass('btn-focus2');
                             // $("#btn-focus").css("background-color", "red");
@@ -464,29 +460,23 @@
             // 关注或者取消关注某商品
             followGoods() {
                 let that = this;
-                let cancelFocus;
-                if (vm.$data.goodsDetailedInfo.followed) {
-                    cancelFocus = 1;
-                } else {
-                    cancelFocus = 0;
-                }
                 $.ajax({
                     type: "post",
                     url: "/goods/followGoods",
                     data: {
                         u_id: $.session.get("u_id"),
                         g_id: $.session.get("g_id"),
-                        focus_state: cancelFocus,
+                        focus_state: vm.$data.goodsDetailedInfo.followed,
                     },
                     success: function (res) {
                         if (res.resultCode == "6009") {
                             $("#btn-focus").css("background-color", "red");
                             $("#btn-focus").val("已关注");
-                            vm.$data.goodsDetailedInfo.followed = true;
+                            vm.$data.goodsDetailedInfo.followed = 1;
                         } else if (res.resultCode == "6024") {
                             $("#btn-focus").css("background-color", "#2e9fff");
                             $("#btn-focus").val("关注");
-                            vm.$data.goodsDetailedInfo.followed = false;
+                            vm.$data.goodsDetailedInfo.followed = 0;
                         } else {
                             console.log(res.resultDesc);
                         }

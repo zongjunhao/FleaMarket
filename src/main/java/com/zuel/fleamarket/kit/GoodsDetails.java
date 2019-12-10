@@ -11,17 +11,16 @@ import java.util.List;
 public class GoodsDetails {
     private Goods goods;
     private User user;
-    private boolean isFollowed;
-
-    public boolean isFollowed() {
-        return isFollowed;
-    }
-
-    public void setFollowed(boolean followed) {
-        isFollowed = followed;
-    }
-
+    private int followed;
     private List<EachGroupComments> allComments;
+
+    public int getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(int followed) {
+        this.followed = followed;
+    }
 
     public User getUser() {
         return user;

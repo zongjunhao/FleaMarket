@@ -263,14 +263,18 @@ public class GoodsService {
             // 判断用户是否关注该商品
             boolean isFollowed = false;
             List<Follow> followList = Follow.dao.find("select * from follow where f_u_id = " + "'" + u_id + "'");
-            for (Follow follow: followList
-                 ) {
+            for (Follow follow : followList
+            ) {
                 if (follow.getFGId() == Integer.parseInt(g_id)) {
                     isFollowed = true;
                     break;
                 }
             }
-            goodsDetails.setFollowed(isFollowed);
+            if (isFollowed) {
+                goodsDetails.setFollowed(1);
+            } else {
+                goodsDetails.setFollowed(0);
+            }
             // 该商品的所有评论信息（不包括回复信息）
             List<Comment> comments = Comment.dao.find("select * from comment where com_g_id = " + "'" + g_id + "'" + "and com_reply = 0");
             // 该商品的所有评论信息（包括所有回复信息）
@@ -410,8 +414,8 @@ public class GoodsService {
         List<Notice> noticeList = Notice.dao.find("select * from notice order by n_updatetime desc");
         if (!noticeList.isEmpty()) {
             // 求购信息查询成功
-            for (Notice notice: noticeList
-                 ) {
+            for (Notice notice : noticeList
+            ) {
                 NoticeAndUser noticeAndUser = new NoticeAndUser();
                 User user = User.dao.findById(notice.getNUId());
 
