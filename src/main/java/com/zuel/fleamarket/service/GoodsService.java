@@ -164,7 +164,7 @@ public class GoodsService {
      */
     public BaseResponse followGoods(String u_id, String g_id, String followState) {
         BaseResponse baseResponse = new BaseResponse();
-        if (followState == "0") {
+        if (followState.equals("0")) {
             Follow follow = new Follow();
             follow.setFUId(Integer.parseInt(u_id));
             follow.setFGId(Integer.parseInt(g_id));
@@ -175,8 +175,8 @@ public class GoodsService {
                 // 添加关注失败
                 baseResponse.setResult(ResultCodeEnum.GOODS_FOLLOW_FAILURE_DB_ERROR);
             }
-        } else if (followState == "1") {
-            Follow follow = Follow.dao.findFirst("select * from follow where u_id = " + "'" + u_id + "'" + "and g_id = " + "'" + g_id + "'");
+        } else if (followState.equals("1")) {
+            Follow follow = Follow.dao.findFirst("select * from follow where f_u_id = " + "'" + u_id + "'" + "and f_g_id = " + "'" + g_id + "'");
             if (follow != null) {
                 if (follow.delete()) {
                     baseResponse.setResult(ResultCodeEnum.GOODS_CANCEL_FOLLOW__SUCCESS);

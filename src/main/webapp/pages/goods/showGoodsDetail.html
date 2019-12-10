@@ -470,13 +470,11 @@
                     url: "/goods/getDetailedGoodsInfo",
                     data: {"g_id": g_id},
                     success: function (res) {
-                        console.log(res);
-                        console.log("sssssssssss" + res.data.followed);
                         if (res.data.followed) {
-                            $("#btn-focus").css("background-color","red");
+                            $("#btn-focus").css("background-color", "red");
                             $("#btn-focus").val("已关注");
                         } else {
-                            $("#btn-focus").css("background-color","#2e9fff");
+                            $("#btn-focus").css("background-color", "#2e9fff");
                             $("#btn-focus").val("关注");
                         }
                         if (res.resultCode == "6002") {
@@ -493,11 +491,12 @@
             followGoods() {
                 let that = this;
                 let cancelFocus;
-                if ($("#btn-focus").val().equals("已关注")) {
+                if ($("#btn-focus").val() == "已关注") {
                     cancelFocus = 1;
                 } else {
                     cancelFocus = 0;
                 }
+                console.log("state:" + cancelFocus);
                 $.ajax({
                     type: "post",
                     url: "/goods/followGoods",
@@ -509,13 +508,12 @@
                     success: function (res) {
                         console.log(res);
                         if (res.resultCode == "6009") {
-                            if (cancelFocus) {
-                                $("#btn-focus").css("background-color","#2e9fff");
-                                $("#btn-focus").val("关注");
-                            } else {
-                                $("#btn-focus").css("background-color","red");
-                                $("#btn-focus").val("已关注");
-                            }
+                            $("#btn-focus").css("background-color", "red");
+                            $("#btn-focus").val("已关注");
+
+                        } else if (res.resultCode == "6024") {
+                            $("#btn-focus").css("background-color", "#2e9fff");
+                            $("#btn-focus").val("关注");
                         } else {
                             console.log(res.resultDesc);
                         }

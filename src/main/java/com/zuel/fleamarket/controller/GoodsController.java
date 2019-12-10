@@ -7,8 +7,6 @@ import com.zuel.fleamarket.kit.BaseResponse;
 import com.zuel.fleamarket.kit.ResultCodeEnum;
 import com.zuel.fleamarket.service.GoodsService;
 
-import java.util.List;
-
 public class GoodsController extends Controller {
     GoodsService goodsService = new GoodsService();
 
@@ -113,7 +111,7 @@ public class GoodsController extends Controller {
         BaseResponse baseResponse = new BaseResponse();
         String u_id = getPara("u_id");
         String g_id = getPara("g_id");
-        String follow_state = getPara("follow_state");
+        String follow_state = getPara("focus_state");
         if (!StrKit.isBlank(u_id) && !StrKit.isBlank(g_id) && !StrKit.isBlank(follow_state)) {
             baseResponse = goodsService.followGoods(u_id, g_id, follow_state);
         } else {
