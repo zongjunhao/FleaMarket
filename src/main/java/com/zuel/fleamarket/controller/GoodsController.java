@@ -233,4 +233,20 @@ public class GoodsController extends Controller {
         baseResponse = goodsService.getNotice();
         renderJson(baseResponse);
     }
+
+    /**
+     * 判断用户是否关注该商品
+     */
+    public void judgeUserFollowGoods() {
+        BaseResponse baseResponse = new BaseResponse();
+        String u_id = getPara("u_id");
+        String g_id = getPara("g_id");
+        if (!StrKit.isBlank(g_id) && !StrKit.isBlank(u_id)) {
+            baseResponse = goodsService.judgeUserFollowGoods(u_id, g_id);
+        } else {
+            // 请求的参数不足
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
+        renderJson(baseResponse);
+    }
 }

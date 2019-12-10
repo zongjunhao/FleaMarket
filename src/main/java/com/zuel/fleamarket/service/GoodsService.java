@@ -431,4 +431,40 @@ public class GoodsService {
         }
         return baseResponse;
     }
+
+    /**
+     * 判断用户是否关注某商品
+     *
+     * @param u_id
+     * @param g_id
+     * @return
+     */
+    public BaseResponse judgeUserFollowGoods(String u_id, String g_id) {
+        BaseResponse baseResponse = new BaseResponse();
+        // 判断用户是否关注该商品
+        boolean flag = false;
+        List<Follow> followList = Follow.dao.find("select * from follow where f_u_id = " + "'" + u_id + "'");
+        if (followList.size() != 0) {
+            for (Follow follow : followList
+            ) {
+                if (follow.getFGId() == Integer.parseInt(g_id)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) {
+                // 用户关注该商品
+                baseResponse.setData(1);
+                baseResponse.setResult(ResultCodeEnum.USER_FOLLOW_THIS_GOODS);
+            } else {
+                // 用户未关注该商品
+                baseResponse.setData(0);
+                baseResponse.setResult(ResultCodeEnum.USER_NOT_FOLLOW_THIS_GOODS);
+            }
+        } else {
+            // 用户未关注商品
+            baseResponse.setResult(ResultCodeEnum.USER_NOT_FOLLOW_GOODS);
+        }
+        return baseResponse;
+    }
 }

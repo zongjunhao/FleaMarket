@@ -75,6 +75,10 @@ public enum ResultCodeEnum {
     GOODS_CANCEL_FOLLOW__SUCCESS("6024", "货品取消关注成功"),
     GOODS_NOT_FOLLOW("6025", "货品未关注"),
 
+    USER_FOLLOW_THIS_GOODS("6026", "用户关注该商品"),
+    USER_NOT_FOLLOW_THIS_GOODS("6027", "用户未关注该商品"),
+    USER_NOT_FOLLOW_GOODS("6028", "用户未关注商品"),
+
     USER_QUERY_SUCCESS("7000", "用户查询成功"),
     TEST("9000", "测试");
 
