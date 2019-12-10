@@ -11,6 +11,7 @@ import com.zuel.fleamarket.controller.AdminController;
 import com.zuel.fleamarket.controller.GoodsController;
 import com.zuel.fleamarket.controller.IndexController;
 import com.zuel.fleamarket.controller.UserController;
+import com.zuel.fleamarket.kit.MyCaptchaCache;
 import com.zuel.fleamarket.model._MappingKit;
 
 public class MainConfig extends JFinalConfig {
@@ -29,6 +30,8 @@ public class MainConfig extends JFinalConfig {
         me.setBaseDownloadPath("download");
         //设置默认视图类型
         me.setViewType(ViewType.JSP);
+        // 配置验证码保存到数据库
+        me.setCaptchaCache(new MyCaptchaCache());
     }
 
     @Override
