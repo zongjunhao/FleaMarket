@@ -93,9 +93,6 @@
         $("#modify").click(function(){
             if(checkName()&&checkNewPass()&&checkNewPass1()){
                 console.log("click");
-                console.log("账号" + $("#a_account").val());
-                console.log("旧密码" + $("#oldPassword").val());
-                console.log("新密码" + $("#newPassword").val());
                 $.ajax({
                     type:"POST",
                     url:"/admin/modifyPassword",
