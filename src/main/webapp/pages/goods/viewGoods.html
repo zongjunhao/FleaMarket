@@ -223,7 +223,7 @@
                     data: {u_id: u_id},
                     success: function (res) {
                         console.log(res);
-                        if (res.resultCode == "6002") {
+                        if (res.resultCode == "6002"  || res.resultCode == "6011") {
                             that.goodsList = res.data;
                         } else {
                             console.log(res.resultDesc)

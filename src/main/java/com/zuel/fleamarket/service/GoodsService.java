@@ -203,7 +203,7 @@ public class GoodsService {
         if (!follows.isEmpty()) {
             for (int i = 0; i < follows.size(); i++) {
                 Follow follow = follows.get(i);
-                Goods goods = Goods.dao.findFirst("select * from goods where g_id = " + follow.getFGId() + "'");
+                Goods goods = Goods.dao.findFirst("select * from goods where g_id = " + "'" + follow.getFGId() + "'");
                 goodsList.add(goods);
             }
             baseResponse.setResult(ResultCodeEnum.GOODS_FOLLOW_QUERY_SUCCESS);
