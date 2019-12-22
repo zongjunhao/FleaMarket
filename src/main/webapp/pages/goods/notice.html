@@ -126,6 +126,7 @@
 						})
 					},
 					publishNotice() {
+						let that = this;
 						console.log("publish")
 						$.ajax({
 							type: "post",
@@ -138,9 +139,9 @@
 							},
 							success: function(res) {
 								console.log(res);
-								if (res.resultCode == "6021") {
+								if (res.resultCode == "6018") {
 									console.log(res.resultDesc);
-									this.getNotice();
+									that.getNotice();
 								} else {
 									console.log(res.resultDesc)
 								}
