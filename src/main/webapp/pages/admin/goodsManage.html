@@ -34,6 +34,7 @@
                             <th>价格</th>
                             <th>发布时间</th>
                             <th>状态</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -67,7 +68,7 @@
                     $.each(res.data, function (i, value) {
                         var category = categorys[parseInt(value.g_c_id) - 1];
                         table += "<tr>" +
-                            "<td>" + i + 1 + "</td>" +
+                            "<td>" + (i + 1) + "</td>" +
                             "<td>" + value.g_name + "</td>" +
                             "<td>" + category + "</td>" +
                             "<td>" + value.g_realprice + "</td>" +
@@ -91,14 +92,25 @@
         });
 
     });
-    function deleteGoods(goodsId) {
-        $.ajax({
-            type: "POST",
-            url: "/goods/deleteGoods",
-            success:function (res) {
-
+    function deleteGoods(goodsId) {$.ajax({
+        type: "POST",
+        url: "/goods/deleteGoods",
+        data:{
+            g_id : goodsId
+        },
+        success:function (res) {
+            if (res.resultCode == "6004"){
+                console.log("商品删除成功");
+                location.reload()
+            } else {
+                console.log("商品删除失败")
             }
-        });
+        },
+        error: function (res) {
+
+        }
+    });
+
     }
 </script>
 </body>

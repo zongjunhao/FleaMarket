@@ -86,33 +86,22 @@ public class AdminService {
     }
 
     /**
-     * 删除用户（可批量删除）
+     * 删除用户
      *
-     * @param u_ids 用户id
+     * @param u_id 用户id
      * @return 是否删除成功
      */
-    public BaseResponse deleteUsers(final String[] u_ids) {
-        final BaseResponse baseResponse = new BaseResponse();
-        boolean succeed = Db.tx(new IAtom() {
-            @Override
-            public boolean run() throws SQLException {
-                for (String u_id : u_ids) {
-                    User user = User.dao.findById(u_id);
-                    if (user == null) { // 没有查找到当前用户，操作失败，返回错误信息并回滚
-                        baseResponse.setResult(ResultCodeEnum.RECORD_NO_EXIST);
-                        return false;
-                    } else {
-                        if (!user.delete()) { // 用户删除失败
-                            baseResponse.setResult(ResultCodeEnum.DB_SYS_ERROR);
-                            return false;
-                        }
-                    }
-                }
-                return true;
+    public BaseResponse deleteUser(String u_id) {
+        BaseResponse baseResponse = new BaseResponse();
+        User user = User.dao.findById(u_id);
+        if (user == null) { // 没有查找到当前用户，操作失败，返回错误信息
+            baseResponse.setResult(ResultCodeEnum.RECORD_NO_EXIST);
+        } else {
+            if (!user.delete()) { // 用户删除失败
+                baseResponse.setResult(ResultCodeEnum.DB_SYS_ERROR);
+            } else {
+                baseResponse.setResult(ResultCodeEnum.DB_DELETE_SUCCESS);
             }
-        });
-        if (succeed) {
-            baseResponse.setResult(ResultCodeEnum.DB_DELETE_SUCCESS);
         }
         return baseResponse;
     }
