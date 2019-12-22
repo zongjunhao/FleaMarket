@@ -160,7 +160,7 @@
         });
         $("#modify").click(function () {
             console.log("click");
-            if (checkName() && checkOldPass() && checkNewPass() && checkNewPass1() && checkPhone() && checkAge() && checkEmail()) {
+            if (checkName() && checkOldPass() && checkNewPass() && checkNewPass1() && checkPhone()) {
 
                 $.ajax({
                     type: "POST",
@@ -175,7 +175,7 @@
                     },
                     success: function (res) {
                         console.log(res);
-                        location.href = "userInfo.jsp"
+                        location.href = "/pages/user/userInfo.html"
                     },
                     error: function (res) {
                         console.log(res)
