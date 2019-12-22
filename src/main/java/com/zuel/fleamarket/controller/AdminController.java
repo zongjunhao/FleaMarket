@@ -67,7 +67,7 @@ public class AdminController extends Controller {
         String id = getPara("id");
         String account = getPara("account");
         String oldPassword = getPara("oldPassword");
-        String password = getPara("password");
+        String password = getPara("newPwd");
         baseResponse = adminService.modifyPassword(id, account, oldPassword, password);
         renderJson(baseResponse);
     }
