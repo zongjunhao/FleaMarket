@@ -40,7 +40,7 @@
             margin-left: 20px;
         }
 
-        .goods-time, .goods-price {
+        .goods-time, .goods-price, .tip {
             color: gray;
         }
 
@@ -49,11 +49,27 @@
             flex-wrap: wrap;
             justify-content: space-around;
         }
+		
+		.tip-div{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 200px;
+		}
+		
+		.tip{
+			font-size: 30px;
+			color: #BFBFBF;
+		}
     </style>
 </head>
 <body>
 <div id="content">
     <div class="card">
+		<div class="tip-div" v-if="goodsList.length == 0">
+			<img src="../../image/none.png" >
+			<div class="tip">当前没有商品哦</div>
+		</div>
         <div class="card-body">
             <div class="goods-card" v-for="goods in goodsList" v-on:click="click(goods.g_id)">
                 <div class="goods-image">
@@ -83,97 +99,7 @@
     var app = new Vue({
         el: '#content',
         data: {
-            goodsList: [{
-                g_describe: "test",
-                g_state: 1,
-                g_name: "user2category1",
-                g_id: 1,
-                g_c_id: 1,
-                g_addtime: "2019-11-28 10:24:27",
-                g_u_id: 2,
-                g_price: 200,
-                g_updatetime: "2019-11-28 10:24:27",
-                g_realprice: 20,
-                g_imagepath: "//g-search3.alicdn.com/img/bao/uploaded/i4/i1/115823344/O1CN01Mi9Ty91aZb0yxNShH_!!0-item_pic.jpg_250x250.jpg_.webp"
-            },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 2,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                },
-                {
-                    g_describe: "test2",
-                    g_state: 1,
-                    g_name: "user2category1",
-                    g_id: 3,
-                    g_c_id: 1,
-                    g_addtime: "2019-11-28 10:24:27",
-                    g_u_id: 2,
-                    g_price: 200,
-                    g_updatetime: "2019-11-28 10:24:27",
-                    g_realprice: 20,
-                    g_imagepath: ""
-                }
+            goodsList: [
             ]
         },
         methods: {
