@@ -30,7 +30,7 @@
                         <label class="col-sm-4 control-label">用户名</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" class="a_account form-control" placeholder="请输入用户名"/>
+                                <input id="a_account" type="text" class="a_account form-control" placeholder="请输入用户名"/>
                                 <span class="input-group-btn">
                                     <span class="icon1 iconfont icon-tongguo"></span>
                                 </span>
@@ -42,7 +42,7 @@
                         <label class="col-sm-4 control-label">原密码</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" class="oldPassword form-control" placeholder="请输入原密码"/>
+                                <input id="oldPassword" type="text" class="oldPassword form-control" placeholder="请输入原密码"/>
                                 <span class="input-group-btn">
                                     <span class="icon2 iconfont icon-tongguo"></span>
                                 </span>
@@ -55,7 +55,7 @@
                         <div class="col-sm-8">
                             <!-- <div class="f_phone form-control">15717172075</div> -->
                             <div class="input-group">
-                                <input type="text" class="newPassword form-control" placeholder="请输入新密码"/>
+                                <input id="newPassword" type="text" class="newPassword form-control" placeholder="请输入新密码"/>
                                 <span class="input-group-btn">
                                     <span class="icon3 iconfont icon-jujue"></span>
                                 </span>
@@ -93,21 +93,24 @@
         $("#modify").click(function(){
             if(checkName()&&checkNewPass()&&checkNewPass1()){
                 console.log("click");
+                console.log("账号" + $("#a_account").val());
+                console.log("旧密码" + $("#oldPassword").val());
+                console.log("新密码" + $("#newPassword").val());
                 $.ajax({
                     type:"POST",
                     url:"/admin/modifyPassword",
                     data:{
                         id:$.session.get("a_id"),
-                        account:$(".name").val(),
-                        oldPassword:$(".password1").val(),
-                        newPwd:$(".password").val()
+                        account:$("#a_account").val(),
+                        oldPassword:$("#oldPassword").val(),
+                        newPwd:$("#newPassword").val()
                     },
                     success:function(res){
                         console.log(res);
                         console.log("成功修改");
-                        $.session.set("a_account",$(".name").val());
-                        $.session.set("a_pwd",$(".password").val());
-                        location.href="/admin.adminInfo.html";
+                        $.session.set("a_account",$("#a_account").val());
+                        $.session.set("a_pwd",$("#newPassword").val());
+                        location.href="/pages/admin/adminInfo.html";
                     },
                     error : function(res){
                         console.log(res)
