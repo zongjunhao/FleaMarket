@@ -151,7 +151,9 @@
                 data: formdata,
                 success: function (res) {
                     // $("#loading").remove();
-                    location.href = getUrlParam("return");
+                    // location.href = getUrlParam("return");
+                    $.session.set("categoryId", "myGoods");
+                    location.href = "/pages/goods/viewGoods.html";
                     console.log(res);
                 },
                 error: function (res) {
