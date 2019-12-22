@@ -23,7 +23,7 @@ public class MainConfig extends JFinalConfig {
         //设置当前是否为开发模式
         me.setDevMode(PropKit.getBoolean("devMode"));
         //设置默认上传文件保存路径 getFile等使用
-        me.setBaseUploadPath("upload/temp/");
+        me.setBaseUploadPath("upload/");
         //设置上传最大限制尺寸
         me.setMaxPostSize(1024 * 1024 * 1024);
         //设置默认下载文件路径 renderFile使用
