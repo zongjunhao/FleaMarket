@@ -8,7 +8,6 @@ import com.zuel.fleamarket.model.Admin;
 import com.zuel.fleamarket.model.Goods;
 import com.zuel.fleamarket.model.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class AdminService {
@@ -133,7 +132,7 @@ public class AdminService {
         final BaseResponse baseResponse = new BaseResponse();
         boolean succeed = Db.tx(new IAtom() {
             @Override
-            public boolean run() throws SQLException {
+            public boolean run() {
                 for (String g_id : g_ids) {
                     Goods goods = Goods.dao.findById(g_id);
                     if (goods == null) { // 没有查找到当前货物，操作失败，返回错误信息并回滚

@@ -56,7 +56,7 @@ public class MainConfig extends JFinalConfig {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(dbPlugin);
         arp.setShowSql(PropKit.getBoolean("devMode"));
         arp.setDialect(new MysqlDialect());
-        /********在此添加数据库 表-Model 映射*********/
+        /* *******在此添加数据库 表-Model 映射*********/
         _MappingKit.mapping(arp);
         //添加到插件列表中
         me.add(dbPlugin);
