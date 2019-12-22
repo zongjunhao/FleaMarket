@@ -1,6 +1,7 @@
 package com.zuel.fleamarket.controller;
 
 import com.jfinal.core.Controller;
+import com.jfinal.kit.StrKit;
 import com.zuel.fleamarket.kit.BaseResponse;
 import com.zuel.fleamarket.kit.ResultCodeEnum;
 import com.zuel.fleamarket.service.AdminService;
@@ -68,7 +69,11 @@ public class AdminController extends Controller {
         String account = getPara("account");
         String oldPassword = getPara("oldPassword");
         String password = getPara("newPwd");
-        baseResponse = adminService.modifyPassword(id, account, oldPassword, password);
+        if (!StrKit.isBlank(account) && !StrKit.isBlank(oldPassword) && !StrKit.isBlank(password)){
+            baseResponse = adminService.modifyPassword(id, account, oldPassword, password);
+        } else {
+            baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
+        }
         renderJson(baseResponse);
     }
 
