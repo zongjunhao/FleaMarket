@@ -38,30 +38,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>201721130058</td>
-                            <td>宗俊豪</td>
-                            <td>男</td>
-                            <td>13176553791</td>
-                            <td>1016767058</td>
-                            <td style="text-align: center">
-                                <button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_stuid + ')">删除
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>201721130058</td>
-                            <td>宗俊豪</td>
-                            <td>男</td>
-                            <td>13176553791</td>
-                            <td>1016767058</td>
-                            <td style="text-align: center">
-                                <button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_stuid + ')">删除
-                                </button>
-                            </td>
-                        </tr>
+<!--                        <tr>-->
+<!--                            <td>1</td>-->
+<!--                            <td>201721130058</td>-->
+<!--                            <td>宗俊豪</td>-->
+<!--                            <td>男</td>-->
+<!--                            <td>13176553791</td>-->
+<!--                            <td>1016767058</td>-->
+<!--                            <td style="text-align: center">-->
+<!--                                <button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_stuid + ')">删除-->
+<!--                                </button>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>2</td>-->
+<!--                            <td>201721130058</td>-->
+<!--                            <td>宗俊豪</td>-->
+<!--                            <td>男</td>-->
+<!--                            <td>13176553791</td>-->
+<!--                            <td>1016767058</td>-->
+<!--                            <td style="text-align: center">-->
+<!--                                <button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_stuid + ')">删除-->
+<!--                                </button>-->
+<!--                            </td>-->
+<!--                        </tr>-->
                         </tbody>
                     </table>
                 </div>
@@ -88,15 +88,17 @@
                     var table = "";
                     var tableLength = res.data.length;
                     $.each(res.data, function (i, value) {
+                        let gender = value.u_gender == null ? "" : value.u_gender;
+                        let phone = value.u_phone == null ? "" : value.u_phone;
                         table += "<tr>" +
-                            "<td>" + i + 1 + "</td>" +
+                            "<td>" + (i + 1) + "</td>" +
                             "<td>" + value.u_stuid + "</td>" +
                             "<td>" + value.u_name + "</td>" +
-                            "<td>" + value.u_gender + "</td>" +
-                            "<td>" + value.u_phone + "</td>" +
+                            "<td>" + gender + "</td>" +
+                            "<td>" + phone + "</td>" +
                             "<td>" + value.u_qq + "</td>" +
                             "<td>" +
-                            '<button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_stuid + ')">删除</button>' +
+                            '<button class="btn btn-xs btn-default" onclick="deleteUser(' + value.u_id + ')">删除</button>' +
                             "</td>" +
                             "</tr>"
                     });
@@ -118,7 +120,24 @@
     }
 
     function deleteUser(u_stuid) {
+        $.ajax({
+            type: "POST",
+            url: "/admin/deleteUser",
+            data:{
+                u_id : u_stuid
+            },
+            success:function (res) {
+                if (res.resultCode == "2009"){
+                    console.log("商品删除成功");
+                    location.reload()
+                } else {
+                    console.log("商品删除失败")
+                }
+            },
+            error: function (res) {
 
+            }
+        });
     }
 </script>
 </body>

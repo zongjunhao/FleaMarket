@@ -87,12 +87,12 @@ public class AdminController extends Controller {
     }
 
     /**
-     * 删除用户（可批量删除）
+     * 删除用户
      */
-    public void deleteUsers() {
+    public void deleteUser() {
         BaseResponse baseResponse = new BaseResponse();
-        String[] u_ids = getParaValues("u_ids");
-        baseResponse = adminService.deleteUsers(u_ids);
+        String u_id = getPara("u_id");
+        baseResponse = adminService.deleteUser(u_id);
         renderJson(baseResponse);
     }
 
