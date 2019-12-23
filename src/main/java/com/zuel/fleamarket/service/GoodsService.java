@@ -32,7 +32,7 @@ public class GoodsService {
      */
     public BaseResponse getGoods() {
         BaseResponse baseResponse = new BaseResponse();
-        List<Goods> goodsList = Goods.dao.find("select * from goods");
+        List<Goods> goodsList = Goods.dao.find("select * from goods order by g_updatetime desc");
         if (!goodsList.isEmpty()) {
             // 货品查询成功
             baseResponse.setData(goodsList);
@@ -73,7 +73,7 @@ public class GoodsService {
      */
     public BaseResponse queryGoods(String g_name) {
         BaseResponse baseResponse = new BaseResponse();
-        List<Goods> goods = Goods.dao.find("select * from goods where g_name like %" + "'" + g_name + "'" + "%");
+        List<Goods> goods = Goods.dao.find("select * from goods where g_name like '%" + g_name + "%'");
         if (!goods.isEmpty()) {
             // 货品查询成功
             baseResponse.setResult(ResultCodeEnum.GOODS_QUERY_SUCCESS);
