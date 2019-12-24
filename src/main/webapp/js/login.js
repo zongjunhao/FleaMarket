@@ -136,6 +136,8 @@ function user_login() {
                 if (json.resultCode == "4000") {
                     //登录成功
                     //alert(json.resultDesc);
+                    $.cookie("loginFlag", 1);
+                    console.log("cookie------------->" + $.cookie("loginFlag"));
                     $.session.set("u_id", json.data.u_id);
                     $.session.set("u_name", json.data.u_name);
                     $.session.set("u_gender", json.data.u_gender);
@@ -180,6 +182,7 @@ function admin_login() {
                 if (json.resultCode == "4000") {
                     //登录成功
                     //alert(json.resultDesc);
+                    $.cookie("loginFlag", 1);
                     $.session.set("role", "1");
                     $.session.set("a_id", json.data.a_id);
                     $.session.set("a_account", json.data.a_account);

@@ -203,6 +203,7 @@
 <!-- Javascript -->
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/lib/jq/jquerySession.js"></script>
+<script src="/lib/jq/jquery.cookie.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/assets/scripts/klorofil-common.js"></script>
@@ -247,6 +248,7 @@
     });
 
     $(function () {
+
         console.log("the first function");
         init();
 
@@ -274,13 +276,16 @@
             $(".userNav").hide();
             $(".navbar-form").hide();
         } else { // 用户
+            console.log("设置用户信息");
             url = logout[1][0] + "?" + logout[1][1] + "=" + $.session.get("u_stuid");
             id = $.session.get("u_id");
+            console.log("用户id--------------->" + id);
             $("#manageRole").attr("title", "用户");
             $(".userInfo").attr("href", "/pages/user/userInfo.html");
             $(".changeInfo").attr("href", "/pages/user/userChangeInfo.html");
             $("#myiframe").attr("src", "/pages/user/userMainPage.html");
             $("#username").text($.session.get("u_name"));
+            console.log("用户名字-------------->" + $.session.get("u_name"));
             $(".adminNav").hide();
         }
     }
@@ -294,6 +299,7 @@
             success: function (res) {
                 //console.log(returnLocation)
                 if (res.resultCode == "4004") {
+                    $.cookie("loginFlag", null);
                     $.session.clear();
                     location.href = "login.html";
                 } else if (res.resultCode == "4005") {

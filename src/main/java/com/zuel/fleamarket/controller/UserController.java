@@ -51,8 +51,9 @@ public class UserController extends Controller {
                 baseResponse.setResult(ResultCodeEnum.PARA_NUM_ERROR);
             }
             System.out.println(baseResponse.getResultCode());
-            if (baseResponse.getResultCode().equals("4000"))
+            if (baseResponse.getResultCode().equals("4000")) {
                 setSessionAttr(u_stuid, "ready");
+            }
             else
                 setSessionAttr(u_stuid, "unready");
         } else {
