@@ -142,6 +142,9 @@
 								if (res.resultCode == "6018") {
 									console.log(res.resultDesc);
 									that.getNotice();
+									$("#notice-name").val("");
+									$("#notice-price").val("");
+									$("#notice-describe").val("");
 								} else {
 									console.log(res.resultDesc)
 								}
